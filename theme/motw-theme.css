@@ -460,11 +460,11 @@ button.mv-location-btn:hover {
 	font-weight: 700;
 }
 
-/* -- 6d. Documents (files): the same full, unblended category color as
-   the top-level folder and subfolder text (--mv-item-accent) — just not
-   bold. -- */
+/* -- 6d. Documents (files): Alabaster, same as every other row in the
+   explorer now — not bold, which is the only thing distinguishing a
+   file from a folder at this point. -- */
 .nav-file-title {
-	color: var(--mv-item-accent, var(--mv-cyan));
+	color: var(--mv-text-primary) !important;
 	font-weight: 400;
 }
 
