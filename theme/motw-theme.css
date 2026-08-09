@@ -388,24 +388,30 @@ button.mv-location-btn:hover {
 
 /* -- 6b. Subfolder styling (the default for any folder title): outline
    in the inherited category color only — text stays the theme's normal
-   nav-item color/weight, unstyled. -- */
+   nav-item color/weight, unstyled. Border opacity is softened (doc
+   section 31/23: full-saturation color should stay reserved for small,
+   high-value accents, not something the eye sits on constantly). -- */
 .nav-folder-title {
-	border: 1px solid var(--mv-item-accent, transparent);
+	border: 1px solid color-mix(in srgb, var(--mv-item-accent, transparent) 55%, transparent);
 	border-radius: var(--mv-radius-sm);
 	padding: 0.1em 0.5em;
 }
 
-/* -- 6c. Top-level folders override 6b: solid category background,
-   bold Alabaster text, no outline. "Top-level" is read straight off
+/* -- 6c. Top-level folders override 6b: muted category fill (not the
+   full-saturation Core color — doc section 23 "Filled Areas" is explicit
+   that large surfaces should use a dark/muted derivative, with the bright
+   color reserved for borders/headings/icons) + a Core-colored left
+   accent stripe + bold Alabaster text. "Top-level" is read straight off
    data-path rather than assumed DOM nesting (Obsidian's file-explorer
    markup doesn't reliably expose a `.mod-root > .nav-folder-children`
    chain to select against) — a top-level folder's path has no "/" in
    it, any subfolder's does. -- */
 .nav-folder-title:not([data-path*="/"]) {
-	background-color: var(--mv-item-accent, var(--mv-cyan));
+	background-color: color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 25%, var(--mv-void));
+	border: 1px solid transparent;
+	border-left: 3px solid var(--mv-item-accent, var(--mv-cyan));
 	color: var(--mv-text-primary) !important;
 	font-weight: 700;
-	border-color: transparent;
 }
 
 /* -- 6d. Documents (files): category-colored text, not bold. -- */
