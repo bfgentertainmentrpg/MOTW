@@ -62,9 +62,9 @@
 	   Monster's Dark/Light are the doc's literal values; the rest are
 	   computed with that same formula for consistency. */
 
-	--mv-minion-core: #C37D64;
-	--mv-minion-dark: #3B2923;
-	--mv-minion-light: #D59781;
+	--mv-minion-core: #D19C89;
+	--mv-minion-dark: #453029;
+	--mv-minion-light: #E4BCAD;
 
 	--mv-monster-core: #D15B6A;
 	--mv-monster-dark: #3F2027;
@@ -80,17 +80,17 @@
 	--mv-hunter-dark: #202E3F;
 	--mv-hunter-light: #7AA8E2;
 
-	--mv-mystery-core: #8C4C1F;
-	--mv-mystery-dark: #251911;
-	--mv-mystery-light: #AB571B;
+	--mv-mystery-core: #BA4C27;
+	--mv-mystery-dark: #311D16;
+	--mv-mystery-light: #DF5426;
 
-	--mv-reference-core: #7B8A7A;
-	--mv-reference-dark: #282B28;
-	--mv-reference-light: #909E8F;
+	--mv-reference-core: #628D7C;
+	--mv-reference-dark: #222A27;
+	--mv-reference-light: #73A290;
 
-	--mv-asset-core: #6BAA7A;
-	--mv-asset-dark: #253328;
-	--mv-asset-light: #84BE91;
+	--mv-asset-core: #DDA75D;
+	--mv-asset-dark: #45351F;
+	--mv-asset-light: #ECBF80;
 
 	/* Threats moved off the Monster-crimson family entirely, onto its own
 	   purple — same hue as the Minion category's Muted Lavender (H270).
