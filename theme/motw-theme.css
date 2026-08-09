@@ -62,9 +62,9 @@
 	   Monster's Dark/Light are the doc's literal values; the rest are
 	   computed with that same formula for consistency. */
 
-	--mv-minion-core: #A07CC5;
-	--mv-minion-dark: #33273E;
-	--mv-minion-light: #BA9CD9;
+	--mv-minion-core: #C37D64;
+	--mv-minion-dark: #3B2923;
+	--mv-minion-light: #D59781;
 
 	--mv-monster-core: #D15B6A;
 	--mv-monster-dark: #3F2027;
