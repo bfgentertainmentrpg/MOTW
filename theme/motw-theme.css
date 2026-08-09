@@ -370,8 +370,8 @@ button.mv-location-btn:hover {
    color is *expressed*:
 
      Top-level folder  -> solid category background, bold Alabaster text
-     Subfolder         -> outline in category color, bold category text
-     File (leaf item)  -> category-colored text, not bold
+     Subfolder         -> bold category-colored text, no frame
+     File (leaf item)  -> full category-colored text, not bold
 
    Update the data-path values below to match your actual vault folder
    names — Obsidian stamps the vault-relative path onto .nav-folder-title
@@ -432,6 +432,15 @@ button.mv-location-btn:hover {
 .nav-file-title {
 	color: var(--mv-item-accent, var(--mv-cyan));
 	font-weight: 400;
+}
+
+/* -- 6e. Turn off the file-explorer's indentation guide lines — the
+   vertical rules connecting nested items. Obsidian exposes this as a CSS
+   variable rather than a fixed element, so this is the reliable way to
+   hide it regardless of internal markup changes between versions. -- */
+.nav-files-container {
+	--indentation-guide-width: 0px;
+	--indentation-guide-color: transparent;
 }
 
 /* =============== 7. REMAINING CATEGORIES — TOKENS + NEXT STEPS ========
