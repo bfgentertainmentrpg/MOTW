@@ -397,14 +397,13 @@ button.mv-location-btn:hover {
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: var(--mv-minion-core); --mv-item-accent-dark: var(--mv-minion-dark); }
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); --mv-item-accent-dark: var(--mv-monster-dark); }
 
-/* -- 6b. Subfolder styling (the default for any folder title): frame and
-   text both use the full, unblended category color (--mv-item-accent) —
-   a bolder version of the top-level accent stripe, which is that same
-   color blended 65% toward Void. -- */
+/* -- 6b. Subfolder styling (the default for any folder title): no frame
+   at all — just bold text in the full, unblended category color
+   (--mv-item-accent). -- */
 .nav-folder-title {
-	border: 1px solid var(--mv-item-accent, transparent);
+	border: none;
 	color: var(--mv-item-accent, var(--mv-text-secondary));
-	border-radius: var(--mv-radius-sm);
+	font-weight: 700;
 	padding: 0.1em 0.5em;
 }
 
