@@ -406,20 +406,24 @@ button.mv-location-btn:hover {
    folder then inherits the override instead of the parent's color.
 
    Threats' four subfolders are one continuous fade of --mv-threat-vivid
-   toward Void, 15 points per step, in this specific order — Monsters
-   stays fully vivid, each folder after it a little more washed out:
-     01 - Monsters   -> 100% vivid
-     02 - Minions    ->  85% vivid / 15% Void
-     03 - Villain    ->  70% vivid / 30% Void
-     04 - Phenomena  ->  55% vivid / 45% Void
-   Both --mv-item-accent and --mv-item-accent-dark are set to the same
-   value — these subfolders now use it as a solid background (6b), not
-   just text, so there's no separate "dark" tier to compute. Paths match
-   the numbered folder names actually in the vault. */
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/01 - Monsters"]) { --mv-item-accent: var(--mv-threat-vivid); --mv-item-accent-dark: var(--mv-threat-vivid); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/02 - Minions"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 85%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 85%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/03 - Villain"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/04 - Phenomena"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 55%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 55%, var(--mv-void)); }
+   toward Void, in this specific order — Monsters most vivid, each folder
+   after it a little more washed out. Two separate ramps, since
+   --mv-item-accent (text/stripe use, via file text and any future
+   hover/border) and --mv-item-accent-dark (this folder's own background
+   fill) have different constraints: text needs to stay legible/bright,
+   but the background must stay darker than "03 - Threats" itself
+   (--mv-threat-header, which sits at roughly a 43% blend) or the
+   hierarchy reads backwards. So the -dark ramp starts below 43% and
+   fades further from there, while -accent keeps the brighter values:
+     01 - Monsters   -> accent 100% / dark 35%
+     02 - Minions    -> accent  85% / dark 25%
+     03 - Villain     -> accent  70% / dark 15%
+     04 - Phenomena  -> accent  55% / dark  5%
+   Paths match the numbered folder names actually in the vault. */
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/01 - Monsters"]) { --mv-item-accent: var(--mv-threat-vivid); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 35%, var(--mv-void)); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/02 - Minions"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 85%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 25%, var(--mv-void)); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/03 - Villain"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 15%, var(--mv-void)); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/04 - Phenomena"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 55%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 5%, var(--mv-void)); }
 
 /* -- 6b. Subfolder styling (the default for any folder title): solid
    background in the category's Dark tier (same "the color we decided
