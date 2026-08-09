@@ -426,11 +426,11 @@ button.mv-location-btn:hover {
 	font-weight: 700;
 }
 
-/* -- 6d. Documents (files): category color, not bold — but desaturated
-   toward Pale Blue rather than full Core saturation, so a folder full of
-   files doesn't read as a wall of bright hue. -- */
+/* -- 6d. Documents (files): the same full, unblended category color as
+   the top-level folder and subfolder text (--mv-item-accent) — just not
+   bold. -- */
 .nav-file-title {
-	color: color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 50%, var(--mv-text-secondary) 50%);
+	color: var(--mv-item-accent, var(--mv-cyan));
 	font-weight: 400;
 }
 
