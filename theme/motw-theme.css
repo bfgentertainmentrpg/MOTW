@@ -406,23 +406,31 @@ button.mv-location-btn:hover {
    folder then inherits the override instead of the parent's color.
 
    Threats' four subfolders are one continuous fade of --mv-threat-vivid
-   toward Void, in this specific order — Monsters stays fully vivid,
-   each folder after it a little more washed out, Phenomena barely there:
-     Monsters   -> 100% vivid
-     Minions    ->  75% vivid / 25% Void
-     Villain    ->  50% vivid / 50% Void
-     Phenomena  ->  25% vivid / 75% Void */
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-threat-vivid); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 75%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Villain"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 50%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Phenomena"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 25%, var(--mv-void)); }
+   toward Void, 15 points per step, in this specific order — Monsters
+   stays fully vivid, each folder after it a little more washed out:
+     01 - Monsters   -> 100% vivid
+     02 - Minions    ->  85% vivid / 15% Void
+     03 - Villain    ->  70% vivid / 30% Void
+     04 - Phenomena  ->  55% vivid / 45% Void
+   Both --mv-item-accent and --mv-item-accent-dark are set to the same
+   value — these subfolders now use it as a solid background (6b), not
+   just text, so there's no separate "dark" tier to compute. Paths match
+   the numbered folder names actually in the vault. */
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/01 - Monsters"]) { --mv-item-accent: var(--mv-threat-vivid); --mv-item-accent-dark: var(--mv-threat-vivid); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/02 - Minions"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 85%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 85%, var(--mv-void)); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/03 - Villain"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/04 - Phenomena"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 55%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-vivid) 55%, var(--mv-void)); }
 
-/* -- 6b. Subfolder styling (the default for any folder title): no frame
-   at all — just bold text in the full, unblended category color
-   (--mv-item-accent). -- */
+/* -- 6b. Subfolder styling (the default for any folder title): solid
+   background in the category's Dark tier (same "the color we decided
+   on" convention as the top-level fill) + bold Alabaster text. No frame.
+   For most categories --mv-item-accent-dark is simply inherited from the
+   top-level branch assignment in 6a; Threats' four subfolders set their
+   own value directly above so each gets its own step of the fade. -- */
 .nav-folder-title {
 	border: none;
-	color: var(--mv-item-accent, var(--mv-text-secondary));
+	background-color: var(--mv-item-accent-dark, var(--mv-navy));
+	color: var(--mv-text-primary) !important;
 	font-weight: 700;
 	padding: 0.1em 0.5em;
 }
