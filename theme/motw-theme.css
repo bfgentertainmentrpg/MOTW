@@ -199,10 +199,14 @@ hr,
 }
 
 /* -- Callouts: system default is Blue Black body / Cyan border+title.
-   Category callouts (data-callout="monster" etc.) override --callout-color. -- */
+   Category callouts (data-callout="monster" etc.) override --callout-color
+   and --callout-bg. Background is a solid, full-opacity color — never a
+   color-mix blend — using the category's Dark tier (Blue Black for the
+   system default, which has no category/no Dark tier of its own). -- */
 .callout {
 	--callout-color: var(--mv-cyan-rgb);
-	background-color: color-mix(in srgb, rgb(var(--callout-color)) 10%, var(--mv-panel)) !important;
+	--callout-bg: var(--mv-panel);
+	background-color: var(--callout-bg) !important;
 	border: 1px solid color-mix(in srgb, rgb(var(--callout-color)), transparent 55%) !important;
 	border-left: 3px solid rgb(var(--callout-color)) !important;
 	border-radius: var(--mv-radius-inner) !important;
@@ -292,6 +296,7 @@ progress {
 /* Monster callout: dark Monster background, Monster border/title */
 .callout[data-callout="monster"] {
 	--callout-color: var(--mv-monster-core-rgb);
+	--callout-bg: var(--mv-monster-dark);
 }
 
 /* Monster-specific action button, e.g. inside a Monster template.
@@ -343,6 +348,7 @@ button.mv-monster-btn:hover {
 
 .callout[data-callout="location"] {
 	--callout-color: var(--mv-location-core-rgb);
+	--callout-bg: var(--mv-location-dark);
 }
 
 button.mv-location-btn {
@@ -372,22 +378,24 @@ button.mv-location-btn:hover {
    / .nav-file-title as data-path, exact and case-sensitive. */
 
 /* -- 6a. Assign a category color per branch. `:has()` reads the color
-   off the folder's own title, then the resulting custom property
-   inherits down into every child folder/file — that's what makes the
-   cascade automatic. -- */
-.nav-folder:has(> .nav-folder-title[data-path="01 - Mysteries"]) { --mv-item-accent: var(--mv-mystery-core); }
-.nav-folder:has(> .nav-folder-title[data-path="02 - Hunters"]) { --mv-item-accent: var(--mv-hunter-core); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats"]) { --mv-item-accent: var(--mv-monster-core); }
-.nav-folder:has(> .nav-folder-title[data-path="04 - NPCs"]) { --mv-item-accent: var(--mv-minion-core); }
-.nav-folder:has(> .nav-folder-title[data-path="05 - Locations"]) { --mv-item-accent: var(--mv-location-core); }
-.nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-reference-core); }
-.nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-asset-core); }
+   off the folder's own title, then the resulting custom properties
+   inherit down into every child folder/file — that's what makes the
+   cascade automatic. Two properties per category: --mv-item-accent
+   (Core — used for text/borders/stripes) and --mv-item-accent-dark
+   (Dark — used anywhere a category color fills a background). -- */
+.nav-folder:has(> .nav-folder-title[data-path="01 - Mysteries"]) { --mv-item-accent: var(--mv-mystery-core); --mv-item-accent-dark: var(--mv-mystery-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="02 - Hunters"]) { --mv-item-accent: var(--mv-hunter-core); --mv-item-accent-dark: var(--mv-hunter-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats"]) { --mv-item-accent: var(--mv-monster-core); --mv-item-accent-dark: var(--mv-monster-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="04 - NPCs"]) { --mv-item-accent: var(--mv-minion-core); --mv-item-accent-dark: var(--mv-minion-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="05 - Locations"]) { --mv-item-accent: var(--mv-location-core); --mv-item-accent-dark: var(--mv-location-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-reference-core); --mv-item-accent-dark: var(--mv-reference-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-asset-core); --mv-item-accent-dark: var(--mv-asset-dark); }
 
 /* Subtree overrides: a folder can claim its own category even though its
    parent branch is colored differently — everything beneath *this*
    folder then inherits the override instead of the parent's color. */
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: var(--mv-minion-core); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: var(--mv-minion-core); --mv-item-accent-dark: var(--mv-minion-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); --mv-item-accent-dark: var(--mv-monster-dark); }
 
 /* -- 6b. Subfolder styling (the default for any folder title): a faint
    outline in the inherited category color — text stays the theme's
@@ -401,14 +409,16 @@ button.mv-location-btn:hover {
 	padding: 0.1em 0.5em;
 }
 
-/* -- 6c. Top-level folders override 6b: category-tinted fill + a slim,
-   also-tinted left accent stripe + bold Alabaster text. "Top-level" is
+/* -- 6c. Top-level folders override 6b: solid, full-opacity category Dark
+   fill (no color-mix blend — a background always uses the category's Dark
+   tier straight) + a slim, blended left accent stripe (unchanged — this
+   is a border, not a background) + bold Alabaster text. "Top-level" is
    read straight off data-path rather than assumed DOM nesting (Obsidian's
    file-explorer markup doesn't reliably expose a `.mod-root >
    .nav-folder-children` chain to select against) — a top-level folder's
    path has no "/" in it, any subfolder's does. -- */
 .nav-folder-title:not([data-path*="/"]) {
-	background-color: color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 10%, var(--mv-void));
+	background-color: var(--mv-item-accent-dark, var(--mv-navy));
 	border: 1px solid transparent;
 	border-left: 3px solid color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 65%, var(--mv-void));
 	color: var(--mv-text-primary) !important;
