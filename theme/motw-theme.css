@@ -397,14 +397,13 @@ button.mv-location-btn:hover {
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: var(--mv-minion-core); --mv-item-accent-dark: var(--mv-minion-dark); }
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); --mv-item-accent-dark: var(--mv-monster-dark); }
 
-/* -- 6b. Subfolder styling (the default for any folder title): a faint
-   outline in the inherited category color — text stays the theme's
-   normal nav-item color/weight, unstyled. Pulled back hard from the
-   first pass (was 55% opacity): this is ambient sidebar chrome the eye
-   sits on constantly, not a one-off accent, so it needs to stay closer
-   to invisible than to loud. -- */
+/* -- 6b. Subfolder styling (the default for any folder title): frame and
+   text both use the full, unblended category color (--mv-item-accent) —
+   a bolder version of the top-level accent stripe, which is that same
+   color blended 65% toward Void. -- */
 .nav-folder-title {
-	border: 1px solid color-mix(in srgb, var(--mv-item-accent, transparent) 25%, transparent);
+	border: 1px solid var(--mv-item-accent, transparent);
+	color: var(--mv-item-accent, var(--mv-text-secondary));
 	border-radius: var(--mv-radius-sm);
 	padding: 0.1em 0.5em;
 }
