@@ -1,397 +1,393 @@
 /* ==
-@name          MOTW Theme
-@description   General-purpose site/component theme derived from the
-               "Minimal Dracula" Obsidian theme (github.com/druxorey/minimal-dracula-for-obsidian).
-               Same color system, spacing, and rounded-corner language, adapted from
-               Obsidian-specific selectors into plain, reusable CSS for web pages
-               and components.
-@usage         Include this stylesheet, then opt into dark mode either by the
-               user's OS preference (automatic) or by setting
-               <html data-theme="dark"> / <html data-theme="light"> to force one.
+@name          MOTW Vault
+@namespace     bfgentertainmentrpg/motw
+@description   Obsidian CSS snippet implementing the MOTW Vault color & visual
+               design system: a dark navy/black environment, Core Cyan as the
+               universal system accent, Alabaster Cream as the sole information
+               color, and category-specific accent colors that identify content
+               type (Monster, Minion, Location, Hunter, Mystery, Reference, Asset).
+
+@usage         Copy into .obsidian/snippets/ and enable it. This is a single,
+               deliberately dark identity for the vault (no light-theme
+               counterpart is defined by the design system), so the tokens
+               below apply unconditionally rather than being gated behind
+               body.theme-dark.
+
+@worked-examples   MONSTER and LOCATION are built out fully (heading, table,
+               callout, button, folder color) as the reference pattern.
+               The other five categories have tokens defined and derivation
+               notes at the bottom of this file — extending them is a matter
+               of copying the MONSTER or LOCATION block and swapping the
+               category name/variables.
 == */
 
-/* ========================== DESIGN TOKENS ========================== */
+/* ===================== 1. FOUNDATION TOKENS =========================
+   Environment -> Structure -> Text, per the design doc's four visual
+   layers. These never change per-category; every category color sits on
+   top of this base. */
 
 :root {
-	/* -- Radius scale -- */
-	--motw-radius-outer: 16px;
-	--motw-radius-inner: 10px;
-	--motw-radius-sm: 6px;
+	/* -- Radius / spacing, carried over from the previous vault pass -- */
+	--mv-radius-outer: 16px;
+	--mv-radius-inner: 10px;
+	--mv-radius-sm: 6px;
 
-	/* -- Type scale -- */
-	--motw-h1-size: 2.4em;
-	--motw-h2-size: 1.45em;
-	--motw-h3-size: 1.25em;
-	--motw-h4-size: 1.12em;
-	--motw-h5-size: 1.10em;
-	--motw-h6-size: 1.05em;
+	/* -- Environment (background layers, darkest to lightest) -- */
+	--mv-void: #070B10;      /* Level 0 — main background, empty space */
+	--mv-navy: #0D1720;      /* Level 1 — secondary surfaces */
+	--mv-panel: #12232D;     /* Level 1 — primary component surface (cards, callout bodies, inputs) */
 
-	--motw-h1-weight: 800;
-	--motw-h2-weight: 700;
-	--motw-h3-weight: 600;
-	--motw-h4-weight: 500;
-	--motw-h5-weight: 500;
-	--motw-h6-weight: 500;
+	/* -- Structure (interface, not content) -- */
+	--mv-teal-dark: #16404C;   /* Level 2 — table headers, structural fills */
+	--mv-teal-muted: #286477;  /* Level 2 — secondary headings, secondary borders */
+	--mv-cyan: #3B91A8;        /* Level 3 — the house color: nav, universal buttons, active states */
+	--mv-cyan-rgb: 59, 145, 168;
 
-	--motw-line-height: 1.6;
-	--motw-heading-spacing: 1.8em;
+	/* -- Text -- */
+	--mv-text-secondary: #8FAEB8;  /* Pale Blue — metadata, subtitles, secondary headings */
+	--mv-text-primary: #EDE6D6;    /* Alabaster — the only color that carries actual information */
 
-	/* -- Motion -- */
-	--motw-transition: all 0.2s ease;
+	/* -- Borders, derived from the structure layer -- */
+	--mv-border: #263A43;
+	--mv-border-strong: #315764;
 
-	/* ---- Light palette (default) ---- */
-	--motw-color-base: #EDE9DA;
-	--motw-color-surface: #FFFBEB;
-	--motw-color-overlay: #DEDBCC;
-	--motw-color-highlight: #CECCC0;
+	/* ===================== 2. CATEGORY TOKENS =========================
+	   Each category gets Core / Dark / Light. Core = doc's authoritative
+	   hex. Dark/Light are derived by holding hue fixed and shifting
+	   saturation/lightness (Dark: S -23, L -40; Light: S +8, L +9 — the
+	   exact deltas the doc's own Monster Core -> Dark/Light pair implies).
+	   Monster's Dark/Light are the doc's literal values; the rest are
+	   computed with that same formula for consistency. */
 
-	--motw-color-text: #1F1F1F;
-	--motw-color-subtext: #6C664B;
-	--motw-color-muted: #BCBAB3;
-	--motw-color-comment: #6C664B;
+	--mv-minion-core: #A07CC5;
+	--mv-minion-dark: #3A3144;
+	--mv-minion-light: #B796D9;
 
-	--motw-color-accent: #644AC9;
-	--motw-color-accent-strong: #4F3AA1;
+	--mv-monster-core: #D15B6A;
+	--mv-monster-dark: #3F2027;
+	--mv-monster-light: #E27A86;
+	--mv-monster-core-rgb: 209, 91, 106;
 
-	--motw-color-red-1: #D74C3D;
-	--motw-color-red-2: #CB3A2A;
-	--motw-color-red-3: #9B2D21;
-	--motw-color-orange-1: #D16319;
-	--motw-color-orange-2: #AF3A03;
-	--motw-color-orange-3: #8C2E02;
-	--motw-color-yellow-1: #9E841A;
-	--motw-color-yellow-2: #846E15;
-	--motw-color-yellow-3: #6A5811;
-	--motw-color-green-1: #198D0C;
-	--motw-color-green-2: #14710A;
-	--motw-color-green-3: #105908;
-	--motw-color-cyan-1: #2AA198;
-	--motw-color-cyan-2: #179299;
-	--motw-color-cyan-3: #12747A;
-	--motw-color-blue-1: #047FB4;
-	--motw-color-blue-2: #036A96;
-	--motw-color-blue-3: #025578;
-	--motw-color-purple-1: #7862D0;
-	--motw-color-purple-2: #644AC9;
-	--motw-color-purple-3: #4F3AA1;
-	--motw-color-pink-1: #BF185A;
-	--motw-color-pink-2: #A3144D;
-	--motw-color-pink-3: #82103E;
+	--mv-location-core: #4BB3A5;
+	--mv-location-dark: #151D1C;
+	--mv-location-light: #63C9BC;
+	--mv-location-core-rgb: 75, 179, 165;
 
-	--motw-button-border: rgba(0, 0, 0, 0.08);
-	--motw-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 -1.5px 0 rgba(0, 0, 0, 0.1);
-	--motw-code-bg: var(--motw-color-overlay);
-	--motw-code-color: var(--motw-color-orange-2);
-	--motw-hr-color: var(--motw-color-muted);
-	--motw-selection: color-mix(in srgb, var(--motw-color-accent), transparent 70%);
+	--mv-hunter-core: #5B8FD1;
+	--mv-hunter-dark: #202E40;
+	--mv-hunter-light: #78A7E2;
+
+	--mv-mystery-core: #E08A3E;
+	--mv-mystery-dark: #3D2815;
+	--mv-mystery-light: #EDA25E;
+
+	--mv-reference-core: #78909C;
+	--mv-reference-dark: #242424;
+	--mv-reference-light: #8BA8B7;
+
+	--mv-asset-core: #6BAA7A;
+	--mv-asset-dark: #232624;
+	--mv-asset-light: #81C290;
 }
 
-/* ---- Dark palette: OS preference ---- */
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme="light"]) {
-		--motw-color-base: #191A21;
-		--motw-color-surface: #21222C;
-		--motw-color-overlay: #282A36;
-		--motw-color-highlight: #343746;
-
-		--motw-color-text: #F8F8F2;
-		--motw-color-subtext: #BABCC9;
-		--motw-color-muted: #707487;
-		--motw-color-comment: #6270A4;
-
-		--motw-color-accent: #BD93F9;
-		--motw-color-accent-strong: #D6ACFF;
-
-		--motw-color-red-1: #FF6E6E;
-		--motw-color-red-2: #FF5555;
-		--motw-color-red-3: #E63C3C;
-		--motw-color-orange-1: #FFD185;
-		--motw-color-orange-2: #FFB86C;
-		--motw-color-orange-3: #E69F53;
-		--motw-color-yellow-1: #FFFFA5;
-		--motw-color-yellow-2: #F1FA8C;
-		--motw-color-yellow-3: #D8E173;
-		--motw-color-green-1: #69FF94;
-		--motw-color-green-2: #50FA7B;
-		--motw-color-green-3: #37EB62;
-		--motw-color-cyan-1: #A4FFFF;
-		--motw-color-cyan-2: #8BE9FD;
-		--motw-color-cyan-3: #72D0E4;
-		--motw-color-blue-1: #6DCCFF;
-		--motw-color-blue-2: #54B3FF;
-		--motw-color-blue-3: #3B9AE6;
-		--motw-color-purple-1: #D6ACFF;
-		--motw-color-purple-2: #BD93F9;
-		--motw-color-purple-3: #A47AE0;
-		--motw-color-pink-1: #FF92DF;
-		--motw-color-pink-2: #FF79C6;
-		--motw-color-pink-3: #E660AD;
-
-		--motw-button-border: rgba(255, 255, 255, 0.08);
-		--motw-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-		--motw-code-bg: var(--motw-color-base);
-		--motw-code-color: var(--motw-color-orange-2);
-	}
-}
-
-/* ---- Dark palette: explicit override wins either direction ---- */
-:root[data-theme="dark"] {
-	--motw-color-base: #191A21;
-	--motw-color-surface: #21222C;
-	--motw-color-overlay: #282A36;
-	--motw-color-highlight: #343746;
-
-	--motw-color-text: #F8F8F2;
-	--motw-color-subtext: #BABCC9;
-	--motw-color-muted: #707487;
-	--motw-color-comment: #6270A4;
-
-	--motw-color-accent: #BD93F9;
-	--motw-color-accent-strong: #D6ACFF;
-
-	--motw-color-red-1: #FF6E6E;
-	--motw-color-red-2: #FF5555;
-	--motw-color-red-3: #E63C3C;
-	--motw-color-orange-1: #FFD185;
-	--motw-color-orange-2: #FFB86C;
-	--motw-color-orange-3: #E69F53;
-	--motw-color-yellow-1: #FFFFA5;
-	--motw-color-yellow-2: #F1FA8C;
-	--motw-color-yellow-3: #D8E173;
-	--motw-color-green-1: #69FF94;
-	--motw-color-green-2: #50FA7B;
-	--motw-color-green-3: #37EB62;
-	--motw-color-cyan-1: #A4FFFF;
-	--motw-color-cyan-2: #8BE9FD;
-	--motw-color-cyan-3: #72D0E4;
-	--motw-color-blue-1: #6DCCFF;
-	--motw-color-blue-2: #54B3FF;
-	--motw-color-blue-3: #3B9AE6;
-	--motw-color-purple-1: #D6ACFF;
-	--motw-color-purple-2: #BD93F9;
-	--motw-color-purple-3: #A47AE0;
-	--motw-color-pink-1: #FF92DF;
-	--motw-color-pink-2: #FF79C6;
-	--motw-color-pink-3: #E660AD;
-
-	--motw-button-border: rgba(255, 255, 255, 0.08);
-	--motw-button-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
-	--motw-code-bg: var(--motw-color-base);
-	--motw-code-color: var(--motw-color-orange-2);
-}
-
-/* Callout / accent color lookup, keyed by data-type */
-:root {
-	--motw-callout-info: var(--motw-color-comment);
-	--motw-callout-tip: var(--motw-color-cyan-2);
-	--motw-callout-summary: var(--motw-color-blue-2);
-	--motw-callout-important: var(--motw-color-pink-2);
-	--motw-callout-quote: var(--motw-color-purple-2);
-	--motw-callout-success: var(--motw-color-green-2);
-	--motw-callout-warning: var(--motw-color-yellow-2);
-	--motw-callout-danger: var(--motw-color-red-2);
-}
-
-/* ========================== BASE ELEMENTS =========================== */
-
-* {
-	box-sizing: border-box;
-}
+/* ===================== 3. GLOBAL VAULT STYLING =======================
+   System-level defaults. Nothing here is category-specific — this is
+   what an uncategorized page looks like, with Core Cyan as the accent. */
 
 body {
-	margin: 0;
-	background-color: var(--motw-color-base);
-	color: var(--motw-color-text);
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-	line-height: var(--motw-line-height);
+	background-color: var(--mv-void) !important;
+	color: var(--mv-text-primary);
+}
+
+.workspace-leaf-content,
+.markdown-source-view.mod-cm6 .cm-content,
+.markdown-reading-view {
+	background-color: var(--mv-void);
+	color: var(--mv-text-primary);
 }
 
 ::selection {
-	background: var(--motw-selection);
+	background: color-mix(in srgb, var(--mv-cyan), transparent 65%);
 }
 
-h1, h2, h3, h4, h5, h6 {
-	margin-top: var(--motw-heading-spacing);
-	margin-bottom: 0.5em;
-	line-height: 1.3;
+/* Headings default to Core Cyan (system-level); a category class
+   (see section 4/5) overrides this to the category's Core color. */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.HyperMD-header-1,
+.HyperMD-header-2,
+.HyperMD-header-3 {
+	color: var(--mv-cyan);
+	margin-top: 1.8em !important;
+	margin-bottom: 0.5em !important;
 }
 
-h1 { font-size: var(--motw-h1-size); font-weight: var(--motw-h1-weight); }
-h2 { font-size: var(--motw-h2-size); font-weight: var(--motw-h2-weight); }
-h3 { font-size: var(--motw-h3-size); font-weight: var(--motw-h3-weight); }
-h4 { font-size: var(--motw-h4-size); font-weight: var(--motw-h4-weight); }
-h5 { font-size: var(--motw-h5-size); font-weight: var(--motw-h5-weight); }
-h6 { font-size: var(--motw-h6-size); font-weight: var(--motw-h6-weight); }
-
-h1:not(.motw-center) {
-	border-bottom: 1.5px solid var(--motw-hr-color);
-	padding-bottom: 0.25em;
+.markdown-rendered h1:not([align="center"]),
+.HyperMD-header-1 {
+	border-bottom: 1.5px solid var(--mv-border-strong);
+	padding-bottom: 0.25em !important;
 }
 
-h1.motw-center {
-	text-align: center;
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.HyperMD-header-4,
+.HyperMD-header-5,
+.HyperMD-header-6 {
+	color: var(--mv-text-secondary);
 }
 
-p {
-	margin-bottom: 0.8rem;
-}
-
-a {
-	color: var(--motw-color-accent);
-	transition: var(--motw-transition);
+a,
+.markdown-source-view .cm-string.cm-url {
+	color: var(--mv-cyan) !important;
 }
 
 a:hover {
-	color: var(--motw-color-accent-strong);
+	color: var(--mv-text-secondary) !important;
 }
 
-hr {
-	width: 30%;
-	margin: 3.5rem auto;
-	border: none;
-	border-top: 1px solid var(--motw-hr-color);
-	opacity: 0.6;
+hr,
+.cm-hr {
+	border: none !important;
+	border-top: 1px solid var(--mv-border) !important;
+	opacity: 0.8;
+	width: 30% !important;
+	margin: 3rem auto !important;
 }
 
-/* ============================ CODE ================================== */
-
-code {
-	background-color: var(--motw-code-bg);
-	color: var(--motw-code-color);
-	font-weight: 500;
-	border-radius: var(--motw-radius-sm);
-	padding: 0.15em 0.4em;
-	font-size: 0.9em;
+/* -- Code -- */
+.cm-inline-code,
+:not(pre) > code {
+	background-color: var(--mv-panel) !important;
+	color: var(--mv-cyan) !important;
+	border-radius: var(--mv-radius-sm);
 }
 
-pre {
-	background-color: var(--motw-color-overlay);
-	border-radius: var(--motw-radius-inner);
-	padding: 1rem;
-	overflow-x: auto;
+.markdown-rendered pre,
+.cm-s-obsidian div.HyperMD-codeblock-begin-bg,
+.cm-s-obsidian div.HyperMD-codeblock-end-bg {
+	background-color: var(--mv-navy) !important;
+	border-radius: var(--mv-radius-inner) !important;
 }
 
-pre code {
-	background: none;
-	color: var(--motw-color-text);
-	padding: 0;
+/* -- Tables: dark background, structural (teal) header, Alabaster body --
+   This is the "system-level" table. Category pages override the header
+   fill to their own Dark color (see section 4/5). */
+.markdown-rendered table {
+	border-radius: var(--mv-radius-inner);
+	overflow: hidden;
 }
 
-/* ============================ TABLES ================================= */
-
-table {
-	width: 100%;
-	border-collapse: collapse;
+.markdown-rendered thead tr,
+.markdown-rendered th {
+	background-color: var(--mv-teal-dark) !important;
+	color: var(--mv-text-primary) !important;
 }
 
-thead {
-	background-color: var(--motw-color-overlay);
+.markdown-rendered tbody tr {
+	background-color: var(--mv-panel) !important;
+	color: var(--mv-text-primary);
 }
 
-tbody tr {
-	background-color: var(--motw-color-base);
+.markdown-rendered td,
+.markdown-rendered th {
+	border-color: var(--mv-border) !important;
 }
 
-th, td {
-	padding: 0.6rem 0.9rem;
-	text-align: left;
-	border-bottom: 1px solid var(--motw-color-highlight);
+/* -- Callouts: system default is Blue Black body / Cyan border+title.
+   Category callouts (data-callout="monster" etc.) override --callout-color. -- */
+.callout {
+	--callout-color: var(--mv-cyan-rgb);
+	background-color: color-mix(in srgb, rgb(var(--callout-color)) 10%, var(--mv-panel)) !important;
+	border: 1px solid color-mix(in srgb, rgb(var(--callout-color)), transparent 55%) !important;
+	border-left: 3px solid rgb(var(--callout-color)) !important;
+	border-radius: var(--mv-radius-inner) !important;
 }
 
-/* ============================ CARDS ================================== */
-
-.motw-card {
-	background-color: var(--motw-color-surface);
-	border-radius: var(--motw-radius-outer);
-	padding: 1.25rem 1.5rem;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-}
-
-.motw-panel {
-	background-color: var(--motw-color-surface);
-	border-radius: var(--motw-radius-outer);
-	margin: 10px;
-	padding: 1rem;
-}
-
-/* ============================ BUTTONS ================================ */
-
-.motw-btn {
-	display: inline-block;
-	background-color: var(--motw-color-overlay);
-	color: var(--motw-color-text);
-	border: 1px solid var(--motw-button-border);
-	border-radius: var(--motw-radius-inner);
-	box-shadow: var(--motw-button-shadow);
-	padding: 0.5em 1.1em;
-	font-weight: 500;
-	cursor: pointer;
-	transition: var(--motw-transition);
-}
-
-.motw-btn:hover {
-	background-color: var(--motw-color-accent);
-	color: var(--motw-color-base);
-	border-color: var(--motw-color-accent);
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.motw-btn-primary {
-	background-color: var(--motw-color-accent);
-	color: var(--motw-color-base);
-	border-color: var(--motw-color-accent);
-}
-
-.motw-btn-primary:hover {
-	background-color: var(--motw-color-accent-strong);
-	border-color: var(--motw-color-accent-strong);
-}
-
-/* ============================ FORM FIELDS ============================= */
-
-input, textarea, select {
-	background-color: var(--motw-color-overlay);
-	color: var(--motw-color-text);
-	border: 1px solid var(--motw-button-border);
-	border-radius: var(--motw-radius-inner);
-	padding: 0.5em 0.75em;
-	font: inherit;
-}
-
-/* ============================ CALLOUTS ================================ */
-
-.motw-callout {
-	--motw-callout-color: var(--motw-callout-info);
-	border-radius: var(--motw-radius-inner);
-	border: 1px solid color-mix(in srgb, var(--motw-callout-color), transparent 60%);
-	background-color: color-mix(in srgb, var(--motw-callout-color) 10%, transparent);
-	padding: 1rem 1.25rem;
-	margin: 1rem 0;
-}
-
-.motw-callout-title {
+.callout-title {
+	color: rgb(var(--callout-color)) !important;
 	font-weight: 600;
-	color: var(--motw-callout-color);
-	margin-bottom: 0.4em;
 }
 
-.motw-callout[data-type="tip"] { --motw-callout-color: var(--motw-callout-tip); }
-.motw-callout[data-type="summary"] { --motw-callout-color: var(--motw-callout-summary); }
-.motw-callout[data-type="important"] { --motw-callout-color: var(--motw-callout-important); }
-.motw-callout[data-type="quote"] { --motw-callout-color: var(--motw-callout-quote); }
-.motw-callout[data-type="success"] { --motw-callout-color: var(--motw-callout-success); }
-.motw-callout[data-type="warning"] { --motw-callout-color: var(--motw-callout-warning); }
-.motw-callout[data-type="danger"] { --motw-callout-color: var(--motw-callout-danger); }
-
-/* ============================ TAGS / PILLS ============================= */
-
-.motw-pill {
-	display: inline-block;
-	border-radius: 999px;
-	padding: 0.2em 0.75em;
-	font-size: 0.85em;
-	font-weight: 500;
-	background-color: color-mix(in srgb, var(--motw-color-accent) 15%, transparent);
-	color: var(--motw-color-accent);
-	border: 1px solid color-mix(in srgb, var(--motw-color-accent) 30%, transparent);
+.callout-content {
+	color: var(--mv-text-primary) !important;
 }
+
+/* -- Buttons: dark background, colored border, colored/Alabaster text --
+   per the doc's explicit "not a saturated block" rule. -- */
+button:not(.clickable-icon),
+.dropdown {
+	background-color: var(--mv-panel) !important;
+	color: var(--mv-text-primary) !important;
+	border: 1px solid var(--mv-border-strong) !important;
+	border-radius: var(--mv-radius-inner) !important;
+	transition: all 0.2s ease;
+}
+
+button:not(.clickable-icon):hover {
+	background-color: var(--mv-cyan) !important;
+	color: var(--mv-void) !important;
+	border-color: var(--mv-cyan) !important;
+}
+
+button.mod-cta {
+	background-color: var(--mv-cyan) !important;
+	color: var(--mv-void) !important;
+	border-color: var(--mv-cyan) !important;
+}
+
+/* -- Metadata (properties) panel -- */
+.metadata-container {
+	background-color: var(--mv-panel) !important;
+	border-radius: var(--mv-radius-outer) !important;
+}
+
+.metadata-property-key {
+	color: var(--mv-text-secondary) !important;
+}
+
+/* -- Progress bars / meters default to Cyan (system-level; see category
+   sections for e.g. a Monster threat meter) -- */
+.progress-bar-line,
+progress {
+	accent-color: var(--mv-cyan);
+}
+
+/* ================= 4. CATEGORY: MONSTER (worked example) =============
+   Apply by adding `cssclasses: mv-monster` to a note's frontmatter. That
+   class lands on the note's view container in both Live Preview and
+   Reading mode, which is what the selectors below target. */
+
+.mv-monster h1,
+.mv-monster h2,
+.mv-monster h3,
+.mv-monster .HyperMD-header-1 {
+	color: var(--mv-monster-core) !important;
+}
+
+.mv-monster h1:not([align="center"]) {
+	border-bottom-color: var(--mv-monster-core) !important;
+}
+
+/* Header-table label column: dark Monster fill, Alabaster value text
+   (see doc section 22 — the "NAME / TYPE / MOTIVATION" example table) */
+.mv-monster table th,
+.mv-monster table td:first-child {
+	background-color: var(--mv-monster-dark) !important;
+	color: var(--mv-text-primary) !important;
+}
+
+.mv-monster table td:not(:first-child) {
+	background-color: var(--mv-panel) !important;
+}
+
+.mv-monster table {
+	border: 1px solid var(--mv-monster-core);
+}
+
+/* Monster callout: dark Monster background, Monster border/title */
+.callout[data-callout="monster"] {
+	--callout-color: var(--mv-monster-core-rgb);
+}
+
+/* Monster-specific action button, e.g. inside a Monster template.
+   Selector includes the `button` element to match the specificity of the
+   global button rule in section 3, so this override actually wins. */
+button.mv-monster-btn {
+	background-color: var(--mv-monster-dark) !important;
+	color: var(--mv-text-primary) !important;
+	border: 1px solid var(--mv-monster-core) !important;
+	border-radius: var(--mv-radius-inner);
+}
+
+button.mv-monster-btn:hover {
+	background-color: var(--mv-monster-core) !important;
+	color: var(--mv-void) !important;
+}
+
+/* Monster threat meter (category-specific, per doc section 26) */
+.mv-monster .progress-bar-line {
+	accent-color: var(--mv-monster-core);
+}
+
+/* ================= 5. CATEGORY: LOCATION (worked example) ============ */
+
+.mv-location h1,
+.mv-location h2,
+.mv-location h3,
+.mv-location .HyperMD-header-1 {
+	color: var(--mv-location-core) !important;
+}
+
+.mv-location h1:not([align="center"]) {
+	border-bottom-color: var(--mv-location-core) !important;
+}
+
+.mv-location table th,
+.mv-location table td:first-child {
+	background-color: var(--mv-location-dark) !important;
+	color: var(--mv-text-primary) !important;
+}
+
+.mv-location table td:not(:first-child) {
+	background-color: var(--mv-panel) !important;
+}
+
+.mv-location table {
+	border: 1px solid var(--mv-location-core);
+}
+
+.callout[data-callout="location"] {
+	--callout-color: var(--mv-location-core-rgb);
+}
+
+button.mv-location-btn {
+	background-color: var(--mv-location-dark) !important;
+	color: var(--mv-text-primary) !important;
+	border: 1px solid var(--mv-location-core) !important;
+	border-radius: var(--mv-radius-inner);
+}
+
+button.mv-location-btn:hover {
+	background-color: var(--mv-location-core) !important;
+	color: var(--mv-void) !important;
+}
+
+/* ================= 6. FOLDER COLORS (sidebar index) ===================
+   Targets the exact folder structure from doc section 27. Update the
+   data-path values to match your actual vault folder names — Obsidian
+   stamps the vault-relative path onto .nav-folder-title as data-path,
+   so these must be exact, case-sensitive matches. */
+
+.nav-folder-title[data-path="01 - Mysteries"] { color: var(--mv-mystery-core); }
+.nav-folder-title[data-path="02 - Hunters"] { color: var(--mv-hunter-core); }
+.nav-folder-title[data-path="03 - Threats"] { color: var(--mv-monster-core); }
+.nav-folder-title[data-path="04 - NPCs"] { color: var(--mv-minion-core); }
+.nav-folder-title[data-path="05 - Locations"] { color: var(--mv-location-core); }
+.nav-folder-title[data-path="06 - References"] { color: var(--mv-reference-core); }
+.nav-folder-title[data-path="07 - Assets"] { color: var(--mv-asset-core); }
+
+.nav-folder-title[data-path="03 - Threats/Minions"] { color: var(--mv-minion-core); }
+.nav-folder-title[data-path="03 - Threats/Monsters"] { color: var(--mv-monster-core); }
+
+/* =============== 7. REMAINING CATEGORIES — TOKENS + NEXT STEPS ========
+   Minion, Hunter, Mystery, Reference, and Asset have their Core/Dark/
+   Light tokens defined in section 2 and their folder color wired in
+   section 6, but no worked-out heading/table/callout/button block yet.
+
+   To add one, copy the MONSTER block in section 4 and do a find/replace:
+     .mv-monster        -> .mv-<category>
+     --mv-monster-core   -> --mv-<category>-core
+     --mv-monster-dark   -> --mv-<category>-dark
+     --mv-monster-core-rgb -> --mv-<category>-core-rgb (add the RGB triplet
+                              to section 2 first, same as Monster/Location)
+     data-callout="monster" -> data-callout="<category>"
+
+   RGB triplets for the remaining categories, if/when a callout needs one:
+     Minion    (160, 124, 197)
+     Hunter    (91, 143, 209)
+     Mystery   (224, 138, 62)
+     Reference (120, 144, 156)
+     Asset     (107, 170, 122)
+== */
