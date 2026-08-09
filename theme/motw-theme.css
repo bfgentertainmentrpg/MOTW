@@ -393,9 +393,12 @@ button.mv-location-btn:hover {
 
 /* Subtree overrides: a folder can claim its own category even though its
    parent branch is colored differently — everything beneath *this*
-   folder then inherits the override instead of the parent's color. */
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: var(--mv-minion-core); --mv-item-accent-dark: var(--mv-minion-dark); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); --mv-item-accent-dark: var(--mv-monster-dark); }
+   folder then inherits the override instead of the parent's color.
+   Minions counts as Monster now, not its own Minion color, so it no
+   longer needs (or gets) an override here — it just inherits Threats'
+   Monster color like Phenomena/Villain already do. None currently
+   defined; add one here if a Threats subfolder needs to break from
+   Monster. */
 
 /* -- 6b. Subfolder styling (the default for any folder title): no frame
    at all — just bold text in the full, unblended category color
