@@ -387,11 +387,10 @@ button.mv-location-btn:hover {
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); }
 
 /* -- 6b. Subfolder styling (the default for any folder title): outline
-   in the inherited category color, bold text in that same color. -- */
+   in the inherited category color only — text stays the theme's normal
+   nav-item color/weight, unstyled. -- */
 .nav-folder-title {
-	color: var(--mv-item-accent, var(--mv-text-secondary));
 	border: 1px solid var(--mv-item-accent, transparent);
-	font-weight: 700;
 	border-radius: var(--mv-radius-sm);
 	padding: 0.1em 0.5em;
 }
@@ -402,6 +401,7 @@ button.mv-location-btn:hover {
 .nav-folder.mod-root > .nav-folder-children > .nav-folder > .nav-folder-title {
 	background-color: var(--mv-item-accent, var(--mv-cyan));
 	color: var(--mv-text-primary) !important;
+	font-weight: 700;
 	border-color: transparent;
 }
 
