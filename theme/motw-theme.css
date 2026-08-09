@@ -62,35 +62,41 @@
 	   Monster's Dark/Light are the doc's literal values; the rest are
 	   computed with that same formula for consistency. */
 
-	--mv-minion-core: #D19C89;
-	--mv-minion-dark: #453029;
-	--mv-minion-light: #E4BCAD;
+	/* Minion/NPCs — Brown */
+	--mv-minion-core: #825735;
+	--mv-minion-dark: #241C16;
+	--mv-minion-light: #9D6437;
 
 	--mv-monster-core: #D15B6A;
 	--mv-monster-dark: #3F2027;
 	--mv-monster-light: #E27A86;
 	--mv-monster-core-rgb: 209, 91, 106;
 
-	--mv-location-core: #F2B36B;
-	--mv-location-dark: #52391C;
-	--mv-location-light: #FDCE98;
-	--mv-location-core-rgb: 242, 179, 107;
+	/* Location — Yellow */
+	--mv-location-core: #D6BC51;
+	--mv-location-dark: #40391E;
+	--mv-location-light: #E6CF70;
+	--mv-location-core-rgb: 214, 188, 81;
 
-	--mv-hunter-core: #5B8FD1;
-	--mv-hunter-dark: #202E3F;
-	--mv-hunter-light: #7AA8E2;
+	/* Hunter — Teal */
+	--mv-hunter-core: #41AAAA;
+	--mv-hunter-dark: #1C2F2F;
+	--mv-hunter-light: #4CC5C5;
 
+	/* Mystery — Orange */
 	--mv-mystery-core: #BA4C27;
 	--mv-mystery-dark: #311D16;
 	--mv-mystery-light: #DF5426;
 
-	--mv-reference-core: #628D7C;
-	--mv-reference-dark: #222A27;
-	--mv-reference-light: #73A290;
+	/* Reference — Slate Blue */
+	--mv-reference-core: #5E77A1;
+	--mv-reference-dark: #22272F;
+	--mv-reference-light: #748CB4;
 
-	--mv-asset-core: #DDA75D;
-	--mv-asset-dark: #45351F;
-	--mv-asset-light: #ECBF80;
+	/* Asset — Olive Green */
+	--mv-asset-core: #818A38;
+	--mv-asset-dark: #252617;
+	--mv-asset-light: #9BA73A;
 
 	/* Threats moved off the Monster-crimson family entirely, onto its own
 	   purple — same hue as the Minion category's Muted Lavender (H270).
@@ -430,18 +436,31 @@ button.mv-location-btn:hover {
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/03 - Villain"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)); }
 .nav-folder:has(> .nav-folder-title[data-path="03 - Threats/04 - Phenomena"]) { --mv-item-accent: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)); }
 
-/* -- 6b. Subfolder styling (the default for any folder title): solid
-   background in the category's Dark tier (same "the color we decided
-   on" convention as the top-level fill) + bold Alabaster text. No frame.
-   For most categories --mv-item-accent-dark is simply inherited from the
-   top-level branch assignment in 6a; Threats' four subfolders set their
-   own value directly above so each gets its own step of the fade. -- */
+/* -- 6b. Subfolder styling (the default for any folder title): the
+   category's Dark tier, muted FURTHER — 65% of it blended toward Void —
+   so depth actually reads as depth: top-level is "brightest but muted"
+   (the Dark tier, full strength), every subfolder below it is more
+   muted still. This is what was missing for every category except
+   Threats, which had its own hand-tuned fade but nothing generic drove
+   the other six. Bold Alabaster text, no frame. -- */
 .nav-folder-title {
 	border: none;
-	background-color: var(--mv-item-accent-dark, var(--mv-navy));
+	background-color: color-mix(in srgb, var(--mv-item-accent-dark, var(--mv-navy)) 65%, var(--mv-void));
 	color: var(--mv-text-primary) !important;
 	font-weight: 700;
 	padding: 0.1em 0.5em;
+}
+
+/* Threats' four subfolders already carry their own hand-tuned fade step
+   in --mv-item-accent-dark (set above) — apply it directly rather than
+   letting 6b's generic 65%-further-muting apply on top of it, which
+   would double-mute them. The attribute selector outranks 6b's bare
+   .nav-folder-title on specificity. */
+.nav-folder-title[data-path="03 - Threats/01 - Monsters"],
+.nav-folder-title[data-path="03 - Threats/02 - Minions"],
+.nav-folder-title[data-path="03 - Threats/03 - Villain"],
+.nav-folder-title[data-path="03 - Threats/04 - Phenomena"] {
+	background-color: var(--mv-item-accent-dark);
 }
 
 /* -- 6c. Top-level folders override 6b: solid, full-opacity category Dark
