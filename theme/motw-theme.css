@@ -91,6 +91,16 @@
 	--mv-asset-core: #6BAA7A;
 	--mv-asset-dark: #253328;
 	--mv-asset-light: #84BE91;
+
+	/* Not one of the seven doc categories — a one-off color for the
+	   Threats/Villain subfolder specifically ("something that invokes
+	   just evil"): a dark, dried-blood oxblood, distinct from Monster's
+	   brighter, more immediate-danger crimson. Derived Dark/Light with
+	   the same ratio formula as everything else, for consistency if a
+	   background/hover treatment is ever built out for it. */
+	--mv-villain-core: #6B1420;
+	--mv-villain-dark: #1C0C0E;
+	--mv-villain-light: #831020;
 }
 
 /* ===================== 3. GLOBAL VAULT STYLING =======================
@@ -394,11 +404,20 @@ button.mv-location-btn:hover {
 /* Subtree overrides: a folder can claim its own category even though its
    parent branch is colored differently — everything beneath *this*
    folder then inherits the override instead of the parent's color.
-   Minions counts as Monster now, not its own Minion color, so it no
-   longer needs (or gets) an override here — it just inherits Threats'
-   Monster color like Phenomena/Villain already do. None currently
-   defined; add one here if a Threats subfolder needs to break from
-   Monster. */
+
+   Threats' four subfolders each get their own scheme rather than all
+   inheriting Monster's Crimson:
+     Monsters   -> Monster Core (the violent color already belongs here)
+     Minions    -> Monster Light (a lesser/lighter subset of that same
+                   violent hue, not a color of its own)
+     Phenomena  -> Minion Core / Muted Lavender (borrowed directly)
+     Villain    -> a dedicated one-off "evil" color, --mv-villain-core
+                   (see section 2) — distinct from Monster's crimson so
+                   it doesn't just read as another shade of violence */
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Monsters"]) { --mv-item-accent: var(--mv-monster-core); --mv-item-accent-dark: var(--mv-monster-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Minions"]) { --mv-item-accent: var(--mv-monster-light); --mv-item-accent-dark: var(--mv-monster-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Phenomena"]) { --mv-item-accent: var(--mv-minion-core); --mv-item-accent-dark: var(--mv-minion-dark); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/Villain"]) { --mv-item-accent: var(--mv-villain-core); --mv-item-accent-dark: var(--mv-villain-dark); }
 
 /* -- 6b. Subfolder styling (the default for any folder title): no frame
    at all — just bold text in the full, unblended category color
