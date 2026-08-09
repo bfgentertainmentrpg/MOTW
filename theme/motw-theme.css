@@ -408,7 +408,7 @@ button.mv-location-btn:hover {
    .nav-folder-children` chain to select against) — a top-level folder's
    path has no "/" in it, any subfolder's does. -- */
 .nav-folder-title:not([data-path*="/"]) {
-	background-color: color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 50%, var(--mv-void));
+	background-color: color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 10%, var(--mv-void));
 	border: 1px solid transparent;
 	border-left: 3px solid color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 65%, var(--mv-void));
 	color: var(--mv-text-primary) !important;
