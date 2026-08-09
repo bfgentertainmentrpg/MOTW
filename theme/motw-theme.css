@@ -396,9 +396,12 @@ button.mv-location-btn:hover {
 }
 
 /* -- 6c. Top-level folders override 6b: solid category background,
-   bold Alabaster text, no outline. Selector matches only folders that
-   are direct children of the vault root. -- */
-.nav-folder.mod-root > .nav-folder-children > .nav-folder > .nav-folder-title {
+   bold Alabaster text, no outline. "Top-level" is read straight off
+   data-path rather than assumed DOM nesting (Obsidian's file-explorer
+   markup doesn't reliably expose a `.mod-root > .nav-folder-children`
+   chain to select against) — a top-level folder's path has no "/" in
+   it, any subfolder's does. -- */
+.nav-folder-title:not([data-path*="/"]) {
 	background-color: var(--mv-item-accent, var(--mv-cyan));
 	color: var(--mv-text-primary) !important;
 	font-weight: 700;
