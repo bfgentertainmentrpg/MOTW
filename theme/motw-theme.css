@@ -53,15 +53,18 @@
 
 	/* ===================== 2. CATEGORY TOKENS =========================
 	   Each category gets Core / Dark / Light. Core = doc's authoritative
-	   hex. Dark/Light are derived by holding hue fixed and shifting
-	   saturation/lightness (Dark: S -23, L -40; Light: S +8, L +9 — the
-	   exact deltas the doc's own Monster Core -> Dark/Light pair implies).
+	   hex. Dark/Light are derived by holding hue fixed and scaling
+	   saturation/lightness by the same ratios the doc's own Monster
+	   Core -> Dark/Light pair implies (Dark: S *0.58, L *0.317; Light:
+	   S *1.14, L *1.16). Ratios, not fixed point deltas — a fixed "L -40"
+	   turns any Core darker than ~40% lightness straight to black, which
+	   is what a flat delta did to Mystery's new, already-dark Core.
 	   Monster's Dark/Light are the doc's literal values; the rest are
 	   computed with that same formula for consistency. */
 
 	--mv-minion-core: #A07CC5;
-	--mv-minion-dark: #3A3144;
-	--mv-minion-light: #B796D9;
+	--mv-minion-dark: #33273E;
+	--mv-minion-light: #BA9CD9;
 
 	--mv-monster-core: #D15B6A;
 	--mv-monster-dark: #3F2027;
@@ -69,25 +72,25 @@
 	--mv-monster-core-rgb: 209, 91, 106;
 
 	--mv-location-core: #4BB3A5;
-	--mv-location-dark: #151D1C;
-	--mv-location-light: #63C9BC;
+	--mv-location-dark: #1F322F;
+	--mv-location-light: #61C6B8;
 	--mv-location-core-rgb: 75, 179, 165;
 
 	--mv-hunter-core: #5B8FD1;
-	--mv-hunter-dark: #202E40;
-	--mv-hunter-light: #78A7E2;
+	--mv-hunter-dark: #202E3F;
+	--mv-hunter-light: #7AA8E2;
 
-	--mv-mystery-core: #E08A3E;
-	--mv-mystery-dark: #3D2815;
-	--mv-mystery-light: #EDA25E;
+	--mv-mystery-core: #8C4C1F;
+	--mv-mystery-dark: #251911;
+	--mv-mystery-light: #AB571B;
 
 	--mv-reference-core: #78909C;
-	--mv-reference-dark: #242424;
-	--mv-reference-light: #8BA8B7;
+	--mv-reference-dark: #282D30;
+	--mv-reference-light: #8FA6B1;
 
 	--mv-asset-core: #6BAA7A;
-	--mv-asset-dark: #232624;
-	--mv-asset-light: #81C290;
+	--mv-asset-dark: #253328;
+	--mv-asset-light: #84BE91;
 }
 
 /* ===================== 3. GLOBAL VAULT STYLING =======================
@@ -437,7 +440,7 @@ button.mv-location-btn:hover {
    RGB triplets for the remaining categories, if/when a callout needs one:
      Minion    (160, 124, 197)
      Hunter    (91, 143, 209)
-     Mystery   (224, 138, 62)
+     Mystery   (140, 76, 31)
      Reference (120, 144, 156)
      Asset     (107, 170, 122)
 == */
