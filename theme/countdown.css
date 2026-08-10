@@ -29,8 +29,12 @@ text-shadow:none !important;
 
 /*==============================================================
     CONTAINER
-    85% fixed width, left-justified — same rule as the page and every
-    other component (see the page-width block in motw-theme.css).
+    Fills the page's content box at 100% rather than setting its own
+    85% — the page itself is already fixed to 85% width (see the
+    page-width block in motw-theme.css), so a second, independent 85%
+    here would compound to ~72% of the actual pane and stop lining up
+    with the rest of the page's content. 100% keeps it flush with the
+    same right edge as headings/paragraphs/tables.
 ==============================================================*/
 
 .motw-countdown{
@@ -43,11 +47,9 @@ background:transparent;
 
 margin-bottom:1rem;
 
-width:85% !important;
+width:100% !important;
 
-max-width:85% !important;
-
-min-width:85% !important;
+max-width:100% !important;
 
 margin-left:0 !important;
 
@@ -210,16 +212,6 @@ opacity:.65;
 ==============================================================*/
 
 @media (max-width:700px){
-
-.motw-countdown{
-
-width:100% !important;
-
-max-width:100% !important;
-
-min-width:100% !important;
-
-}
 
 .countdown-row{
 
