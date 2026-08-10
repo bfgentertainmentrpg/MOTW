@@ -22,9 +22,17 @@
 /* ==========================================================
    GEAR TABLE
    85% WIDTH — LEFT ALIGNED
+
+   Scoped to table.gear-table — the original file targeted every plain
+   ".markdown-preview-view table" with !important, which matched (and
+   with !important, WON over) Move Box's own table.move-table rules
+   too, since !important beats specificity regardless of which
+   selector is more specific. Add class="gear-table" to a gear table
+   for these rules to apply to it (matching how Move Box already
+   requires class="move-table").
    ========================================================== */
 
-.markdown-preview-view table {
+.markdown-preview-view table.gear-table {
 
     width: 85% !important;
 
@@ -49,8 +57,8 @@
    MUTED ASSET ORANGE — 1.25px
    ========================================================== */
 
-.markdown-preview-view table th,
-.markdown-preview-view table td {
+.markdown-preview-view table.gear-table th,
+.markdown-preview-view table.gear-table td {
 
     box-sizing: border-box !important;
 
@@ -81,7 +89,7 @@
    ASSET DARK FILL, ASSET CORE ACCENT LINE
    ========================================================== */
 
-.markdown-preview-view table thead th {
+.markdown-preview-view table.gear-table thead th {
 
     background-color:
         var(--mv-asset-dark) !important;
@@ -105,8 +113,8 @@
    15%
    ========================================================== */
 
-.markdown-preview-view table th:nth-child(1),
-.markdown-preview-view table td:nth-child(1) {
+.markdown-preview-view table.gear-table th:nth-child(1),
+.markdown-preview-view table.gear-table td:nth-child(1) {
 
     width: 15% !important;
 
@@ -128,8 +136,8 @@
    10%
    ========================================================== */
 
-.markdown-preview-view table th:nth-child(2),
-.markdown-preview-view table td:nth-child(2) {
+.markdown-preview-view table.gear-table th:nth-child(2),
+.markdown-preview-view table.gear-table td:nth-child(2) {
 
     width: 10% !important;
 
@@ -145,11 +153,11 @@
    enough for that. The header label ("Damage") doesn't fit at 10% at
    this font size, so it wraps instead of overlapping into Features.
    Column width itself stays exactly as designed. */
-.markdown-preview-view table td:nth-child(2) {
+.markdown-preview-view table.gear-table td:nth-child(2) {
     white-space: nowrap !important;
 }
 
-.markdown-preview-view table th:nth-child(2) {
+.markdown-preview-view table.gear-table th:nth-child(2) {
     white-space: normal !important;
     overflow-wrap: break-word;
 }
@@ -160,8 +168,8 @@
    75%
    ========================================================== */
 
-.markdown-preview-view table th:nth-child(3),
-.markdown-preview-view table td:nth-child(3) {
+.markdown-preview-view table.gear-table th:nth-child(3),
+.markdown-preview-view table.gear-table td:nth-child(3) {
 
     width: 75% !important;
 
@@ -180,7 +188,7 @@
    BODY
    ========================================================== */
 
-.markdown-preview-view table tbody tr {
+.markdown-preview-view table.gear-table tbody tr {
 
     background-color: transparent !important;
 
@@ -193,7 +201,7 @@
    HOVER
    ========================================================== */
 
-.markdown-preview-view table tbody tr:hover {
+.markdown-preview-view table.gear-table tbody tr:hover {
 
     background-color:
         color-mix(in srgb, var(--mv-text-primary) 4%, transparent) !important;
@@ -204,8 +212,8 @@
    REMOVE PARAGRAPH SPACING
    ========================================================== */
 
-.markdown-preview-view table th p,
-.markdown-preview-view table td p {
+.markdown-preview-view table.gear-table th p,
+.markdown-preview-view table.gear-table td p {
 
     margin: 0 !important;
 
@@ -222,13 +230,13 @@
 
 @media (max-width: 600px) {
 
-    .markdown-preview-view table {
+    .markdown-preview-view table.gear-table {
 
         width: 85% !important;
     }
 
-    .markdown-preview-view table th,
-    .markdown-preview-view table td {
+    .markdown-preview-view table.gear-table th,
+    .markdown-preview-view table.gear-table td {
 
         padding:
             0.55rem
