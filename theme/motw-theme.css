@@ -119,6 +119,16 @@
 	   just toward their own respective 100% reference. */
 	--mv-threat-header: #1A2D2D;
 	--mv-threat-vivid: #3AA6A6;
+
+	/* -- Typography --
+	   Both are named commercial fonts, not web fonts — this snippet has
+	   no font FILES to embed, only font-family names. Obsidian (Chromium)
+	   will only render them if they're installed as system fonts on this
+	   machine; otherwise every rule below silently falls through to the
+	   serif fallback. If nothing changes after reloading the snippet,
+	   that's most likely why — check the fonts are actually installed. */
+	--mv-font-header: "3rd Man", Georgia, serif;
+	--mv-font-body: "Warnock Pro", Georgia, serif;
 }
 
 /* ===================== 3. GLOBAL VAULT STYLING =======================
@@ -128,7 +138,27 @@
 body {
 	background-color: var(--mv-void) !important;
 	color: var(--mv-text-primary);
+	font-family: var(--mv-font-body);
 }
+
+/* Title/header font, everywhere a heading can appear — reading mode,
+   Live Preview, and the note's own inline title. Sizes use max(18pt, …)
+   so the floor is explicit and self-enforcing even if the scale above
+   it changes later: no header/title ever renders smaller than 18pt. */
+.markdown-rendered h1, .markdown-rendered h2, .markdown-rendered h3,
+.markdown-rendered h4, .markdown-rendered h5, .markdown-rendered h6,
+.HyperMD-header-1, .HyperMD-header-2, .HyperMD-header-3,
+.HyperMD-header-4, .HyperMD-header-5, .HyperMD-header-6,
+.inline-title {
+	font-family: var(--mv-font-header);
+}
+
+.markdown-rendered h1, .HyperMD-header-1, .inline-title { font-size: max(18pt, 32pt) !important; }
+.markdown-rendered h2, .HyperMD-header-2 { font-size: max(18pt, 26pt) !important; }
+.markdown-rendered h3, .HyperMD-header-3 { font-size: max(18pt, 22pt) !important; }
+.markdown-rendered h4, .HyperMD-header-4 { font-size: max(18pt, 19pt) !important; }
+.markdown-rendered h5, .HyperMD-header-5,
+.markdown-rendered h6, .HyperMD-header-6 { font-size: max(18pt, 18pt) !important; }
 
 .workspace-leaf-content,
 .markdown-source-view.mod-cm6 .cm-content,
