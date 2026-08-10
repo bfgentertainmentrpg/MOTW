@@ -1,0 +1,216 @@
+/*==============================================================
+    MONSTER OF THE WEEK
+    COUNTDOWN
+==============================================================*/
+
+.countdown-title{
+
+font-family:var(--h2-font);
+
+font-size:calc(1em + 6px);
+
+font-weight:600;
+
+line-height:0.8;
+
+color: #A984B0;
+
+font-variant:small-caps;
+
+letter-spacing:.05em;
+
+margin:0;
+
+padding-bottom:.1rem;
+
+text-shadow:none !important;
+
+}
+
+/*==============================================================
+    CONTAINER
+==============================================================*/
+
+.motw-countdown{
+
+display:flex;
+
+flex-direction:column;
+
+background:transparent;
+
+margin-bottom:1rem;
+
+width:85%;
+
+box-sizing:border-box;
+
+}
+
+/*==============================================================
+    ROW
+==============================================================*/
+
+.countdown-row{
+
+display:grid;
+
+grid-template-columns:42px 110px 1fr;
+
+align-items:stretch;
+
+width:100%;
+
+box-sizing:border-box;
+
+border-top:1px solid var(--background-modifier-border);
+
+}
+
+.countdown-row:last-child{
+
+border-bottom:1px solid var(--background-modifier-border);
+
+}
+
+/*==============================================================
+    CHECKBOX
+==============================================================*/
+
+.countdown-check{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:.35rem;
+
+}
+
+.countdown-checkbox{
+
+width:18px;
+
+height:18px;
+
+margin:0;
+
+display:block;
+
+cursor:pointer;
+
+}
+
+/*==============================================================
+    STAGE
+==============================================================*/
+
+/* -- Stage colors, muted via color-mix into --mv-void (same technique as
+   the threat-category fades and folder-background muting in
+   motw-theme.css) rather than raw saturated hex, so the gradient reads
+   as part of the same dark, desaturated environment as the rest of the
+   vault instead of popping out as a bright pastel band. -- */
+:root {
+	--mv-countdown-day: color-mix(in srgb, #A7C9E6 30%, var(--mv-void));
+	--mv-countdown-shadows: color-mix(in srgb, #7D98B5 30%, var(--mv-void));
+	--mv-countdown-sunset: color-mix(in srgb, #607285 30%, var(--mv-void));
+	--mv-countdown-dusk: color-mix(in srgb, #D98949 30%, var(--mv-void));
+	--mv-countdown-nightfall: color-mix(in srgb, #A64A88 30%, var(--mv-void));
+	--mv-countdown-midnight: color-mix(in srgb, #5E4FA9 30%, var(--mv-void));
+}
+
+.countdown-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-normal);
+  padding: .25rem .5rem;
+  border-right: 1px solid var(--background-modifier-border);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transition: background 0.5s ease;
+}
+
+/* Day: Starts muted Light Blue, blends completely into incoming Shadows by 65% */
+.day .countdown-stage {
+  background: linear-gradient(to bottom, var(--mv-countdown-day) -30%, var(--mv-countdown-shadows) 65%, var(--mv-countdown-shadows) 100%);
+}
+
+/* Shadows: Starts muted Blue Grey, blending down into incoming Sunset by 65% */
+.shadows .countdown-stage {
+  background: linear-gradient(to bottom, var(--mv-countdown-shadows) -30%, var(--mv-countdown-sunset) 65%, var(--mv-countdown-sunset) 100%);
+}
+
+/* Sunset: Starts muted Slate Grey, blending down into incoming Dusk by 65% */
+.sunset .countdown-stage {
+  background: linear-gradient(to bottom, var(--mv-countdown-sunset) -30%, var(--mv-countdown-dusk) 65%, var(--mv-countdown-dusk) 100%);
+}
+
+/* Dusk: Starts muted Orange, blending down into incoming Nightfall by 65% */
+.dusk .countdown-stage {
+  background: linear-gradient(to bottom, var(--mv-countdown-dusk) -30%, var(--mv-countdown-nightfall) 65%, var(--mv-countdown-nightfall) 100%);
+}
+
+/* Nightfall: Starts muted Sunset Pink, blending down into incoming Midnight by 65% */
+.nightfall .countdown-stage {
+  background: linear-gradient(to bottom, var(--mv-countdown-nightfall) -30%, var(--mv-countdown-midnight) 65%, var(--mv-countdown-midnight) 100%);
+}
+
+/* Midnight: Starts muted Dusk Purple and blends smoothly into --mv-void itself
+   (the old #030D18 terminal was already effectively void-level, so this
+   ties it to the actual token instead of a near-duplicate hardcoded hex) */
+.midnight .countdown-stage {
+  background: linear-gradient(to bottom, var(--mv-countdown-midnight) -30%, var(--mv-void) 100%);
+}
+
+/*==============================================================
+    EVENT
+==============================================================*/
+
+.countdown-event{
+
+display:flex;
+
+align-items:center;
+
+padding:.25rem 1.2rem;
+
+line-height:1.4;
+
+color:var(--text-normal);
+
+}
+
+/*==============================================================
+    COMPLETED
+==============================================================*/
+
+.countdown-row:has(.countdown-checkbox:checked){
+
+opacity:.65;
+
+}
+
+/*==============================================================
+    MOBILE
+==============================================================*/
+
+@media (max-width:700px){
+
+.motw-countdown{
+
+width:100%;
+
+}
+
+.countdown-row{
+
+grid-template-columns:40px 100px 1fr;
+
+}
+
+}
