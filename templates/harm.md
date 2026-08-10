@@ -1,8 +1,15 @@
----
-harm: 20
-harm_max: 20
----
-
+<%*
+/* Merges harm/harm_max into the note's EXISTING frontmatter (creating
+   it if the note has none) instead of writing a standalone --- block —
+   Obsidian only allows one frontmatter block per file, so a static
+   block here would collide with whatever frontmatter a Monster/Hunter/
+   PC template already wrote. Safe to insert into any note either way. */
+const file = app.workspace.getActiveFile();
+await app.fileManager.processFrontMatter(file, (fm) => {
+    fm.harm = 0;
+    fm.harm_max = 7;
+});
+-%>
 <br>
 <div class="harm-title">
 Harm
