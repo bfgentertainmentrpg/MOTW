@@ -4,6 +4,34 @@
    ========================================= */
 
 /* =========================================
+   TITLE
+   Same styling as .countdown-title (theme/countdown.css) — same font,
+   size, weight, small-caps, and category-color pull.
+   ========================================= */
+
+.harm-title {
+    font-family: var(--h2-font);
+
+    font-size: calc(1em + 6px);
+
+    font-weight: 600;
+
+    line-height: 0.8;
+
+    color: var(--mv-note-accent) !important;
+
+    font-variant: small-caps;
+
+    letter-spacing: .05em;
+
+    margin: 0;
+
+    padding-bottom: .1rem;
+
+    text-shadow: none !important;
+}
+
+/* =========================================
    TRACKER ROW
    100% of --mv-table-width, the same shared width every other
    component uses (see motw-theme.css) — not an independent %. The
