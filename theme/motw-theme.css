@@ -541,6 +541,22 @@ button.mv-monster-btn:hover {
 	accent-color: var(--mv-monster-core);
 }
 
+/* ================= 4B. CATEGORY: MINION ==================================
+   Minion was one of the doc's original 7 content-type categories (see
+   the file header) but had no note-content rule of its own — only its
+   --mv-minion-core/-dark tokens existed, used elsewhere by the NPC
+   sub-categories (Recurring/Single Appearance). Wired up here the same
+   way as Asset. */
+.mv-minion { --mv-note-accent: var(--mv-minion-core); --mv-note-accent-dark: var(--mv-minion-dark); }
+.mv-minion h1, .mv-minion h2, .mv-minion h3, .mv-minion h4, .mv-minion h5, .mv-minion h6,
+.mv-minion .HyperMD-header-1 { color: var(--mv-minion-core) !important; }
+.mv-minion hr, .mv-minion .cm-hr { border-top-color: var(--mv-minion-core) !important; opacity: 0.6; }
+.mv-minion table:not(.move-table):not(.gear-table) th, .mv-minion table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-minion-dark) !important; color: var(--mv-text-primary) !important; }
+.mv-minion table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.callout[data-callout="minion"] { --callout-color: var(--mv-minion-core-rgb); --callout-bg: var(--mv-minion-dark); }
+button.mv-minion-btn { background-color: var(--mv-minion-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-minion-core) !important; border-radius: var(--mv-radius-inner); }
+button.mv-minion-btn:hover { background-color: var(--mv-minion-core) !important; color: var(--mv-void) !important; }
+
 /* ================= 5. CATEGORY: LOCATION (worked example) ============ */
 
 .mv-location { --mv-note-accent: var(--mv-location-core); --mv-note-accent-dark: var(--mv-location-dark); }

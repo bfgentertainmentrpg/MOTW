@@ -1,5 +1,5 @@
 Category:
 
 ```meta-bind
-INPUT[select(option(mv-monster, Monster), option(mv-location, Location), option(mv-mystery, Mystery), option(mv-hunter, Hunter), option(mv-reference, Reference), option(mv-asset, Asset), option(mv-monsters, Threat Monsters), option(mv-minions, Threat Minions), option(mv-villain, Threat Villain), option(mv-phenomena, Threat Phenomena), option(mv-recurring, NPC Recurring), option(mv-single-appearance, NPC Single Appearance)):cssclasses]
+INPUT[select(option(mv-mystery, Mystery), option(mv-hunter, Hunter), option(mv-monster, Monster), option(mv-minion, Minion), option(mv-villain, Villain), option(mv-phenomena, Phenomena), option(mv-recurring, Recurring NPC), option(mv-single-appearance, One Time NPC), option(mv-location, Location), option(mv-reference, Reference), option(mv-asset, Asset)):cssclasses]
 ```
