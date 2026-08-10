@@ -29,12 +29,11 @@ text-shadow:none !important;
 
 /*==============================================================
     CONTAINER
-    Fills the page's content box at 100% rather than setting its own
-    85% — the page itself is already fixed to 85% width (see the
-    page-width block in motw-theme.css), so a second, independent 85%
-    here would compound to ~72% of the actual pane and stop lining up
-    with the rest of the page's content. 100% keeps it flush with the
-    same right edge as headings/paragraphs/tables.
+    Fixed to --mv-table-width (900px), same shared width as Move Box
+    and Gear tables (see motw-theme.css) — not a % of the page. A
+    percentage here would track the page's 85% box and drift wider
+    than the tables' fixed column, throwing off alignment between the
+    countdown and every table above/below it on the page.
 ==============================================================*/
 
 .motw-countdown{
@@ -47,9 +46,9 @@ background:transparent;
 
 margin-bottom:1rem;
 
-width:100% !important;
+width:var(--mv-table-width) !important;
 
-max-width:100% !important;
+max-width:var(--mv-table-width) !important;
 
 margin-left:0 !important;
 
@@ -212,6 +211,19 @@ opacity:.65;
 ==============================================================*/
 
 @media (max-width:700px){
+
+/* Deliberately NOT --mv-table-width (900px) here — on an actual
+   small/mobile viewport a fixed 900px box would force horizontal
+   scrolling, which is exactly what this breakpoint exists to
+   prevent. Viewport-relative on purpose, matching Gear's own
+   small-screen override. */
+.motw-countdown{
+
+width:92vw !important;
+
+max-width:92vw !important;
+
+}
 
 .countdown-row{
 
