@@ -127,7 +127,7 @@
 	   machine; otherwise every rule below silently falls through to the
 	   serif fallback. If nothing changes after reloading the snippet,
 	   that's most likely why — check the fonts are actually installed. */
-	--mv-font-header: "Funkrocker", Georgia, serif;
+	--mv-font-header: "Knife Fight Ballet", Georgia, serif;
 	--mv-font-body: "Warnock Pro", Georgia, serif;
 }
 
