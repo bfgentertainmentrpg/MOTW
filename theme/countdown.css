@@ -13,7 +13,7 @@ font-weight:600;
 
 line-height:0.8;
 
-color: #A984B0;
+color: var(--mv-note-accent) !important;
 
 font-variant:small-caps;
 
@@ -29,6 +29,8 @@ text-shadow:none !important;
 
 /*==============================================================
     CONTAINER
+    85% fixed width, left-justified — same rule as the page and every
+    other component (see the page-width block in motw-theme.css).
 ==============================================================*/
 
 .motw-countdown{
@@ -41,7 +43,15 @@ background:transparent;
 
 margin-bottom:1rem;
 
-width:85%;
+width:85% !important;
+
+max-width:85% !important;
+
+min-width:85% !important;
+
+margin-left:0 !important;
+
+margin-right:auto !important;
 
 box-sizing:border-box;
 
@@ -203,7 +213,11 @@ opacity:.65;
 
 .motw-countdown{
 
-width:100%;
+width:100% !important;
+
+max-width:100% !important;
+
+min-width:100% !important;
 
 }
 
