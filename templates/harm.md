@@ -1,13 +1,13 @@
+```yaml
+harm: 20
+harm_max: 20
+```
+
 <br>
 <div class="harm-title">
 Harm
 </div>
 <br>
-
-```yaml
-harm: 20
-harm_max: 20
-```
 
 ```meta-bind-js-view
 {harm} as harm
