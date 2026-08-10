@@ -50,8 +50,7 @@
 
 /* ==========================================================
    ALL CELLS
-   HORIZONTAL LINES ONLY
-   MUTED CATEGORY ACCENT — 1.25px
+   FULL BORDERS, ALABASTER
    ========================================================== */
 
 .markdown-preview-view table.gear-table th,
@@ -59,12 +58,7 @@
 
     box-sizing: border-box !important;
 
-    border-left: none !important;
-    border-right: none !important;
-    border-top: none !important;
-
-    border-bottom:
-        1px solid color-mix(in srgb, var(--mv-note-accent) 45%, var(--mv-border)) !important;
+    border: 1px solid var(--mv-text-primary) !important;
 
     /* Top / Right / Bottom / Left */
     padding:
@@ -83,7 +77,9 @@
 
 /* ==========================================================
    HEADER
-   CATEGORY DARK FILL, CATEGORY ACCENT LINE — via --mv-note-accent(-dark)
+   CATEGORY DARK FILL — via --mv-note-accent-dark. Border matches every
+   other cell now (full, Alabaster) rather than a category-accent line,
+   for one consistent border color across the whole table.
    ========================================================== */
 
 .markdown-preview-view table.gear-table thead th {
@@ -98,10 +94,7 @@
 
     text-align: left !important;
 
-    border: none !important;
-
-    border-bottom:
-        2px solid var(--mv-note-accent) !important;
+    border: 1px solid var(--mv-text-primary) !important;
 }
 
 
