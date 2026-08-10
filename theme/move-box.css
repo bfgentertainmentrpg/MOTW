@@ -33,7 +33,7 @@
     --move-border: var(--mv-text-primary);     /* Alabaster */
 
     --move-width: var(--mv-table-width);  /* 100% of the page's own content box, shared with every other table — see motw-theme.css */
-    --move-roll-width: 10%;
+    --move-roll-width: var(--mv-table-first-col-width);  /* 152px, shared with Gear's Name column and Countdown's checkbox+stage columns — see motw-theme.css */
 }
 
 /* ==========================================================

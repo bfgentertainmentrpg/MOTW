@@ -102,13 +102,14 @@
 
 /* ==========================================================
    NAME
-   15%
+   152px — shared with Move Box's Roll column and Countdown's
+   checkbox+stage columns (--mv-table-first-col-width, motw-theme.css)
    ========================================================== */
 
 .markdown-preview-view table.gear-table th:nth-child(1),
 .markdown-preview-view table.gear-table td:nth-child(1) {
 
-    width: 15% !important;
+    width: var(--mv-table-first-col-width) !important;
 
     color:
         var(--mv-text-primary) !important;

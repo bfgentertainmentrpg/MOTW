@@ -89,6 +89,13 @@
 	   varies per category/context. -- */
 	--mv-table-width: 100%;
 
+	/* -- Shared first-column width — 152px, matching Countdown's
+	   checkbox (42px) + stage (110px) columns combined (see
+	   theme/countdown.css). Move Box's Roll column and Gear's Name
+	   column both reference this so all three components' first
+	   column lines up at an identical pixel width. -- */
+	--mv-table-first-col-width: 152px;
+
 	/* -- Environment (background layers, darkest to lightest) -- */
 	--mv-void: #070B10;      /* Level 0 — main background, empty space */
 	--mv-navy: #0D1720;      /* Level 1 — secondary surfaces */
