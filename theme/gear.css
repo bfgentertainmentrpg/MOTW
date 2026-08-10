@@ -1,0 +1,228 @@
+/* ==========================================================
+   GEAR
+   ========================================================== */
+
+
+/* ==========================================================
+   GEAR HEADING
+   Filed under 07 - Assets — aliased to --mv-asset-core (Orange)
+   rather than the old hardcoded #789397 / "FOLDER COLOR #7"
+   reference, per the cross-snippet consistency rule (see
+   theme/motw-theme.css). font-family isn't redeclared here — the
+   main theme's h1-h3 rule already sets --mv-font-header (and
+   small-caps) on any h2 in Reading/Live Preview, so this only
+   needs to add the category color.
+   ========================================================== */
+
+.markdown-preview-view h2 {
+    color: var(--mv-asset-core) !important;
+    font-weight: 700 !important;
+}
+
+/* ==========================================================
+   GEAR TABLE
+   85% WIDTH — LEFT ALIGNED
+   ========================================================== */
+
+.markdown-preview-view table {
+
+    width: 85% !important;
+
+    margin-left: 0 !important;
+    margin-right: auto !important;
+
+    table-layout: fixed !important;
+
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+
+    margin-top: 0.25rem !important;
+    margin-bottom: 1rem !important;
+
+    color: var(--mv-text-primary) !important;
+}
+
+
+/* ==========================================================
+   ALL CELLS
+   HORIZONTAL LINES ONLY
+   MUTED ASSET ORANGE — 1.25px
+   ========================================================== */
+
+.markdown-preview-view table th,
+.markdown-preview-view table td {
+
+    box-sizing: border-box !important;
+
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+
+    border-bottom:
+        1px solid color-mix(in srgb, var(--mv-asset-core) 45%, var(--mv-border)) !important;
+
+    /* Top / Right / Bottom / Left */
+    padding:
+        0.25rem
+        0.55rem
+        0.10rem
+        0.55rem !important;
+
+    vertical-align: middle !important;
+
+    color: var(--mv-text-primary) !important;
+
+    line-height: 2 !important;
+}
+
+
+/* ==========================================================
+   HEADER
+   ASSET DARK FILL, ASSET CORE ACCENT LINE
+   ========================================================== */
+
+.markdown-preview-view table thead th {
+
+    background-color:
+        var(--mv-asset-dark) !important;
+
+    color:
+        var(--mv-text-primary) !important;
+
+    font-weight: 700 !important;
+
+    text-align: left !important;
+
+    border: none !important;
+
+    border-bottom:
+        2px solid var(--mv-asset-core) !important;
+}
+
+
+/* ==========================================================
+   NAME
+   15%
+   ========================================================== */
+
+.markdown-preview-view table th:nth-child(1),
+.markdown-preview-view table td:nth-child(1) {
+
+    width: 15% !important;
+
+    color:
+        var(--mv-text-primary) !important;
+
+    font-weight: 600 !important;
+
+    text-align: left !important;
+
+    white-space: normal !important;
+
+    overflow-wrap: break-word;
+}
+
+
+/* ==========================================================
+   DAMAGE
+   10%
+   ========================================================== */
+
+.markdown-preview-view table th:nth-child(2),
+.markdown-preview-view table td:nth-child(2) {
+
+    width: 10% !important;
+
+    color:
+        var(--mv-text-primary) !important;
+
+    font-weight: 600 !important;
+
+    text-align: left !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* ==========================================================
+   FEATURES
+   75%
+   ========================================================== */
+
+.markdown-preview-view table th:nth-child(3),
+.markdown-preview-view table td:nth-child(3) {
+
+    width: 75% !important;
+
+    color:
+        var(--mv-text-primary) !important;
+
+    text-align: left !important;
+
+    white-space: normal !important;
+
+    vertical-align: middle !important;
+}
+
+
+/* ==========================================================
+   BODY
+   ========================================================== */
+
+.markdown-preview-view table tbody tr {
+
+    background-color: transparent !important;
+
+    color:
+        var(--mv-text-primary) !important;
+}
+
+
+/* ==========================================================
+   HOVER
+   ========================================================== */
+
+.markdown-preview-view table tbody tr:hover {
+
+    background-color:
+        color-mix(in srgb, var(--mv-text-primary) 4%, transparent) !important;
+}
+
+
+/* ==========================================================
+   REMOVE PARAGRAPH SPACING
+   ========================================================== */
+
+.markdown-preview-view table th p,
+.markdown-preview-view table td p {
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    color:
+        var(--mv-text-primary) !important;
+}
+
+
+/* ==========================================================
+   SMALL SCREENS
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .markdown-preview-view table {
+
+        width: 85% !important;
+    }
+
+    .markdown-preview-view table th,
+    .markdown-preview-view table td {
+
+        padding:
+            0.55rem
+            0.4rem
+            0.15rem
+            0.4rem !important;
+    }
+}
