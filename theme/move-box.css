@@ -49,6 +49,7 @@
 
     line-height: 1.2;
 
+    margin-left: 0;
     margin-bottom: 0;
 
     text-shadow: none !important;
@@ -66,7 +67,7 @@
     margin-top: .15rem;
     margin-bottom: .35rem;
 
-    margin-left: 1.7rem;
+    margin-left: 0;
 
     color: var(--move-text);
 
@@ -109,7 +110,7 @@
 table.move-table {
     width: var(--move-width);
 
-    margin-left: 1.7rem;
+    margin-left: 0;
     margin-right: auto;
 
     margin-top: .25rem;

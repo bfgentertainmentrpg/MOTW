@@ -19,7 +19,7 @@ const low = await tp.system.prompt(
 
 tR += `
 
-- [ ] <span class="move-heading">${moveName}</span>
+<span class="move-heading">${moveName}</span>
 
 <span class="move-note">
 ${moveDescription}
