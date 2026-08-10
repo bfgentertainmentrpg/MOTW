@@ -7,7 +7,6 @@ harm_max: 20
 <div class="harm-title">
 Harm
 </div>
-<br>
 
 ```meta-bind-js-view
 {harm} as harm
