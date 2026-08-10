@@ -20,7 +20,7 @@
     --move-border: var(--mv-text-primary);  /* Alabaster */
 
     --move-width: 85%;
-    --move-roll-width: 135px;
+    --move-roll-width: 10%;
 }
 
 /* ==========================================================
@@ -94,9 +94,10 @@
    ========================================================== */
 
 table.move-table {
-    width: calc(var(--move-width) - 1.7rem);
+    width: var(--move-width);
 
     margin-left: 1.7rem;
+    margin-right: auto;
 
     margin-top: .25rem;
     margin-bottom: 1rem;
@@ -174,6 +175,13 @@ table.move-table td:first-child {
 table.move-table th:nth-child(2),
 table.move-table td:nth-child(2) {
     width: auto;
+}
+
+/* Body cells only — the header row stays a unified dark bar across both
+   columns (table.move-table thead th, above). Second-column body cells
+   match the page background instead of getting their own fill. */
+table.move-table td:nth-child(2) {
+    background-color: var(--mv-void) !important;
 }
 
 /* ----------------------------------------------------------
