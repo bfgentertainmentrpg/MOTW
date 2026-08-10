@@ -1,0 +1,276 @@
+/* =========================================
+   HARM TRACKER
+   Heal | Meter | Harm
+   ========================================= */
+
+/* =========================================
+   TRACKER ROW
+   100% of --mv-table-width, the same shared width every other
+   component uses (see motw-theme.css) — not an independent %. The
+   page itself is already fixed to 85%, so a second, independent %
+   here would compound (the same bug Countdown's container hit).
+   ========================================= */
+
+.harm-tracker-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: var(--mv-table-width) !important;
+    max-width: var(--mv-table-width) !important;
+    min-width: var(--mv-table-width) !important;
+
+    margin-left: 0 !important;
+    margin-right: auto !important;
+
+    box-sizing: border-box !important;
+}
+
+/* =========================================
+   HEAL / HARM BUTTONS
+   ========================================= */
+
+.harm-tracker-button {
+    flex: 0 0 auto;
+}
+
+.harm-tracker-button .mb-button > button,
+.mb-button.harm-heal-button > button,
+.mb-button.harm-harm-button > button {
+    min-height: 36px !important;
+
+    color: var(--mv-text-primary) !important;
+
+    font-family: var(--font-interface) !important;
+    font-size: 0.78em !important;
+    font-weight: 700 !important;
+
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+
+    border-radius: var(--mv-radius-sm) !important;
+    box-shadow: none !important;
+
+    padding: 7px 14px !important;
+
+    line-height: 1.2 !important;
+
+    box-sizing: border-box !important;
+}
+
+/* =========================================
+   HEAL BUTTON
+   ========================================= */
+
+.mb-button.harm-heal-button > button {
+    background-color: #4E6750 !important;
+    border: 1px solid #4E6750 !important;
+    color: var(--mv-text-primary) !important;
+}
+
+.mb-button.harm-heal-button > button:hover {
+    background-color: #5B765D !important;
+    border-color: #5B765D !important;
+    color: var(--mv-text-primary) !important;
+}
+
+/* =========================================
+   HARM BUTTON
+   ========================================= */
+
+.mb-button.harm-harm-button > button {
+    background-color: #773F3F !important;
+    border: 1px solid #773F3F !important;
+    color: var(--mv-text-primary) !important;
+}
+
+.mb-button.harm-harm-button > button:hover {
+    background-color: #894A4A !important;
+    border-color: #894A4A !important;
+    color: var(--mv-text-primary) !important;
+}
+
+/* =========================================
+   PRESSED STATE
+   ========================================= */
+
+.mb-button.harm-heal-button > button:active,
+.mb-button.harm-harm-button > button:active {
+    filter: brightness(0.9);
+}
+
+/* =========================================
+   METER COLUMN
+   ========================================= */
+
+.harm-meter-column {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    box-sizing: border-box !important;
+}
+
+/* =========================================
+   HARM METER
+   ========================================= */
+
+.harm-meter {
+    position: relative;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    height: 36px;
+
+    border: 1px solid;
+    border-radius: var(--mv-radius-sm);
+    overflow: hidden;
+
+    background-color: var(--background-primary);
+
+    transition: border-color 0.2s ease;
+
+    box-sizing: border-box !important;
+}
+
+/* =========================================
+   METER FRAME COLORS
+   ========================================= */
+
+/* Green — Harm 0–3 */
+
+.harm-meter.harm-meter-low {
+    border-color: #4E6750;
+}
+
+/* Yellow — Harm 4 through below 80% */
+
+.harm-meter.harm-meter-medium {
+    border-color: #88753F;
+}
+
+/* Red — 80%+ */
+
+.harm-meter.harm-meter-high {
+    border-color: #773F3F;
+}
+
+/* =========================================
+   METER FILL
+   ========================================= */
+
+.harm-meter-fill {
+    height: 100%;
+    width: 0;
+
+    transition:
+        width 0.2s ease,
+        background-color 0.2s ease;
+
+    box-sizing: border-box !important;
+}
+
+/* Green */
+
+.harm-meter-fill.harm-fill-low {
+    background-color: #4E6750;
+}
+
+/* Yellow */
+
+.harm-meter-fill.harm-fill-medium {
+    background-color: #88753F;
+}
+
+/* Red */
+
+.harm-meter-fill.harm-fill-high {
+    background-color: #773F3F;
+}
+
+/* =========================================
+   METER LABELS
+   ========================================= */
+
+.harm-meter-min,
+.harm-meter-max,
+.harm-current-label {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--mv-text-primary) !important;
+
+    pointer-events: none;
+    z-index: 3;
+
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   MINIMUM
+   ========================================= */
+
+.harm-meter-min {
+    left: 8px;
+    font-weight: 600;
+}
+
+/* =========================================
+   CURRENT HARM
+   ========================================= */
+
+.harm-current-label {
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-family: var(--font-interface) !important;
+    font-size: 0.85em !important;
+    font-weight: 700 !important;
+
+    letter-spacing: 0.04em;
+
+    white-space: nowrap;
+}
+
+/* =========================================
+   MAXIMUM
+   ========================================= */
+
+.harm-meter-max {
+    right: 8px;
+    font-weight: 600;
+}
+
+/* =========================================
+   SMALL SCREENS
+   ========================================= */
+
+@media (max-width: 500px) {
+
+    /* No width override needed here anymore — the row is already
+       100% of the page's own 85% content box, which can never exceed
+       the viewport, so there's nothing for a small-screen width
+       override to fix. */
+    .harm-tracker-row {
+        gap: 8px;
+    }
+
+    .harm-tracker-button .mb-button > button {
+        min-height: 36px !important;
+
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .harm-meter {
+        height: 36px;
+    }
+
+    .harm-current-label {
+        font-size: 0.75em !important;
+    }
+}
