@@ -32,7 +32,7 @@
 
     --move-border: var(--mv-text-primary);     /* Alabaster */
 
-    --move-width: 85%;
+    --move-width: var(--mv-table-width);  /* fixed px, shared with every other table — see motw-theme.css */
     --move-roll-width: 10%;
 }
 

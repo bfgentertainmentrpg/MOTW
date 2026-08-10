@@ -77,6 +77,14 @@
 	--mv-radius-inner: 10px;
 	--mv-radius-sm: 6px;
 
+	/* -- Shared table width. Fixed px, not a %, so every table (Move Box,
+	   Gear, any future one) renders at the identical size on every page
+	   regardless of pane/window width — a % recalculates per-container,
+	   which is exactly what made tables inconsistent from one note or
+	   split-pane layout to the next. Safe to alias directly (unlike
+	   --mv-note-accent) since this never varies per category/context. -- */
+	--mv-table-width: 900px;
+
 	/* -- Environment (background layers, darkest to lightest) -- */
 	--mv-void: #070B10;      /* Level 0 — main background, empty space */
 	--mv-navy: #0D1720;      /* Level 1 — secondary surfaces */

@@ -17,7 +17,8 @@
 
 /* ==========================================================
    GEAR TABLE
-   85% WIDTH — LEFT ALIGNED
+   FIXED WIDTH (--mv-table-width, shared with every other table — see
+   motw-theme.css) — LEFT ALIGNED
 
    Scoped to table.gear-table — the original file targeted every plain
    ".markdown-preview-view table" with !important, which matched (and
@@ -30,7 +31,7 @@
 
 .markdown-preview-view table.gear-table {
 
-    width: 85% !important;
+    width: var(--mv-table-width) !important;
 
     margin-left: 0 !important;
     margin-right: auto !important;
@@ -229,9 +230,13 @@
 
 @media (max-width: 600px) {
 
+    /* Deliberately NOT --mv-table-width (900px) here — on an actual
+       small/mobile viewport a fixed 900px table would force horizontal
+       scrolling, which is exactly what this breakpoint exists to
+       prevent. Viewport-relative on purpose, just for this one case. */
     .markdown-preview-view table.gear-table {
 
-        width: 85% !important;
+        width: 92vw !important;
     }
 
     .markdown-preview-view table.gear-table th,
