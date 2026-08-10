@@ -440,6 +440,24 @@ progress {
 	accent-color: var(--mv-cyan);
 }
 
+/* -- Page width: content is a fixed 85% of the pane, left-justified.
+   Obsidian's own sizer elements normally center content and size it via
+   --file-line-width (only when Readable Line Length is on, else full
+   width) — width/max-width/min-width all pinned to the same 85% value
+   here overrides that in both directions regardless of the toggle, and
+   margin-right: auto (instead of Obsidian's margin: 0 auto) removes the
+   centering so content hugs the left edge of the pane. Targets both
+   Live Preview/Source mode (.cm-sizer) and Reading mode
+   (.markdown-preview-sizer) so it holds in every view mode. -- */
+.markdown-source-view.mod-cm6 .cm-sizer,
+.markdown-preview-view .markdown-preview-sizer {
+	width: 85% !important;
+	max-width: 85% !important;
+	min-width: 85% !important;
+	margin-left: 0 !important;
+	margin-right: auto !important;
+}
+
 /* ================= 4. CATEGORY: MONSTER (worked example) =============
    Apply by adding `cssclasses: mv-monster` to a note's frontmatter. That
    class lands on the note's view container in both Live Preview and
