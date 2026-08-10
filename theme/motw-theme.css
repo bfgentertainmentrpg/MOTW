@@ -622,6 +622,21 @@ button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important;
 button.mv-reference-btn { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-reference-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !important; color: var(--mv-void) !important; }
 
+/* ================= 5D2. CATEGORY: ASSET =================================
+   --mv-asset-core/--mv-asset-dark already existed (used for the sidebar
+   folder color on 07 - Assets) but had no note-content rule of its own —
+   this wires it up the same way as Mystery/Hunter/Reference so it's a
+   real, selectable cssclasses value. */
+.mv-asset { --mv-note-accent: var(--mv-asset-core); --mv-note-accent-dark: var(--mv-asset-dark); }
+.mv-asset h1, .mv-asset h2, .mv-asset h3, .mv-asset h4, .mv-asset h5, .mv-asset h6,
+.mv-asset .HyperMD-header-1 { color: var(--mv-asset-core) !important; }
+.mv-asset hr, .mv-asset .cm-hr { border-top-color: var(--mv-asset-core) !important; opacity: 0.6; }
+.mv-asset table:not(.move-table):not(.gear-table) th, .mv-asset table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-asset-dark) !important; color: var(--mv-text-primary) !important; }
+.mv-asset table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.callout[data-callout="asset"] { --callout-color: var(--mv-asset-core-rgb); --callout-bg: var(--mv-asset-dark); }
+button.mv-asset-btn { background-color: var(--mv-asset-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-asset-core) !important; border-radius: var(--mv-radius-inner); }
+button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; color: var(--mv-void) !important; }
+
 /* ================= 5E. THREATS SUB-CATEGORIES ==========================
    Monsters/Minions/Villain/Phenomena, matching the exact fade values
    already driving their sidebar folders (section 6a) — a note's heading/
