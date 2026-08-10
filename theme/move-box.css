@@ -8,18 +8,26 @@
    Aliased to the shared MOTW Vault tokens (theme/motw-theme.css)
    rather than hardcoded hex OR one fixed category, so this snippet
    automatically stays in sync with the main theme's colors and fonts
-   AND adapts to whatever category the note actually belongs to.
-   --move-green/--move-heading now read --mv-note-accent(-dark) — the
-   generic "current note's category color" pair every .mv-X block in
-   the main theme feeds — instead of being hardcoded to Teal. A move
-   table in a .mv-villain note picks up Villain's color; in an
+   AND adapts to whatever category the note actually belongs to. A
+   move table in a .mv-villain note picks up Villain's color; in an
    uncategorized note it falls back to system Core Cyan / Dark Teal.
    Requires motw-theme.css to be enabled alongside this snippet.
-   ---------------------------------------------------------- */
+
+   --mv-note-accent(-dark) is used DIRECTLY below wherever the old
+   --move-green/--move-heading appeared — NOT wrapped in another
+   :root-only alias. That indirection was tried first and silently
+   broke inside any categorized note: a custom property's var()
+   references resolve using the referenced variable's value AT THE
+   ELEMENT WHERE THAT PROPERTY ITSELF IS DECLARED, so an alias declared
+   only once at :root permanently locks in the :root-level value
+   (system Cyan/Dark Teal) and never sees a deeper .mv-X override, even
+   though --mv-note-accent itself resolves correctly when read directly.
+   See theme/motw-theme.css's note on this same mistake. --move-text/
+   --move-border don't have this problem — --mv-text-primary (Alabaster)
+   is a stable constant, never locally overridden per category, so
+   aliasing it is safe. */
 
 :root {
-    --move-green: var(--mv-note-accent-dark);  /* structural dark fill, whatever category this note belongs to */
-    --move-heading: var(--mv-note-accent);     /* heading color, same category */
     --move-text: var(--mv-text-primary);       /* Alabaster */
 
     --move-border: var(--mv-text-primary);     /* Alabaster */
@@ -33,7 +41,7 @@
    ========================================================== */
 
 .move-heading {
-    color: var(--move-heading) !important;
+    color: var(--mv-note-accent) !important;
 
     font-family: var(--mv-font-header) !important;
     font-size: calc(1em + 6px);
@@ -143,7 +151,7 @@ table.move-table td * {
    ========================================================== */
 
 table.move-table thead th {
-    background-color: var(--move-green) !important;
+    background-color: var(--mv-note-accent-dark) !important;
     color: var(--move-text) !important;
 
     border: 1px solid var(--move-border) !important;
@@ -167,7 +175,7 @@ table.move-table td:first-child {
 
     white-space: nowrap;
 
-    background-color: var(--move-green) !important;
+    background-color: var(--mv-note-accent-dark) !important;
     color: var(--move-text) !important;
 
     font-weight: 600;
@@ -224,7 +232,7 @@ table.move-table tbody tr:hover {
 /* Completed checkbox */
 
 .markdown-preview-view li.task-list-item.is-checked > .task-list-item-checkbox {
-    accent-color: var(--move-green);
+    accent-color: var(--mv-note-accent-dark);
 }
 
 /* ==========================================================

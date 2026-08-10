@@ -291,18 +291,29 @@ body {
    theme/move-box.css and theme/gear.css, which read these instead of a
    fixed --mv-teal-dark or --mv-asset-core. Defaults to Core Cyan / Dark
    Teal at system level, same as an uncategorized page's headings/tables.
-   --mv-link-color is now just an alias of --mv-note-accent — it used to
-   carry its own per-category override, consolidated here since the two
-   were always set to the identical value anyway. */
+
+   IMPORTANT: always reference --mv-note-accent(-dark) DIRECTLY at the
+   point of use. Do not create ANOTHER custom property that just aliases
+   it (e.g. `--foo: var(--mv-note-accent);`) declared only once at
+   :root — a custom property's var() references resolve using the
+   variable's value AT THE ELEMENT WHERE THAT PROPERTY ITSELF IS
+   DECLARED, not at wherever it's later used. An alias declared only at
+   :root permanently resolves to the :root-level value (system Cyan) and
+   silently ignores every .mv-X override deeper in the tree, even though
+   --mv-note-accent itself still resolves correctly if you reference it
+   directly. This exact mistake shipped once already (an earlier
+   --mv-link-color alias, and theme/move-box.css's --move-heading/
+   --move-green) — both looked correct in an uncategorized note and only
+   broke once an actual category tag was involved, which is why it's
+   worth this much of a warning. */
 :root {
 	--mv-note-accent: var(--mv-cyan);
 	--mv-note-accent-dark: var(--mv-teal-dark);
-	--mv-link-color: var(--mv-note-accent);
 }
 
 a,
 .markdown-source-view .cm-string.cm-url {
-	color: var(--mv-link-color) !important;
+	color: var(--mv-note-accent) !important;
 }
 
 a:hover {
@@ -446,17 +457,17 @@ progress {
 
 /* Header-table label column: dark Monster fill, Alabaster value text
    (see doc section 22 — the "NAME / TYPE / MOTIVATION" example table) */
-.mv-monster table th,
-.mv-monster table td:first-child {
+.mv-monster table:not(.move-table):not(.gear-table) th,
+.mv-monster table:not(.move-table):not(.gear-table) td:first-child {
 	background-color: var(--mv-monster-dark) !important;
 	color: var(--mv-text-primary) !important;
 }
 
-.mv-monster table td:not(:first-child) {
+.mv-monster table:not(.move-table):not(.gear-table) td:not(:first-child) {
 	background-color: var(--mv-panel) !important;
 }
 
-.mv-monster table {
+.mv-monster table:not(.move-table):not(.gear-table) {
 	border: 1px solid var(--mv-monster-core);
 }
 
@@ -506,17 +517,17 @@ button.mv-monster-btn:hover {
 }
 
 
-.mv-location table th,
-.mv-location table td:first-child {
+.mv-location table:not(.move-table):not(.gear-table) th,
+.mv-location table:not(.move-table):not(.gear-table) td:first-child {
 	background-color: var(--mv-location-dark) !important;
 	color: var(--mv-text-primary) !important;
 }
 
-.mv-location table td:not(:first-child) {
+.mv-location table:not(.move-table):not(.gear-table) td:not(:first-child) {
 	background-color: var(--mv-panel) !important;
 }
 
-.mv-location table {
+.mv-location table:not(.move-table):not(.gear-table) {
 	border: 1px solid var(--mv-location-core);
 }
 
@@ -543,9 +554,9 @@ button.mv-location-btn:hover {
 .mv-mystery h1, .mv-mystery h2, .mv-mystery h3, .mv-mystery h4, .mv-mystery h5, .mv-mystery h6,
 .mv-mystery .HyperMD-header-1 { color: var(--mv-mystery-core) !important; }
 .mv-mystery hr, .mv-mystery .cm-hr { border-top-color: var(--mv-mystery-core) !important; opacity: 0.6; }
-.mv-mystery table th, .mv-mystery table td:first-child { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-primary) !important; }
-.mv-mystery table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-mystery table { border: 1px solid var(--mv-mystery-core); }
+.mv-mystery table:not(.move-table):not(.gear-table) th, .mv-mystery table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-primary) !important; }
+.mv-mystery table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-mystery table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-mystery-core); }
 .callout[data-callout="mystery"] { --callout-color: var(--mv-mystery-core-rgb); --callout-bg: var(--mv-mystery-dark); }
 button.mv-mystery-btn { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-mystery-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !important; color: var(--mv-void) !important; }
@@ -555,9 +566,9 @@ button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !importan
 .mv-hunter h1, .mv-hunter h2, .mv-hunter h3, .mv-hunter h4, .mv-hunter h5, .mv-hunter h6,
 .mv-hunter .HyperMD-header-1 { color: var(--mv-hunter-core) !important; }
 .mv-hunter hr, .mv-hunter .cm-hr { border-top-color: var(--mv-hunter-core) !important; opacity: 0.6; }
-.mv-hunter table th, .mv-hunter table td:first-child { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-primary) !important; }
-.mv-hunter table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-hunter table { border: 1px solid var(--mv-hunter-core); }
+.mv-hunter table:not(.move-table):not(.gear-table) th, .mv-hunter table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-primary) !important; }
+.mv-hunter table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-hunter table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-hunter-core); }
 .callout[data-callout="hunter"] { --callout-color: var(--mv-hunter-core-rgb); --callout-bg: var(--mv-hunter-dark); }
 button.mv-hunter-btn { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-hunter-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important; color: var(--mv-void) !important; }
@@ -567,9 +578,9 @@ button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important;
 .mv-reference h1, .mv-reference h2, .mv-reference h3, .mv-reference h4, .mv-reference h5, .mv-reference h6,
 .mv-reference .HyperMD-header-1 { color: var(--mv-reference-core) !important; }
 .mv-reference hr, .mv-reference .cm-hr { border-top-color: var(--mv-reference-core) !important; opacity: 0.6; }
-.mv-reference table th, .mv-reference table td:first-child { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-primary) !important; }
-.mv-reference table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-reference table { border: 1px solid var(--mv-reference-core); }
+.mv-reference table:not(.move-table):not(.gear-table) th, .mv-reference table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-primary) !important; }
+.mv-reference table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-reference table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-reference-core); }
 .callout[data-callout="reference"] { --callout-color: var(--mv-reference-core-rgb); --callout-bg: var(--mv-reference-dark); }
 button.mv-reference-btn { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-reference-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !important; color: var(--mv-void) !important; }
@@ -588,33 +599,33 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-monsters h1, .mv-monsters h2, .mv-monsters h3, .mv-monsters h4, .mv-monsters h5, .mv-monsters h6,
 .mv-monsters .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; }
 .mv-monsters hr, .mv-monsters .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-monsters table th, .mv-monsters table td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
-.mv-monsters table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-monsters table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); }
+.mv-monsters table:not(.move-table):not(.gear-table) th, .mv-monsters table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-monsters table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-monsters table:not(.move-table):not(.gear-table) { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); }
 
 .mv-minions { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)); }
 .mv-minions h1, .mv-minions h2, .mv-minions h3, .mv-minions h4, .mv-minions h5, .mv-minions h6,
 .mv-minions .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; }
 .mv-minions hr, .mv-minions .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-minions table th, .mv-minions table td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
-.mv-minions table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-minions table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); }
+.mv-minions table:not(.move-table):not(.gear-table) th, .mv-minions table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-minions table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-minions table:not(.move-table):not(.gear-table) { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); }
 
 .mv-villain { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)); }
 .mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6,
 .mv-villain .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; }
 .mv-villain hr, .mv-villain .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-villain table th, .mv-villain table td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
-.mv-villain table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-villain table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); }
+.mv-villain table:not(.move-table):not(.gear-table) th, .mv-villain table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-villain table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-villain table:not(.move-table):not(.gear-table) { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); }
 
 .mv-phenomena { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)); }
 .mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6,
 .mv-phenomena .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; }
 .mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-phenomena table th, .mv-phenomena table td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
-.mv-phenomena table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-phenomena table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); }
+.mv-phenomena table:not(.move-table):not(.gear-table) th, .mv-phenomena table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-phenomena table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-phenomena table:not(.move-table):not(.gear-table) { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); }
 
 /* ================= 5F. NPC SUB-CATEGORIES ===============================
    Recurring/Single Appearance don't have a pre-existing sidebar fade
@@ -625,17 +636,17 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6,
 .mv-recurring .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; }
 .mv-recurring hr, .mv-recurring .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-recurring table th, .mv-recurring table td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
-.mv-recurring table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-recurring table { border: 1px solid color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)); }
+.mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-recurring table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-recurring table:not(.move-table):not(.gear-table) { border: 1px solid color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)); }
 
 .mv-single-appearance { --mv-note-accent: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)); }
 .mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6,
 .mv-single-appearance .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; }
 .mv-single-appearance hr, .mv-single-appearance .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-single-appearance table th, .mv-single-appearance table td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
-.mv-single-appearance table td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-single-appearance table { border: 1px solid color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); }
+.mv-single-appearance table:not(.move-table):not(.gear-table) th, .mv-single-appearance table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-single-appearance table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.mv-single-appearance table:not(.move-table):not(.gear-table) { border: 1px solid color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); }
 
 /* ================= 6. FOLDER & FILE COLORS (sidebar index) ============
    Category is assigned once per branch, then cascades to every subfolder
