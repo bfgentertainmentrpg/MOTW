@@ -282,12 +282,22 @@ body {
    Le Mano Regular having no real bold weight; Calluna's synthetic bold
    is acceptable, so this override isn't needed. */
 
-/* Link color matches H3 in whatever category the note belongs to —
-   defaults to Core Cyan (same as H1-H3's system default), each .mv-X
-   block below overrides --mv-link-color to that category's core color,
-   the same value its own H1-H3 already use. */
+/* --mv-note-accent / --mv-note-accent-dark: the current note's category
+   color, generically — every .mv-X block below sets both to that
+   category's Core/Dark pair (the same values its own headings/tables
+   already use). This is what lets OTHER snippets (Move Box, Gear, any
+   future table template) inherit "whatever category this note belongs
+   to" instead of hardcoding one fixed category's color themselves — see
+   theme/move-box.css and theme/gear.css, which read these instead of a
+   fixed --mv-teal-dark or --mv-asset-core. Defaults to Core Cyan / Dark
+   Teal at system level, same as an uncategorized page's headings/tables.
+   --mv-link-color is now just an alias of --mv-note-accent — it used to
+   carry its own per-category override, consolidated here since the two
+   were always set to the identical value anyway. */
 :root {
-	--mv-link-color: var(--mv-cyan);
+	--mv-note-accent: var(--mv-cyan);
+	--mv-note-accent-dark: var(--mv-teal-dark);
+	--mv-link-color: var(--mv-note-accent);
 }
 
 a,
@@ -416,7 +426,7 @@ progress {
    class lands on the note's view container in both Live Preview and
    Reading mode, which is what the selectors below target. */
 
-.mv-monster { --mv-link-color: var(--mv-monster-core); }
+.mv-monster { --mv-note-accent: var(--mv-monster-core); --mv-note-accent-dark: var(--mv-monster-dark); }
 .mv-monster h1,
 .mv-monster h2,
 .mv-monster h3,
@@ -478,7 +488,7 @@ button.mv-monster-btn:hover {
 
 /* ================= 5. CATEGORY: LOCATION (worked example) ============ */
 
-.mv-location { --mv-link-color: var(--mv-location-core); }
+.mv-location { --mv-note-accent: var(--mv-location-core); --mv-note-accent-dark: var(--mv-location-dark); }
 .mv-location h1,
 .mv-location h2,
 .mv-location h3,
@@ -529,7 +539,7 @@ button.mv-location-btn:hover {
 
 /* ================= 5B. CATEGORY: MYSTERY =============================
    Apply with `cssclasses: mv-mystery`. Same pattern as Monster/Location. */
-.mv-mystery { --mv-link-color: var(--mv-mystery-core); }
+.mv-mystery { --mv-note-accent: var(--mv-mystery-core); --mv-note-accent-dark: var(--mv-mystery-dark); }
 .mv-mystery h1, .mv-mystery h2, .mv-mystery h3, .mv-mystery h4, .mv-mystery h5, .mv-mystery h6,
 .mv-mystery .HyperMD-header-1 { color: var(--mv-mystery-core) !important; }
 .mv-mystery hr, .mv-mystery .cm-hr { border-top-color: var(--mv-mystery-core) !important; opacity: 0.6; }
@@ -541,7 +551,7 @@ button.mv-mystery-btn { background-color: var(--mv-mystery-dark) !important; col
 button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5C. CATEGORY: HUNTER =============================== */
-.mv-hunter { --mv-link-color: var(--mv-hunter-core); }
+.mv-hunter { --mv-note-accent: var(--mv-hunter-core); --mv-note-accent-dark: var(--mv-hunter-dark); }
 .mv-hunter h1, .mv-hunter h2, .mv-hunter h3, .mv-hunter h4, .mv-hunter h5, .mv-hunter h6,
 .mv-hunter .HyperMD-header-1 { color: var(--mv-hunter-core) !important; }
 .mv-hunter hr, .mv-hunter .cm-hr { border-top-color: var(--mv-hunter-core) !important; opacity: 0.6; }
@@ -553,7 +563,7 @@ button.mv-hunter-btn { background-color: var(--mv-hunter-dark) !important; color
 button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5D. CATEGORY: REFERENCE ============================= */
-.mv-reference { --mv-link-color: var(--mv-reference-core); }
+.mv-reference { --mv-note-accent: var(--mv-reference-core); --mv-note-accent-dark: var(--mv-reference-dark); }
 .mv-reference h1, .mv-reference h2, .mv-reference h3, .mv-reference h4, .mv-reference h5, .mv-reference h6,
 .mv-reference .HyperMD-header-1 { color: var(--mv-reference-core) !important; }
 .mv-reference hr, .mv-reference .cm-hr { border-top-color: var(--mv-reference-core) !important; opacity: 0.6; }
@@ -574,7 +584,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
    Threats/01 - Monsters folder's actual color; .mv-monster (singular)
    is a separate, older crimson "monster stat block" style. Don't
    confuse the two when tagging a note. */
-.mv-monsters { --mv-link-color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); }
+.mv-monsters { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)); }
 .mv-monsters h1, .mv-monsters h2, .mv-monsters h3, .mv-monsters h4, .mv-monsters h5, .mv-monsters h6,
 .mv-monsters .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; }
 .mv-monsters hr, .mv-monsters .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; opacity: 0.6; }
@@ -582,7 +592,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-monsters table td:not(:first-child) { background-color: var(--mv-panel) !important; }
 .mv-monsters table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); }
 
-.mv-minions { --mv-link-color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); }
+.mv-minions { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)); }
 .mv-minions h1, .mv-minions h2, .mv-minions h3, .mv-minions h4, .mv-minions h5, .mv-minions h6,
 .mv-minions .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; }
 .mv-minions hr, .mv-minions .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; opacity: 0.6; }
@@ -590,7 +600,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-minions table td:not(:first-child) { background-color: var(--mv-panel) !important; }
 .mv-minions table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); }
 
-.mv-villain { --mv-link-color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); }
+.mv-villain { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)); }
 .mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6,
 .mv-villain .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; }
 .mv-villain hr, .mv-villain .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; opacity: 0.6; }
@@ -598,7 +608,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-villain table td:not(:first-child) { background-color: var(--mv-panel) !important; }
 .mv-villain table { border: 1px solid color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); }
 
-.mv-phenomena { --mv-link-color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); }
+.mv-phenomena { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)); }
 .mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6,
 .mv-phenomena .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; }
 .mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; opacity: 0.6; }
@@ -611,7 +621,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
    (only Threats does), so this introduces one: Recurring stays close to
    full NPC Green, Single Appearance fades further — a recurring
    character should read as more "present" than someone seen once. */
-.mv-recurring { --mv-link-color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)); }
+.mv-recurring { --mv-note-accent: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-minion-dark) 90%, var(--mv-void)); }
 .mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6,
 .mv-recurring .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; }
 .mv-recurring hr, .mv-recurring .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; opacity: 0.6; }
@@ -619,7 +629,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-recurring table td:not(:first-child) { background-color: var(--mv-panel) !important; }
 .mv-recurring table { border: 1px solid color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)); }
 
-.mv-single-appearance { --mv-link-color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); }
+.mv-single-appearance { --mv-note-accent: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)); }
 .mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6,
 .mv-single-appearance .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; }
 .mv-single-appearance hr, .mv-single-appearance .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; opacity: 0.6; }

@@ -6,18 +6,23 @@
 /* ----------------------------------------------------------
    COLOR PALETTE
    Aliased to the shared MOTW Vault tokens (theme/motw-theme.css)
-   rather than hardcoded hex, so this snippet automatically stays in
-   sync with the main theme's colors and fonts. Requires
-   motw-theme.css to be enabled alongside this snippet — see its
-   note on cross-snippet consistency.
+   rather than hardcoded hex OR one fixed category, so this snippet
+   automatically stays in sync with the main theme's colors and fonts
+   AND adapts to whatever category the note actually belongs to.
+   --move-green/--move-heading now read --mv-note-accent(-dark) — the
+   generic "current note's category color" pair every .mv-X block in
+   the main theme feeds — instead of being hardcoded to Teal. A move
+   table in a .mv-villain note picks up Villain's color; in an
+   uncategorized note it falls back to system Core Cyan / Dark Teal.
+   Requires motw-theme.css to be enabled alongside this snippet.
    ---------------------------------------------------------- */
 
 :root {
-    --move-green: var(--mv-teal-dark);      /* structural dark fill — same role as table headers/label columns elsewhere */
-    --move-heading: var(--mv-cyan);         /* system-level heading color */
-    --move-text: var(--mv-text-primary);    /* Alabaster */
+    --move-green: var(--mv-note-accent-dark);  /* structural dark fill, whatever category this note belongs to */
+    --move-heading: var(--mv-note-accent);     /* heading color, same category */
+    --move-text: var(--mv-text-primary);       /* Alabaster */
 
-    --move-border: var(--mv-text-primary);  /* Alabaster */
+    --move-border: var(--mv-text-primary);     /* Alabaster */
 
     --move-width: 85%;
     --move-roll-width: 10%;

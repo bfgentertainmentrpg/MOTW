@@ -5,19 +5,15 @@
 
 /* ==========================================================
    GEAR HEADING
-   Filed under 07 - Assets — aliased to --mv-asset-core (Orange)
-   rather than the old hardcoded #789397 / "FOLDER COLOR #7"
-   reference, per the cross-snippet consistency rule (see
-   theme/motw-theme.css). font-family isn't redeclared here — the
-   main theme's h1-h3 rule already sets --mv-font-header (and
-   small-caps) on any h2 in Reading/Live Preview, so this only
-   needs to add the category color.
+   No rule needed here anymore — the main theme's own h1-h3 rule
+   (theme/motw-theme.css) already colors every heading per-category
+   via --mv-note-accent, bold and small-caps included. A Gear-specific
+   copy of that same logic was redundant, and worse, a second place
+   that could drift out of sync if the color rules ever change. If the
+   Gear heading ever needs to look different FROM other headings in
+   the same note, that's a distinct rule to add here — not a
+   duplicate of the general one.
    ========================================================== */
-
-.markdown-preview-view h2 {
-    color: var(--mv-asset-core) !important;
-    font-weight: 700 !important;
-}
 
 /* ==========================================================
    GEAR TABLE
@@ -54,7 +50,7 @@
 /* ==========================================================
    ALL CELLS
    HORIZONTAL LINES ONLY
-   MUTED ASSET ORANGE — 1.25px
+   MUTED CATEGORY ACCENT — 1.25px
    ========================================================== */
 
 .markdown-preview-view table.gear-table th,
@@ -67,7 +63,7 @@
     border-top: none !important;
 
     border-bottom:
-        1px solid color-mix(in srgb, var(--mv-asset-core) 45%, var(--mv-border)) !important;
+        1px solid color-mix(in srgb, var(--mv-note-accent) 45%, var(--mv-border)) !important;
 
     /* Top / Right / Bottom / Left */
     padding:
@@ -86,13 +82,13 @@
 
 /* ==========================================================
    HEADER
-   ASSET DARK FILL, ASSET CORE ACCENT LINE
+   CATEGORY DARK FILL, CATEGORY ACCENT LINE — via --mv-note-accent(-dark)
    ========================================================== */
 
 .markdown-preview-view table.gear-table thead th {
 
     background-color:
-        var(--mv-asset-dark) !important;
+        var(--mv-note-accent-dark) !important;
 
     color:
         var(--mv-text-primary) !important;
@@ -104,7 +100,7 @@
     border: none !important;
 
     border-bottom:
-        2px solid var(--mv-asset-core) !important;
+        2px solid var(--mv-note-accent) !important;
 }
 
 
