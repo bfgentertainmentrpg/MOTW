@@ -204,7 +204,7 @@ body {
 	--font-text-override: var(--mv-font-body);
 	--font-interface-override: var(--mv-font-body);
 	--font-monospace-override: var(--mv-font-body);
-	--font-text-size: 18px;
+	--font-text-size: 16px;
 }
 
 /* Same font-size story as font-family above: the variable feeds
@@ -213,7 +213,7 @@ body {
 .markdown-rendered,
 .markdown-source-view .cm-content,
 .markdown-preview-view {
-	font-size: 18px !important;
+	font-size: 16px !important;
 }
 
 /* Title/header font, everywhere a heading can appear — reading mode,
@@ -688,7 +688,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 	color: var(--mv-text-primary) !important;
 	font-family: var(--mv-font-header) !important;
 	font-weight: 700;
-	font-size: 18px !important;
+	font-size: 16px !important;
 	padding: 0.1em 0.5em;
 }
 
@@ -726,7 +726,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .nav-file-title {
 	color: var(--mv-text-primary) !important;
 	font-weight: 400;
-	font-size: 18px !important;
+	font-size: 16px !important;
 }
 
 /* -- 6e. Turn off the file-explorer's indentation guide lines — the
