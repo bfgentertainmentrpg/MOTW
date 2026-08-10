@@ -143,10 +143,19 @@ body {
 	   internal rules, not from `body`'s inherited font-family — a plain
 	   `body { font-family }` alone usually loses to those. Overriding
 	   the variables themselves is what actually reaches editor/preview
-	   content, the sidebar, and the rest of the UI. */
+	   content, the sidebar, and the rest of the UI. The `-override`
+	   variants exist because Settings -> Appearance -> Font writes to
+	   THOSE specifically, and Obsidian's internal rules prefer them over
+	   the base variable when they're set — if you have any custom font
+	   configured there (even the default), it wins over --font-text
+	   alone, which is almost certainly why the previous pass had no
+	   visible effect. Setting both covers it either way. */
 	--font-text: var(--mv-font-body);
 	--font-interface: var(--mv-font-body);
 	--font-monospace: var(--mv-font-body);
+	--font-text-override: var(--mv-font-body);
+	--font-interface-override: var(--mv-font-body);
+	--font-monospace-override: var(--mv-font-body);
 }
 
 /* Title/header font, everywhere a heading can appear — reading mode,
