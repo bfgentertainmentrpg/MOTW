@@ -62,60 +62,58 @@
 	   Monster's Dark/Light are the doc's literal values; the rest are
 	   computed with that same formula for consistency. */
 
-	/* Minion/NPCs — Brown */
-	--mv-minion-core: #825735;
-	--mv-minion-dark: #241C16;
-	--mv-minion-light: #9D6437;
+	/* Minion/NPCs — Green */
+	--mv-minion-core: #3D8F52;
+	--mv-minion-dark: #19281D;
+	--mv-minion-light: #40AD5C;
 
 	--mv-monster-core: #D15B6A;
 	--mv-monster-dark: #3F2027;
 	--mv-monster-light: #E27A86;
 	--mv-monster-core-rgb: 209, 91, 106;
 
-	/* Location — Yellow */
-	--mv-location-core: #D6BC51;
-	--mv-location-dark: #40391E;
-	--mv-location-light: #E6CF70;
-	--mv-location-core-rgb: 214, 188, 81;
+	/* Location — Brown */
+	--mv-location-core: #6F432A;
+	--mv-location-dark: #1F1712;
+	--mv-location-light: #864C2B;
+	--mv-location-core-rgb: 111, 67, 42;
 
-	/* Hunter — Teal */
-	--mv-hunter-core: #41AAAA;
-	--mv-hunter-dark: #1C2F2F;
-	--mv-hunter-light: #4CC5C5;
+	/* Hunter — Blue */
+	--mv-hunter-core: #598ACF;
+	--mv-hunter-dark: #202C3E;
+	--mv-hunter-light: #77A3E0;
 
-	/* Mystery — Orange */
-	--mv-mystery-core: #BA4C27;
-	--mv-mystery-dark: #311D16;
-	--mv-mystery-light: #DF5426;
+	/* Mystery — Purple */
+	--mv-mystery-core: #7F3DAE;
+	--mv-mystery-dark: #271B30;
+	--mv-mystery-light: #9347C9;
 
-	/* Reference — Slate Blue */
-	--mv-reference-core: #5E77A1;
-	--mv-reference-dark: #22272F;
-	--mv-reference-light: #748CB4;
+	/* Reference — Yellow */
+	--mv-reference-core: #D4B949;
+	--mv-reference-dark: #3D371D;
+	--mv-reference-light: #E4CC66;
 
-	/* Asset — Olive Green */
-	--mv-asset-core: #818A38;
-	--mv-asset-dark: #252617;
-	--mv-asset-light: #9BA73A;
+	/* Asset — Orange */
+	--mv-asset-core: #E07E29;
+	--mv-asset-dark: #3C2918;
+	--mv-asset-light: #F09443;
 
-	/* Threats moved off the Monster-crimson family entirely, onto its own
-	   purple — same hue as the Minion category's Muted Lavender (H270).
-	   Two tiers, since one faded value couldn't satisfy both jobs at once:
-	     --mv-threat-header: the fill color, faded down from the first
-	       pass (#6B36A1, L42%) to sit at a similar weight to Mystery Dark
-	       (L11%) and Hunter Dark (L19%) — what every other top-level
-	       folder's fill actually looks like, so the original read
-	       noticeably louder than its neighbors.
-	     --mv-threat-vivid: kept bright, for anything that needs to stay
-	       legible as text on the dark sidebar (file names, the top-level
-	       accent stripe) rather than fill a background — faded backgrounds
-	       work because Alabaster/bold text sits on top of them, but plain
-	       colored file text has no such help.
+	/* Threats — Teal. Moved off the Monster-crimson family entirely (and,
+	   as of this pass, off purple too — purple now belongs to Mystery)
+	   onto its own identity. Two tiers, since one faded value can't
+	   satisfy both jobs at once:
+	     --mv-threat-header: the fill color (Dark tier) — muted, matching
+	       the weight of every other top-level folder's fill.
+	     --mv-threat-vivid: the Core tier, kept bright for anything that
+	       needs to stay legible as text on the dark sidebar (file names,
+	       the top-level accent stripe) rather than fill a background —
+	       faded backgrounds work because Alabaster/bold text sits on top
+	       of them, but plain colored file text has no such help.
 	   Section 6a fades both, in the same order (Monsters 90%, Minions
 	   80%, Villain 70%, Phenomena 60%, each 10 points below the last),
 	   just toward their own respective 100% reference. */
-	--mv-threat-header: #332145;
-	--mv-threat-vivid: #9459CF;
+	--mv-threat-header: #1A2D2D;
+	--mv-threat-vivid: #3AA6A6;
 }
 
 /* ===================== 3. GLOBAL VAULT STYLING =======================
