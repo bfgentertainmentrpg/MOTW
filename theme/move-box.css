@@ -1,0 +1,284 @@
+/* ==========================================================
+   MOVEBOX - TABLE
+   Part 1
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   COLOR PALETTE
+   Aliased to the shared MOTW Vault tokens (theme/motw-theme.css)
+   rather than hardcoded hex, so this snippet automatically stays in
+   sync with the main theme's colors and fonts. Requires
+   motw-theme.css to be enabled alongside this snippet — see its
+   note on cross-snippet consistency.
+   ---------------------------------------------------------- */
+
+:root {
+    --move-green: var(--mv-teal-dark);      /* structural dark fill — same role as table headers/label columns elsewhere */
+    --move-heading: var(--mv-cyan);         /* system-level heading color */
+    --move-text: var(--mv-text-primary);    /* Alabaster */
+
+    --move-border: var(--mv-text-primary);  /* Alabaster */
+
+    --move-width: 85%;
+    --move-roll-width: 135px;
+}
+
+/* ==========================================================
+   MOVE TITLE
+   ========================================================== */
+
+.move-heading {
+    color: var(--move-heading) !important;
+
+    font-family: var(--mv-font-header) !important;
+    font-size: calc(1em + 6px);
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    margin-bottom: 0;
+
+    text-shadow: none !important;
+}
+
+/* ==========================================================
+   MOVE DESCRIPTION
+   ========================================================== */
+
+.move-note {
+    display: block;
+
+    width: var(--move-width);
+
+    margin-top: .15rem;
+    margin-bottom: .35rem;
+
+    margin-left: 1.7rem;
+
+    color: var(--move-text);
+
+    font-family: var(--mv-font-body);
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+/* ==========================================================
+   REMOVE STRIKETHROUGH
+   ========================================================== */
+
+/* Reading View */
+
+.markdown-preview-view li.task-list-item.is-checked,
+.markdown-preview-view li.task-list-item.is-checked * {
+    text-decoration: none !important;
+}
+
+/* Live Preview */
+
+.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"],
+.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="x"] * {
+    text-decoration: none !important;
+}
+
+/* ==========================================================
+   KEEP ORIGINAL COLORS
+   ========================================================== */
+
+.markdown-preview-view li.task-list-item.is-checked,
+.markdown-preview-view li.task-list-item.is-checked * {
+    color: inherit !important;
+}
+
+/* ==========================================================
+   MOVE TABLE
+   ========================================================== */
+
+table.move-table {
+    width: calc(var(--move-width) - 1.7rem);
+
+    margin-left: 1.7rem;
+
+    margin-top: .25rem;
+    margin-bottom: 1rem;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    font-family: var(--mv-font-body);
+}
+
+/* ----------------------------------------------------------
+   CELLS
+   ---------------------------------------------------------- */
+
+table.move-table th,
+table.move-table td {
+    border: 1px solid var(--move-border);
+
+    padding: .4rem .5rem;
+
+    vertical-align: top;
+
+    line-height: 1.3;
+}
+
+/* ----------------------------------------------------------
+   REMOVE EXTRA SPACING INSIDE CELLS
+   ---------------------------------------------------------- */
+
+table.move-table th *,
+table.move-table td * {
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================================
+   TABLE HEADER
+   ========================================================== */
+
+table.move-table thead th {
+    background-color: var(--move-green) !important;
+    color: var(--move-text) !important;
+
+    border: 1px solid var(--move-border) !important;
+
+    padding: .4rem .5rem !important;
+
+    font-family: var(--mv-font-header) !important;
+    font-variant: small-caps;
+    font-weight: 700;
+
+    text-align: left;
+}
+
+/* ----------------------------------------------------------
+   FIRST COLUMN
+   ---------------------------------------------------------- */
+
+table.move-table th:first-child,
+table.move-table td:first-child {
+    width: var(--move-roll-width);
+
+    white-space: nowrap;
+
+    background-color: var(--move-green) !important;
+    color: var(--move-text) !important;
+
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   SECOND COLUMN
+   ---------------------------------------------------------- */
+
+table.move-table th:nth-child(2),
+table.move-table td:nth-child(2) {
+    width: auto;
+}
+
+/* ----------------------------------------------------------
+   ROW SPACING
+   ---------------------------------------------------------- */
+
+table.move-table tr {
+    background: transparent;
+}
+
+/* ----------------------------------------------------------
+   HOVER (Optional)
+   ---------------------------------------------------------- */
+
+table.move-table tbody tr:hover {
+    background-color: color-mix(in srgb, var(--mv-text-primary) 4%, transparent);
+}
+
+/* ==========================================================
+   CHECKBOX
+   ========================================================== */
+
+/* Keep checkbox functional */
+
+.markdown-preview-view .task-list-item-checkbox,
+.markdown-source-view.mod-cm6 input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Completed checkbox */
+
+.markdown-preview-view li.task-list-item.is-checked > .task-list-item-checkbox {
+    accent-color: var(--move-green);
+}
+
+/* ==========================================================
+   COMPONENT SPACING
+   ========================================================== */
+
+.markdown-preview-view li.task-list-item {
+    margin-bottom: .35rem;
+}
+
+.move-heading + .move-note {
+    margin-top: .4rem;
+}
+
+.move-note + .move-table {
+    margin-top: .25rem;
+}
+
+/* ==========================================================
+   MARKDOWN TABLE SUPPORT
+   ========================================================== */
+
+/* If a Markdown-generated table is given the move-table class,
+   these rules ensure it renders identically to an HTML table. */
+
+.markdown-preview-view table.move-table,
+.markdown-source-view.mod-cm6 table.move-table {
+    width: var(--move-width) !important;
+
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+}
+
+/* ==========================================================
+   FUTURE PROOFING
+   ========================================================== */
+
+/* Prevent theme plugins from inserting spacing */
+
+table.move-table p {
+    margin: 0 !important;
+}
+
+table.move-table ul,
+table.move-table ol {
+    margin-top: .25rem;
+    margin-bottom: .25rem;
+}
+
+table.move-table li {
+    margin: 0;
+}
+
+/* Images inside tables */
+
+table.move-table img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Links */
+
+table.move-table a {
+    color: inherit;
+}
+
+/* Code */
+
+table.move-table code {
+    font-size: .95em;
+}
+
+/* ==========================================================
+   END OF FILE
+   ========================================================== */
