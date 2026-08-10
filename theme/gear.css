@@ -139,8 +139,19 @@
     font-weight: 600 !important;
 
     text-align: left !important;
+}
 
+/* Data cells ("+1", "+2") stay on one line — the column is only wide
+   enough for that. The header label ("Damage") doesn't fit at 10% at
+   this font size, so it wraps instead of overlapping into Features.
+   Column width itself stays exactly as designed. */
+.markdown-preview-view table td:nth-child(2) {
     white-space: nowrap !important;
+}
+
+.markdown-preview-view table th:nth-child(2) {
+    white-space: normal !important;
+    overflow-wrap: break-word;
 }
 
 
