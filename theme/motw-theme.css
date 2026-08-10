@@ -368,6 +368,7 @@ hr,
    fill to their own Dark color (see section 4/5). */
 .markdown-rendered table {
 	border-radius: 0;
+	border-collapse: collapse;
 }
 
 .markdown-rendered thead tr,
@@ -381,9 +382,20 @@ hr,
 	color: var(--mv-text-primary);
 }
 
+/* Horizontal lines only, no verticals — same treatment as Countdown's
+   rows (border-top per row, --background-modifier-border to match its
+   exact shade of grey). */
 .markdown-rendered td,
 .markdown-rendered th {
-	border-color: var(--mv-text-primary) !important;
+	border: none !important;
+}
+
+.markdown-rendered tr {
+	border-top: 1px solid var(--background-modifier-border) !important;
+}
+
+.markdown-rendered tr:last-child {
+	border-bottom: 1px solid var(--background-modifier-border) !important;
 }
 
 /* -- Callouts: system default is Blue Black body / Cyan border+title.
@@ -503,10 +515,6 @@ progress {
 	background-color: var(--mv-panel) !important;
 }
 
-.mv-monster table:not(.move-table):not(.gear-table) {
-	border: 1px solid var(--mv-text-primary);
-}
-
 /* Monster callout: dark Monster background, Monster border/title */
 .callout[data-callout="monster"] {
 	--callout-color: var(--mv-monster-core-rgb);
@@ -563,10 +571,6 @@ button.mv-monster-btn:hover {
 	background-color: var(--mv-panel) !important;
 }
 
-.mv-location table:not(.move-table):not(.gear-table) {
-	border: 1px solid var(--mv-text-primary);
-}
-
 .callout[data-callout="location"] {
 	--callout-color: var(--mv-location-core-rgb);
 	--callout-bg: var(--mv-location-dark);
@@ -592,7 +596,6 @@ button.mv-location-btn:hover {
 .mv-mystery hr, .mv-mystery .cm-hr { border-top-color: var(--mv-mystery-core) !important; opacity: 0.6; }
 .mv-mystery table:not(.move-table):not(.gear-table) th, .mv-mystery table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-primary) !important; }
 .mv-mystery table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-mystery table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
 .callout[data-callout="mystery"] { --callout-color: var(--mv-mystery-core-rgb); --callout-bg: var(--mv-mystery-dark); }
 button.mv-mystery-btn { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-mystery-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !important; color: var(--mv-void) !important; }
@@ -604,7 +607,6 @@ button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !importan
 .mv-hunter hr, .mv-hunter .cm-hr { border-top-color: var(--mv-hunter-core) !important; opacity: 0.6; }
 .mv-hunter table:not(.move-table):not(.gear-table) th, .mv-hunter table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-primary) !important; }
 .mv-hunter table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-hunter table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
 .callout[data-callout="hunter"] { --callout-color: var(--mv-hunter-core-rgb); --callout-bg: var(--mv-hunter-dark); }
 button.mv-hunter-btn { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-hunter-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important; color: var(--mv-void) !important; }
@@ -616,7 +618,6 @@ button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important;
 .mv-reference hr, .mv-reference .cm-hr { border-top-color: var(--mv-reference-core) !important; opacity: 0.6; }
 .mv-reference table:not(.move-table):not(.gear-table) th, .mv-reference table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-primary) !important; }
 .mv-reference table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-reference table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
 .callout[data-callout="reference"] { --callout-color: var(--mv-reference-core-rgb); --callout-bg: var(--mv-reference-dark); }
 button.mv-reference-btn { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-reference-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !important; color: var(--mv-void) !important; }
@@ -637,32 +638,24 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-monsters hr, .mv-monsters .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-monsters table:not(.move-table):not(.gear-table) th, .mv-monsters table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-monsters table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-monsters table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
-
 .mv-minions { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)); }
 .mv-minions h1, .mv-minions h2, .mv-minions h3, .mv-minions h4, .mv-minions h5, .mv-minions h6,
 .mv-minions .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; }
 .mv-minions hr, .mv-minions .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-minions table:not(.move-table):not(.gear-table) th, .mv-minions table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-minions table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-minions table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
-
 .mv-villain { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)); }
 .mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6,
 .mv-villain .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; }
 .mv-villain hr, .mv-villain .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-villain table:not(.move-table):not(.gear-table) th, .mv-villain table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-villain table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-villain table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
-
 .mv-phenomena { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)); }
 .mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6,
 .mv-phenomena .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; }
 .mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-phenomena table:not(.move-table):not(.gear-table) th, .mv-phenomena table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-phenomena table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-phenomena table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
-
 /* ================= 5F. NPC SUB-CATEGORIES ===============================
    Recurring/Single Appearance don't have a pre-existing sidebar fade
    (only Threats does), so this introduces one: Recurring stays close to
@@ -674,16 +667,12 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 .mv-recurring hr, .mv-recurring .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-recurring table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-recurring table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
-
 .mv-single-appearance { --mv-note-accent: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)); }
 .mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6,
 .mv-single-appearance .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; }
 .mv-single-appearance hr, .mv-single-appearance .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-single-appearance table:not(.move-table):not(.gear-table) th, .mv-single-appearance table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-single-appearance table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-single-appearance table:not(.move-table):not(.gear-table) { border: 1px solid var(--mv-text-primary); }
-
 /* ================= 6. FOLDER & FILE COLORS (sidebar index) ============
    Category is assigned once per branch, then cascades to every subfolder
    and file inside it automatically via a CSS custom property — no need

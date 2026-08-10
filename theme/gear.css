@@ -52,7 +52,9 @@
 
 /* ==========================================================
    ALL CELLS
-   FULL BORDERS, ALABASTER
+   HORIZONTAL LINES ONLY, NO VERTICALS — same treatment as Countdown's
+   rows (border-top per row below, --background-modifier-border to
+   match its exact shade of grey).
    ========================================================== */
 
 .markdown-preview-view table.gear-table th,
@@ -60,7 +62,7 @@
 
     box-sizing: border-box !important;
 
-    border: 1px solid var(--mv-text-primary) !important;
+    border: none !important;
 
     /* Top / Right / Bottom / Left */
     padding:
@@ -76,12 +78,22 @@
     line-height: 2 !important;
 }
 
+.markdown-preview-view table.gear-table tr {
+
+    border-top: 1px solid var(--background-modifier-border) !important;
+}
+
+.markdown-preview-view table.gear-table tr:last-child {
+
+    border-bottom: 1px solid var(--background-modifier-border) !important;
+}
+
 
 /* ==========================================================
    HEADER
    CATEGORY DARK FILL — via --mv-note-accent-dark. Border matches every
-   other cell now (full, Alabaster) rather than a category-accent line,
-   for one consistent border color across the whole table.
+   other row now (horizontal-only, --background-modifier-border) rather
+   than a category-accent line or a full Alabaster box.
    ========================================================== */
 
 .markdown-preview-view table.gear-table thead th {
@@ -96,7 +108,7 @@
 
     text-align: left !important;
 
-    border: 1px solid var(--mv-text-primary) !important;
+    border: none !important;
 }
 
 

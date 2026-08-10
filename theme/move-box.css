@@ -22,15 +22,13 @@
    only once at :root permanently locks in the :root-level value
    (system Cyan/Dark Teal) and never sees a deeper .mv-X override, even
    though --mv-note-accent itself resolves correctly when read directly.
-   See theme/motw-theme.css's note on this same mistake. --move-text/
-   --move-border don't have this problem — --mv-text-primary (Alabaster)
-   is a stable constant, never locally overridden per category, so
-   aliasing it is safe. */
+   See theme/motw-theme.css's note on this same mistake. --move-text
+   doesn't have this problem — --mv-text-primary (Alabaster) is a
+   stable constant, never locally overridden per category, so aliasing
+   it is safe. */
 
 :root {
     --move-text: var(--mv-text-primary);       /* Alabaster */
-
-    --move-border: var(--mv-text-primary);     /* Alabaster */
 
     --move-width: var(--mv-table-width);  /* 100% of the page's own content box, shared with every other table — see motw-theme.css */
     --move-roll-width: var(--mv-table-first-col-width);  /* 152px, shared with Gear's Name column and Countdown's checkbox+stage columns — see motw-theme.css */
@@ -128,17 +126,28 @@ table.move-table {
 
 /* ----------------------------------------------------------
    CELLS
+   Horizontal lines only, no verticals — same treatment as Countdown's
+   rows (border-top per row below, --background-modifier-border to
+   match its exact shade of grey).
    ---------------------------------------------------------- */
 
 table.move-table th,
 table.move-table td {
-    border: 1px solid var(--move-border);
+    border: none;
 
     padding: .4rem .5rem;
 
     vertical-align: top;
 
     line-height: 1.3;
+}
+
+table.move-table tr {
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+table.move-table tr:last-child {
+    border-bottom: 1px solid var(--background-modifier-border);
 }
 
 /* ----------------------------------------------------------
@@ -159,7 +168,7 @@ table.move-table thead th {
     background-color: var(--mv-note-accent-dark) !important;
     color: var(--move-text) !important;
 
-    border: 1px solid var(--move-border) !important;
+    border: none !important;
 
     padding: .4rem .5rem !important;
 
