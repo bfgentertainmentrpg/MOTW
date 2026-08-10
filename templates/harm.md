@@ -1,7 +1,7 @@
-```yaml
+---
 harm: 20
 harm_max: 20
-```
+---
 
 <br>
 <div class="harm-title">
