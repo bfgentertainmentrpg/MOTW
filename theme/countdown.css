@@ -29,11 +29,13 @@ text-shadow:none !important;
 
 /*==============================================================
     CONTAINER
-    Fixed to --mv-table-width (900px), same shared width as Move Box
-    and Gear tables (see motw-theme.css) — not a % of the page. A
-    percentage here would track the page's 85% box and drift wider
-    than the tables' fixed column, throwing off alignment between the
-    countdown and every table above/below it on the page.
+    100% of --mv-table-width, the same shared width Move Box and Gear
+    tables use (see motw-theme.css) — which is itself 100% of the
+    page's own 85% content box. Locking width/max-width/min-width
+    together (the same "fixed" pattern as the page-width rule) keeps
+    it from being squeezed or stretched by anything else, and margin
+    stays at 0/auto so it doesn't add a second gutter on top of the
+    page's own.
 ==============================================================*/
 
 .motw-countdown{
@@ -49,6 +51,8 @@ margin-bottom:1rem;
 width:var(--mv-table-width) !important;
 
 max-width:var(--mv-table-width) !important;
+
+min-width:var(--mv-table-width) !important;
 
 margin-left:0 !important;
 
@@ -212,19 +216,10 @@ opacity:.65;
 
 @media (max-width:700px){
 
-/* Deliberately NOT --mv-table-width (900px) here — on an actual
-   small/mobile viewport a fixed 900px box would force horizontal
-   scrolling, which is exactly what this breakpoint exists to
-   prevent. Viewport-relative on purpose, matching Gear's own
-   small-screen override. */
-.motw-countdown{
-
-width:92vw !important;
-
-max-width:92vw !important;
-
-}
-
+/* No width override needed here anymore — the container is already
+   100% of the page's own 85% content box, which can never exceed the
+   viewport, so there's nothing for a small-screen override to fix.
+   Only the row's column layout still needs adjusting at this size. */
 .countdown-row{
 
 grid-template-columns:40px 100px 1fr;

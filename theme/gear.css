@@ -17,8 +17,8 @@
 
 /* ==========================================================
    GEAR TABLE
-   FIXED WIDTH (--mv-table-width, shared with every other table — see
-   motw-theme.css) — LEFT ALIGNED
+   100% WIDTH (--mv-table-width, shared with every other table — see
+   motw-theme.css), fills the page's own 85% content box — LEFT ALIGNED
 
    Scoped to table.gear-table — the original file targeted every plain
    ".markdown-preview-view table" with !important, which matched (and
@@ -32,6 +32,8 @@
 .markdown-preview-view table.gear-table {
 
     width: var(--mv-table-width) !important;
+    max-width: var(--mv-table-width) !important;
+    min-width: var(--mv-table-width) !important;
 
     margin-left: 0 !important;
     margin-right: auto !important;
@@ -223,15 +225,11 @@
 
 @media (max-width: 600px) {
 
-    /* Deliberately NOT --mv-table-width (900px) here — on an actual
-       small/mobile viewport a fixed 900px table would force horizontal
-       scrolling, which is exactly what this breakpoint exists to
-       prevent. Viewport-relative on purpose, just for this one case. */
-    .markdown-preview-view table.gear-table {
-
-        width: 92vw !important;
-    }
-
+    /* No width override needed here anymore — the table is already
+       100% of the page's own 85% content box (see the GEAR TABLE rule
+       above), which can never exceed the viewport, so there's nothing
+       for a small-screen width override to fix. Only the padding still
+       needs tightening at this size. */
     .markdown-preview-view table.gear-table th,
     .markdown-preview-view table.gear-table td {
 

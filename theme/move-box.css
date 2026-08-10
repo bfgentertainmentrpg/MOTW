@@ -32,7 +32,7 @@
 
     --move-border: var(--mv-text-primary);     /* Alabaster */
 
-    --move-width: var(--mv-table-width);  /* fixed px, shared with every other table — see motw-theme.css */
+    --move-width: var(--mv-table-width);  /* 100% of the page's own content box, shared with every other table — see motw-theme.css */
     --move-roll-width: 10%;
 }
 
@@ -62,7 +62,9 @@
 .move-note {
     display: block;
 
-    width: var(--move-width);
+    width: var(--move-width) !important;
+    max-width: var(--move-width) !important;
+    min-width: var(--move-width) !important;
 
     margin-top: .15rem;
     margin-bottom: .35rem;
@@ -108,7 +110,9 @@
    ========================================================== */
 
 table.move-table {
-    width: var(--move-width);
+    width: var(--move-width) !important;
+    max-width: var(--move-width) !important;
+    min-width: var(--move-width) !important;
 
     margin-left: 0;
     margin-right: auto;
@@ -262,6 +266,8 @@ table.move-table tbody tr:hover {
 .markdown-preview-view table.move-table,
 .markdown-source-view.mod-cm6 table.move-table {
     width: var(--move-width) !important;
+    max-width: var(--move-width) !important;
+    min-width: var(--move-width) !important;
 
     border-collapse: collapse !important;
     border-spacing: 0 !important;
