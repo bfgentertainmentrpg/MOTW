@@ -129,13 +129,17 @@
 
 /* ==========================================================
    DAMAGE
-   10%
+   18% — widened from the original 10%. The gear-table.md template now
+   writes values like "2 Protection" / "1 Harm" (Damage Value + affixed
+   word), which is meaningfully longer than the +1/+2 placeholders the
+   original 10% was sized for and was overlapping into Features. Taken
+   from Features (75% -> 67%); Name stays at 15%.
    ========================================================== */
 
 .markdown-preview-view table.gear-table th:nth-child(2),
 .markdown-preview-view table.gear-table td:nth-child(2) {
 
-    width: 10% !important;
+    width: 18% !important;
 
     color:
         var(--mv-text-primary) !important;
@@ -145,10 +149,9 @@
     text-align: left !important;
 }
 
-/* Data cells ("+1", "+2") stay on one line — the column is only wide
-   enough for that. The header label ("Damage") doesn't fit at 10% at
-   this font size, so it wraps instead of overlapping into Features.
-   Column width itself stays exactly as designed. */
+/* Data cells ("2 Protection", "1 Harm") stay on one line at this width
+   for realistic values. The header label wraps instead of overlapping
+   into Features if it's ever still too tight. */
 .markdown-preview-view table.gear-table td:nth-child(2) {
     white-space: nowrap !important;
 }
@@ -161,13 +164,13 @@
 
 /* ==========================================================
    FEATURES
-   75%
+   67%
    ========================================================== */
 
 .markdown-preview-view table.gear-table th:nth-child(3),
 .markdown-preview-view table.gear-table td:nth-child(3) {
 
-    width: 75% !important;
+    width: 67% !important;
 
     color:
         var(--mv-text-primary) !important;
