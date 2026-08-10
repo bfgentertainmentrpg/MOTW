@@ -171,6 +171,11 @@ table.move-table td:first-child {
     color: var(--move-text) !important;
 
     font-weight: 600;
+
+    /* Explicit — browsers center <th> by default, and the first-column
+       body cells are now real <th> elements (proper row headers, not
+       just styled to look like one), matching the top header row. */
+    text-align: left;
 }
 
 /* ----------------------------------------------------------
