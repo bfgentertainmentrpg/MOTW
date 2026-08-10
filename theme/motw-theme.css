@@ -121,14 +121,17 @@
 	--mv-threat-vivid: #3AA6A6;
 
 	/* -- Typography --
-	   Both are named commercial fonts, not web fonts — this snippet has
-	   no font FILES to embed, only font-family names. Obsidian (Chromium)
-	   will only render them if they're installed as system fonts on this
-	   machine; otherwise every rule below silently falls through to the
-	   serif fallback. If nothing changes after reloading the snippet,
-	   that's most likely why — check the fonts are actually installed. */
-	--mv-font-header: "Le Mano", Georgia, serif;
-	--mv-font-body: "Le Mano", Georgia, serif;
+	   Named commercial fonts, not web fonts — this snippet has no font
+	   FILES to embed, only font-family names, and only renders them if
+	   they're installed as system fonts on this machine (else falls
+	   through to the serif fallback).
+	   Installed here as two separate family names — "Le Mano Regular"
+	   and "Le Mano Bold" — rather than one "Le Mano" family with a bold
+	   weight, which is why font-weight:bold alone never actually
+	   selected the real bold glyphs. Headers reference "Le Mano Bold" by
+	   name directly instead of relying on synthetic/faux bold. */
+	--mv-font-header: "Le Mano Bold", Georgia, serif;
+	--mv-font-body: "Le Mano Regular", Georgia, serif;
 }
 
 /* ===================== 3. GLOBAL VAULT STYLING =======================
@@ -289,6 +292,7 @@ hr,
 
 .callout-title {
 	color: rgb(var(--callout-color)) !important;
+	font-family: var(--mv-font-header) !important;
 	font-weight: 600;
 }
 
@@ -615,6 +619,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
 	border: none;
 	background-color: color-mix(in srgb, var(--mv-item-accent-dark, var(--mv-navy)) 65%, var(--mv-void));
 	color: var(--mv-text-primary) !important;
+	font-family: var(--mv-font-header) !important;
 	font-weight: 700;
 	padding: 0.1em 0.5em;
 }
