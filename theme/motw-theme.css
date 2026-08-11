@@ -101,9 +101,9 @@
 	   navy/black identity to a light terrazzo/parchment one — void is
 	   now the lightest layer, not the darkest, and everything that
 	   reads on top of it needs dark text, not light. -- */
-	--mv-void: #F3F1EA;      /* Level 0 — main background, textured (see body background-image below) */
-	--mv-navy: #EAE6D8;      /* Level 1 — secondary surfaces, slightly deeper than void */
-	--mv-panel: #E4DFCE;     /* Level 1 — primary component surface (cards, callout bodies, inputs) */
+	--mv-void: #E8E3DC;      /* Level 0 — main background, textured (see body background-image below) */
+	--mv-navy: #E8E3DC;      /* Level 1 — secondary surfaces, same as void per user's "all primary background areas" call */
+	--mv-panel: #E8E3DC;     /* Level 1 — primary component surface (cards, callout bodies, inputs), same as void */
 
 	/* -- Structure (interface, not content). These stay genuinely dark
 	   on purpose — they're fills meant to hold --mv-text-on-fill (light)
@@ -123,8 +123,8 @@
 
 	/* -- Text -- */
 	--mv-text-secondary: #5C6B63;  /* Muted Slate Green — metadata, subtitles, secondary headings */
-	--mv-text-primary: #1F3038;    /* Deep Charcoal — default reading text on the light void/panel/navy layers */
-	--mv-text-on-fill: #F3E7C9;    /* Cream, pulled from the Route 66 poster's sky/title tones. Used specifically on a dark colored fill (table headers, category Dark tiers, buttons, callouts, folder titles) — NOT the default reading color */
+	--mv-text-primary: #944835;    /* Non-heading reading text on the primary background — table cells, property values, general body text. Headings/inline-title use --mv-note-accent (category Full Power) instead, not this. */
+	--mv-text-on-fill: #E8E3DC;    /* Text on top of a category-colored fill (table headers, category Dark tiers, buttons, callouts, folder titles) — same value as the primary background itself, per user's spec */
 
 	/* -- Borders, derived from the structure layer -- */
 	--mv-border: #C9C2AC;
@@ -150,50 +150,50 @@
 	   folder color and its document heading color are the same Core
 	   value, "Full Power," always. */
 
-	/* Mystery — near-black cactus silhouette */
-	--mv-mystery-core: #1F1712;
-	--mv-mystery-dark: #090707;
-	--mv-mystery-light: #251A14;
-	--mv-mystery-core-rgb: 31, 23, 18;
+	/* Mystery */
+	--mv-mystery-core: #524964;
+	--mv-mystery-dark: #1B191E;
+	--mv-mystery-light: #5E5276;
+	--mv-mystery-core-rgb: 82, 73, 100;
 
-	/* Hunter — deep slate blue (distant mountains) */
-	--mv-hunter-core: #2E4A57;
-	--mv-hunter-dark: #111619;
-	--mv-hunter-light: #325768;
-	--mv-hunter-core-rgb: 46, 74, 87;
+	/* Hunter */
+	--mv-hunter-core: #455C7A;
+	--mv-hunter-dark: #191E23;
+	--mv-hunter-light: #4C6A92;
+	--mv-hunter-core-rgb: 69, 92, 122;
 
-	/* Threat — deep maroon (desert ground). Generic, top-level
-	   "03 - Threats" folder — no more Monster/Minion/Villain/
-	   Phenomena sub-types. */
-	--mv-threat-core: #6B2331;
-	--mv-threat-dark: #1D1012;
-	--mv-threat-light: #822335;
-	--mv-threat-core-rgb: 107, 35, 49;
+	/* Threat — generic, top-level "03 - Threats" folder. Identical
+	   hex to NPC below (both #4A7B8D) — given as-is; the two read as
+	   the same color everywhere (sidebar and document headings). */
+	--mv-threat-core: #4A7B8D;
+	--mv-threat-dark: #1C2528;
+	--mv-threat-light: #5091A9;
+	--mv-threat-core-rgb: 74, 123, 141;
 
-	/* NPC — dark terracotta (mesa rock). Generic, top-level
-	   "04 - NPCs" folder — no more Recurring/One Time sub-types. */
-	--mv-npc-core: #8B4A3D;
-	--mv-npc-dark: #271B19;
-	--mv-npc-light: #A85240;
-	--mv-npc-core-rgb: 139, 74, 61;
+	/* NPC — generic, top-level "04 - NPCs" folder. Identical hex to
+	   Threat above. */
+	--mv-npc-core: #4A7B8D;
+	--mv-npc-dark: #1C2528;
+	--mv-npc-light: #5091A9;
+	--mv-npc-core-rgb: 74, 123, 141;
 
-	/* Location — darker maroon shadow tone */
-	--mv-location-core: #4A1B26;
-	--mv-location-dark: #140C0E;
-	--mv-location-light: #5A1C2A;
-	--mv-location-core-rgb: 74, 27, 38;
+	/* Location. Identical hex to Reference below (both #BA5F48). */
+	--mv-location-core: #BA5F48;
+	--mv-location-dark: #34221E;
+	--mv-location-light: #CC755F;
+	--mv-location-core-rgb: 186, 95, 72;
 
-	/* Reference — deep teal (car body, darkened) */
-	--mv-reference-core: #1F4D4E;
-	--mv-reference-dark: #0D1516;
-	--mv-reference-light: #205D5E;
-	--mv-reference-core-rgb: 31, 77, 78;
+	/* Reference ("Resources"). Identical hex to Location above. */
+	--mv-reference-core: #BA5F48;
+	--mv-reference-dark: #34221E;
+	--mv-reference-light: #CC755F;
+	--mv-reference-core-rgb: 186, 95, 72;
 
-	/* Asset — dark amber/gold (sunset sky, darkened) */
-	--mv-asset-core: #7A5220;
-	--mv-asset-dark: #211910;
-	--mv-asset-light: #95601E;
-	--mv-asset-core-rgb: 122, 82, 32;
+	/* Asset */
+	--mv-asset-core: #664218;
+	--mv-asset-dark: #1B150D;
+	--mv-asset-light: #7D4D16;
+	--mv-asset-core-rgb: 102, 66, 24;
 
 	/* -- Typography --
 	   Named commercial fonts, not web fonts — this snippet has no font
@@ -219,7 +219,7 @@ body {
 	   via stitchTiles), not the original uploaded photo, since the
 	   image itself wasn't accessible as a file to embed directly. Close
 	   approximation: light cream ground, fine desaturated speckling. */
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0YzRjFFQSIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0U4RTNEQyIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
 	background-repeat: repeat;
 	background-size: 260px 260px;
 	color: var(--mv-text-primary);
@@ -286,7 +286,7 @@ body {
 	/* Same repeating terrazzo texture as body — this is the pane that
 	   actually paints over body in practice, so the texture needs to
 	   live here too, not just on body, to actually be visible. */
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0YzRjFFQSIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0U4RTNEQyIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
 	background-repeat: repeat;
 	background-size: 260px 260px;
 	color: var(--mv-text-primary);
