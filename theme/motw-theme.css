@@ -195,6 +195,19 @@
 	--mv-asset-light: #7D4D16;
 	--mv-asset-core-rgb: 102, 66, 24;
 
+	/* -- Folder sidebar colors — same hue/saturation as each category's
+	   Core, lightness halved (~50% darker). Used ONLY by the folder
+	   system (section 6); document headings/.inline-title still use
+	   -core directly (Full Power), unchanged — this reintroduces a
+	   folder-vs-document distinction specifically for the sidebar. -- */
+	--mv-mystery-folder: #292432;
+	--mv-hunter-folder: #222E3D;
+	--mv-threat-folder: #253D46;
+	--mv-npc-folder: #253D46;
+	--mv-location-folder: #5E2F23;
+	--mv-reference-folder: #5E2F23;
+	--mv-asset-folder: #33210C;
+
 	/* -- Typography --
 	   Named commercial fonts, not web fonts — this snippet has no font
 	   FILES to embed, only font-family names, and only renders them if
@@ -712,18 +725,20 @@ button.mv-npc-btn:hover { background-color: var(--mv-npc-core) !important; color
    names — Obsidian stamps the vault-relative path onto .nav-folder-title
    / .nav-file-title as data-path, exact and case-sensitive. */
 
-/* -- 6a. Assign a folder's Full Power color per top-level branch,
-   straight from its category Core token. `:has()` reads it off the
-   folder's own title, then --mv-item-accent cascades down into every
-   child folder/file — that's what makes 2nd/3rd-level depth-fading
-   below possible without re-declaring the base color each time. -- */
-.nav-folder:has(> .nav-folder-title[data-path="01 - Mysteries"]) { --mv-item-accent: var(--mv-mystery-core); }
-.nav-folder:has(> .nav-folder-title[data-path="02 - Hunters"]) { --mv-item-accent: var(--mv-hunter-core); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats"]) { --mv-item-accent: var(--mv-threat-core); }
-.nav-folder:has(> .nav-folder-title[data-path="04 - NPCs"]) { --mv-item-accent: var(--mv-npc-core); }
-.nav-folder:has(> .nav-folder-title[data-path="05 - Locations"]) { --mv-item-accent: var(--mv-location-core); }
-.nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-reference-core); }
-.nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-asset-core); }
+/* -- 6a. Assign a folder's "Full Power" color per top-level branch —
+   but for the folder sidebar specifically, "Full Power" is the -folder
+   token (~50% darker than the category's document-heading Core), not
+   -core directly. `:has()` reads it off the folder's own title, then
+   --mv-item-accent cascades down into every child folder/file —
+   that's what makes 2nd/3rd-level depth-fading below possible without
+   re-declaring the base color each time. -- */
+.nav-folder:has(> .nav-folder-title[data-path="01 - Mysteries"]) { --mv-item-accent: var(--mv-mystery-folder); }
+.nav-folder:has(> .nav-folder-title[data-path="02 - Hunters"]) { --mv-item-accent: var(--mv-hunter-folder); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats"]) { --mv-item-accent: var(--mv-threat-folder); }
+.nav-folder:has(> .nav-folder-title[data-path="04 - NPCs"]) { --mv-item-accent: var(--mv-npc-folder); }
+.nav-folder:has(> .nav-folder-title[data-path="05 - Locations"]) { --mv-item-accent: var(--mv-location-folder); }
+.nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-reference-folder); }
+.nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-asset-folder); }
 
 /* Known 2nd-level subfolders -> 90% fill + a Full Power (100%) frame,
    straight off the inherited --mv-item-accent from their top-level
@@ -747,9 +762,10 @@ button.mv-npc-btn:hover { background-color: var(--mv-npc-core) !important; color
 	border: 1px solid var(--mv-item-accent) !important;
 }
 
-/* -- 6b. Top-level folders: solid Full Power fill (no color-mix — a
-   top-level background always uses the category's Core straight) +
-   cream text. -- */
+/* -- 6b. Top-level folders: solid fill straight from --mv-item-accent
+   (no color-mix — a top-level background always uses it directly),
+   which is now the ~50%-darker -folder token, not -core + cream
+   text. -- */
 .nav-folder-title:not([data-path*="/"]) {
 	background-color: var(--mv-item-accent, var(--mv-navy));
 	border: none;
