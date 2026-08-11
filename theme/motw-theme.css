@@ -126,16 +126,42 @@
 	   Monster's Dark/Light are the doc's literal values; the rest are
 	   computed with that same formula for consistency. */
 
-	/* Minion/NPCs — Green */
-	--mv-minion-core: #3D8F52;
-	--mv-minion-dark: #19281D;
-	--mv-minion-light: #40AD5C;
-	--mv-minion-core-rgb: 61, 143, 82;
+	/* Minion — Curry/Mustard (Pantone 124 C). Decoupled from the NPC
+	   sub-categories below (--mv-npc-core/-dark) — they used to alias
+	   this same token, but that would've silently pulled Recurring/One
+	   Time NPC's color along with Minion's change here, which wasn't
+	   wanted. --mv-npc-core/-dark keep Minion's OLD green values so
+	   NPC sub-categories look exactly as they did before. */
+	--mv-minion-core: #C48513;
+	--mv-minion-dark: #322712;
+	--mv-minion-light: #F29E08;
+	--mv-minion-core-rgb: 196, 133, 19;
 
-	--mv-monster-core: #D15B6A;
-	--mv-monster-dark: #3F2027;
-	--mv-monster-light: #E27A86;
-	--mv-monster-core-rgb: 209, 91, 106;
+	/* NPC sub-categories (Recurring/One Time) — Green. Minion's
+	   original values, preserved under their own token now that
+	   Minion itself has moved to curry/mustard above. */
+	--mv-npc-core: #3D8F52;
+	--mv-npc-dark: #19281D;
+
+	/* Monster — Rose Fuchsia (Pantone 213) */
+	--mv-monster-core: #B62D57;
+	--mv-monster-dark: #31171F;
+	--mv-monster-light: #D92F63;
+	--mv-monster-core-rgb: 182, 45, 87;
+
+	/* Villain — Violet Intense (Pantone 2597). Standalone now — no
+	   longer a color-mix fade of --mv-threat-vivid (see section 5E). */
+	--mv-villain-core: #432660;
+	--mv-villain-dark: #15101B;
+	--mv-villain-light: #4E2774;
+	--mv-villain-core-rgb: 67, 38, 96;
+
+	/* Phenomena — Magenta (Pantone 235). Standalone now — no longer a
+	   color-mix fade of --mv-threat-vivid (see section 5E). */
+	--mv-phenomena-core: #8A2D5A;
+	--mv-phenomena-dark: #26141D;
+	--mv-phenomena-light: #A82D68;
+	--mv-phenomena-core-rgb: 138, 45, 90;
 
 	/* Location — Brown */
 	--mv-location-core: #6F432A;
@@ -542,11 +568,10 @@ button.mv-monster-btn:hover {
 }
 
 /* ================= 4B. CATEGORY: MINION ==================================
-   Minion was one of the doc's original 7 content-type categories (see
-   the file header) but had no note-content rule of its own — only its
-   --mv-minion-core/-dark tokens existed, used elsewhere by the NPC
-   sub-categories (Recurring/Single Appearance). Wired up here the same
-   way as Asset. */
+   Curry/Mustard (Pantone 124 C). Originally shared its core/dark
+   tokens with the NPC sub-categories (Recurring/Single Appearance) —
+   now decoupled (see --mv-npc-core/-dark, section 1) so changing
+   Minion's color doesn't silently drag NPC's color along with it. */
 .mv-minion { --mv-note-accent: var(--mv-minion-core); --mv-note-accent-dark: var(--mv-minion-dark); }
 .mv-minion h1, .mv-minion h2, .mv-minion h3, .mv-minion h4, .mv-minion h5, .mv-minion h6,
 .mv-minion .HyperMD-header-1 { color: var(--mv-minion-core) !important; }
@@ -654,15 +679,18 @@ button.mv-asset-btn { background-color: var(--mv-asset-dark) !important; color: 
 button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5E. THREATS SUB-CATEGORIES ==========================
-   Monsters/Minions/Villain/Phenomena, matching the exact fade values
-   already driving their sidebar folders (section 6a) — a note's heading/
-   table/divider color equals its folder's color, not an approximation.
+   Monsters/Minions (plural — the Threats folder sub-types), still
+   fading from --mv-threat-vivid/-header as before. Villain and
+   Phenomena used to live here too but are now standalone flat-color
+   categories below (5E2/5E3) — no fading, no blending, per user's
+   explicit call: each gets its own fixed Pantone hex, not a
+   percentage of the shared Threat teal.
    Note: these are deliberately NOT named .mv-monster — that class
    already exists above as a standalone crimson identity from before
    Threats had its own teal palette. .mv-monsters (plural) is the
    Threats/01 - Monsters folder's actual color; .mv-monster (singular)
-   is a separate, older crimson "monster stat block" style. Don't
-   confuse the two when tagging a note. */
+   is a separate, older "monster stat block" style. Don't confuse the
+   two when tagging a note. */
 .mv-monsters { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)); }
 .mv-monsters h1, .mv-monsters h2, .mv-monsters h3, .mv-monsters h4, .mv-monsters h5, .mv-monsters h6,
 .mv-monsters .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; }
@@ -675,34 +703,48 @@ button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; c
 .mv-minions hr, .mv-minions .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; opacity: 0.6; }
 .mv-minions table:not(.move-table):not(.gear-table) th, .mv-minions table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-minions table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-villain { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)); }
+
+/* ================= 5E2. CATEGORY: VILLAIN ================================
+   Violet Intense (Pantone 2597) — flat, standalone. No color-mix, no
+   fade off --mv-threat-vivid; --mv-villain-core/-dark are fixed hex. */
+.mv-villain { --mv-note-accent: var(--mv-villain-core); --mv-note-accent-dark: var(--mv-villain-dark); }
 .mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6,
-.mv-villain .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; }
-.mv-villain hr, .mv-villain .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 70%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-villain table:not(.move-table):not(.gear-table) th, .mv-villain table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 70%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-villain .HyperMD-header-1 { color: var(--mv-villain-core) !important; }
+.mv-villain hr, .mv-villain .cm-hr { border-top-color: var(--mv-villain-core) !important; opacity: 0.6; }
+.mv-villain table:not(.move-table):not(.gear-table) th, .mv-villain table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-villain-dark) !important; color: var(--mv-text-primary) !important; }
 .mv-villain table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-phenomena { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)); }
+.callout[data-callout="villain"] { --callout-color: var(--mv-villain-core-rgb); --callout-bg: var(--mv-villain-dark); }
+button.mv-villain-btn { background-color: var(--mv-villain-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-villain-core) !important; border-radius: var(--mv-radius-inner); }
+button.mv-villain-btn:hover { background-color: var(--mv-villain-core) !important; color: var(--mv-void) !important; }
+
+/* ================= 5E3. CATEGORY: PHENOMENA ===============================
+   Magenta (Pantone 235) — flat, standalone. No color-mix, no fade off
+   --mv-threat-vivid; --mv-phenomena-core/-dark are fixed hex. */
+.mv-phenomena { --mv-note-accent: var(--mv-phenomena-core); --mv-note-accent-dark: var(--mv-phenomena-dark); }
 .mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6,
-.mv-phenomena .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; }
-.mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 60%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-phenomena table:not(.move-table):not(.gear-table) th, .mv-phenomena table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-phenomena .HyperMD-header-1 { color: var(--mv-phenomena-core) !important; }
+.mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: var(--mv-phenomena-core) !important; opacity: 0.6; }
+.mv-phenomena table:not(.move-table):not(.gear-table) th, .mv-phenomena table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-phenomena-dark) !important; color: var(--mv-text-primary) !important; }
 .mv-phenomena table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.callout[data-callout="phenomena"] { --callout-color: var(--mv-phenomena-core-rgb); --callout-bg: var(--mv-phenomena-dark); }
+button.mv-phenomena-btn { background-color: var(--mv-phenomena-dark) !important; color: var(--mv-text-primary) !important; border: 1px solid var(--mv-phenomena-core) !important; border-radius: var(--mv-radius-inner); }
+button.mv-phenomena-btn:hover { background-color: var(--mv-phenomena-core) !important; color: var(--mv-void) !important; }
 /* ================= 5F. NPC SUB-CATEGORIES ===============================
    Recurring/Single Appearance don't have a pre-existing sidebar fade
    (only Threats does), so this introduces one: Recurring stays close to
    full NPC Green, Single Appearance fades further — a recurring
    character should read as more "present" than someone seen once. */
-.mv-recurring { --mv-note-accent: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-minion-dark) 90%, var(--mv-void)); }
+.mv-recurring { --mv-note-accent: color-mix(in srgb, var(--mv-npc-core) 90%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-npc-dark) 90%, var(--mv-void)); }
 .mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6,
-.mv-recurring .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; }
-.mv-recurring hr, .mv-recurring .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 90%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-recurring .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-npc-core) 90%, var(--mv-void)) !important; }
+.mv-recurring hr, .mv-recurring .cm-hr { border-top-color: color-mix(in srgb, var(--mv-npc-core) 90%, var(--mv-void)) !important; opacity: 0.6; }
+.mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-npc-dark) 90%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-recurring table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-single-appearance { --mv-note-accent: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)); }
+.mv-single-appearance { --mv-note-accent: color-mix(in srgb, var(--mv-npc-core) 60%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-npc-dark) 60%, var(--mv-void)); }
 .mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6,
-.mv-single-appearance .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; }
-.mv-single-appearance hr, .mv-single-appearance .cm-hr { border-top-color: color-mix(in srgb, var(--mv-minion-core) 60%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-single-appearance table:not(.move-table):not(.gear-table) th, .mv-single-appearance table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-minion-dark) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
+.mv-single-appearance .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-npc-core) 60%, var(--mv-void)) !important; }
+.mv-single-appearance hr, .mv-single-appearance .cm-hr { border-top-color: color-mix(in srgb, var(--mv-npc-core) 60%, var(--mv-void)) !important; opacity: 0.6; }
+.mv-single-appearance table:not(.move-table):not(.gear-table) th, .mv-single-appearance table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-npc-dark) 60%, var(--mv-void)) !important; color: var(--mv-text-primary) !important; }
 .mv-single-appearance table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
 /* ================= 6. FOLDER & FILE COLORS (sidebar index) ============
    Category is assigned once per branch, then cascades to every subfolder
