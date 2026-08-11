@@ -101,9 +101,9 @@
 	   navy/black identity to a light terrazzo/parchment one — void is
 	   now the lightest layer, not the darkest, and everything that
 	   reads on top of it needs dark text, not light. -- */
-	--mv-void: #E8E3DC;      /* Level 0 — main background, textured (see body background-image below) */
-	--mv-navy: #E8E3DC;      /* Level 1 — secondary surfaces, same as void per user's "all primary background areas" call */
-	--mv-panel: #E8E3DC;     /* Level 1 — primary component surface (cards, callout bodies, inputs), same as void */
+	--mv-void: #DDD8CE;      /* Level 0 — main background, textured (see body background-image below) */
+	--mv-navy: #DDD8CE;      /* Level 1 — secondary surfaces, same as void per user's "all primary background areas" call */
+	--mv-panel: #DDD8CE;     /* Level 1 — primary component surface (cards, callout bodies, inputs), same as void */
 
 	/* -- Structure (interface, not content). These stay genuinely dark
 	   on purpose — they're fills meant to hold --mv-text-on-fill (light)
@@ -123,8 +123,8 @@
 
 	/* -- Text -- */
 	--mv-text-secondary: #5C6B63;  /* Muted Slate Green — metadata, subtitles, secondary headings */
-	--mv-text-primary: #944835;    /* Non-heading reading text on the primary background — table cells, property values, general body text. Headings/inline-title use --mv-note-accent (category Full Power) instead, not this. */
-	--mv-text-on-fill: #E8E3DC;    /* Text on top of a category-colored fill (table headers, category Dark tiers, buttons, callouts, folder titles) — same value as the primary background itself, per user's spec */
+	--mv-text-primary: #944835;    /* Non-heading reading text on the primary background — table cells, property values, general body text. System default for an UNCATEGORIZED note; each .mv-X category overrides this to its own --mv-X-text (its -folder color, darkened again — see section 1). Headings/inline-title use --mv-note-accent (Full Power/-folder) instead, not this, regardless of category. */
+	--mv-text-on-fill: #DDD8CE;    /* Text on top of a category-colored fill (table headers, category Dark tiers, buttons, callouts, folder titles) — same value as the primary background itself, per user's spec */
 
 	/* -- Borders, derived from the structure layer -- */
 	--mv-border: #C9C2AC;
@@ -197,10 +197,9 @@
 
 	/* -- Folder sidebar colors. Also used directly for table headers/
 	   callout backgrounds/buttons via -dark (aliased to these, see each
-	   category's -dark token above) — top folder and table header are
-	   the SAME shade and saturation, per user's explicit call. Document
-	   headings/.inline-title still use -core directly (Full Power),
-	   unchanged — untouched by this. -- */
+	   category's -dark token above), AND for document headings/
+	   .inline-title — top folder, table header, and heading text are
+	   all the SAME shade and saturation, per user's explicit call. -- */
 	--mv-mystery-folder: #682637;
 	--mv-hunter-folder: #664867;
 	--mv-threat-folder: #243C60;
@@ -208,6 +207,20 @@
 	--mv-location-folder: #42532D;
 	--mv-reference-folder: #BA511F;
 	--mv-asset-folder: #943323;
+
+	/* -- Primary (non-heading) reading text per category — each
+	   category's -folder value, lightness halved again (~50% darker
+	   still). Overrides the system --mv-text-primary default inside a
+	   categorized note (see each .mv-X rule below), so body text/table
+	   cells/property values read as a quiet, category-tinted near-
+	   black rather than one flat color across every category. -- */
+	--mv-mystery-text: #34131C;
+	--mv-hunter-text: #332433;
+	--mv-threat-text: #121E30;
+	--mv-npc-text: #122F38;
+	--mv-location-text: #212A16;
+	--mv-reference-text: #5D280F;
+	--mv-asset-text: #4A1A12;
 
 	/* -- Typography --
 	   Named commercial fonts, not web fonts — this snippet has no font
@@ -233,7 +246,7 @@ body {
 	   via stitchTiles), not the original uploaded photo, since the
 	   image itself wasn't accessible as a file to embed directly. Close
 	   approximation: light cream ground, fine desaturated speckling. */
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0U4RTNEQyIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0RERDhDRSIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
 	background-repeat: repeat;
 	background-size: 260px 260px;
 	color: var(--mv-text-primary);
@@ -300,7 +313,7 @@ body {
 	/* Same repeating terrazzo texture as body — this is the pane that
 	   actually paints over body in practice, so the texture needs to
 	   live here too, not just on body, to actually be visible. */
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0U4RTNEQyIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMjYwIj4KICA8ZmlsdGVyIGlkPSJ0Ij4KICAgIDxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIwLjkiIG51bU9jdGF2ZXM9IjMiIHNlZWQ9IjExIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIiByZXN1bHQ9Im4iLz4KICAgIDxmZUNvbG9yTWF0cml4IGluPSJuIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwLjUzICAwIDAgMCAwIDAuNTAgIDAgMCAwIDAgMC40MiAgMCAwIDAgMC44NSAwIiByZXN1bHQ9InMiLz4KICAgIDxmZUNvbXBvbmVudFRyYW5zZmVyIGluPSJzIiByZXN1bHQ9InAiPgogICAgICA8ZmVGdW5jQSB0eXBlPSJkaXNjcmV0ZSIgdGFibGVWYWx1ZXM9IjAgMCAwIDAgMCAwLjEwIDAuMjIgMC40Ii8+CiAgICA8L2ZlQ29tcG9uZW50VHJhbnNmZXI+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0RERDhDRSIvPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCN0KSIvPgo8L3N2Zz4=");
 	background-repeat: repeat;
 	background-size: 260px 260px;
 	color: var(--mv-text-primary);
@@ -543,7 +556,7 @@ progress {
 
 /* ================= 5. CATEGORY: LOCATION (worked example) ============ */
 
-.mv-location { --mv-note-accent: var(--mv-location-core); --mv-note-accent-dark: var(--mv-location-dark); }
+.mv-location { --mv-note-accent: var(--mv-location-core); --mv-note-accent-dark: var(--mv-location-dark); --mv-text-primary: var(--mv-location-text); }
 .mv-location h1,
 .mv-location h2,
 .mv-location h3,
@@ -591,7 +604,7 @@ button.mv-location-btn:hover {
 
 /* ================= 5B. CATEGORY: MYSTERY =============================
    Apply with `cssclasses: mv-mystery`. Same pattern as Monster/Location. */
-.mv-mystery { --mv-note-accent: var(--mv-mystery-core); --mv-note-accent-dark: var(--mv-mystery-dark); }
+.mv-mystery { --mv-note-accent: var(--mv-mystery-core); --mv-note-accent-dark: var(--mv-mystery-dark); --mv-text-primary: var(--mv-mystery-text); }
 .mv-mystery h1, .mv-mystery h2, .mv-mystery h3, .mv-mystery h4, .mv-mystery h5, .mv-mystery h6,
 .mv-mystery .HyperMD-header-1, .mv-mystery .inline-title { color: var(--mv-mystery-folder) !important; }
 .mv-mystery hr, .mv-mystery .cm-hr { border-top-color: var(--mv-mystery-core) !important; opacity: 0.6; }
@@ -602,7 +615,7 @@ button.mv-mystery-btn { background-color: var(--mv-mystery-dark) !important; col
 button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5C. CATEGORY: HUNTER =============================== */
-.mv-hunter { --mv-note-accent: var(--mv-hunter-core); --mv-note-accent-dark: var(--mv-hunter-dark); }
+.mv-hunter { --mv-note-accent: var(--mv-hunter-core); --mv-note-accent-dark: var(--mv-hunter-dark); --mv-text-primary: var(--mv-hunter-text); }
 .mv-hunter h1, .mv-hunter h2, .mv-hunter h3, .mv-hunter h4, .mv-hunter h5, .mv-hunter h6,
 .mv-hunter .HyperMD-header-1, .mv-hunter .inline-title { color: var(--mv-hunter-folder) !important; }
 .mv-hunter hr, .mv-hunter .cm-hr { border-top-color: var(--mv-hunter-core) !important; opacity: 0.6; }
@@ -613,7 +626,7 @@ button.mv-hunter-btn { background-color: var(--mv-hunter-dark) !important; color
 button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5D. CATEGORY: REFERENCE ============================= */
-.mv-reference { --mv-note-accent: var(--mv-reference-core); --mv-note-accent-dark: var(--mv-reference-dark); }
+.mv-reference { --mv-note-accent: var(--mv-reference-core); --mv-note-accent-dark: var(--mv-reference-dark); --mv-text-primary: var(--mv-reference-text); }
 .mv-reference h1, .mv-reference h2, .mv-reference h3, .mv-reference h4, .mv-reference h5, .mv-reference h6,
 .mv-reference .HyperMD-header-1, .mv-reference .inline-title { color: var(--mv-reference-folder) !important; }
 .mv-reference hr, .mv-reference .cm-hr { border-top-color: var(--mv-reference-core) !important; opacity: 0.6; }
@@ -628,7 +641,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
    folder color on 07 - Assets) but had no note-content rule of its own —
    this wires it up the same way as Mystery/Hunter/Reference so it's a
    real, selectable cssclasses value. */
-.mv-asset { --mv-note-accent: var(--mv-asset-core); --mv-note-accent-dark: var(--mv-asset-dark); }
+.mv-asset { --mv-note-accent: var(--mv-asset-core); --mv-note-accent-dark: var(--mv-asset-dark); --mv-text-primary: var(--mv-asset-text); }
 .mv-asset h1, .mv-asset h2, .mv-asset h3, .mv-asset h4, .mv-asset h5, .mv-asset h6,
 .mv-asset .HyperMD-header-1, .mv-asset .inline-title { color: var(--mv-asset-folder) !important; }
 .mv-asset hr, .mv-asset .cm-hr { border-top-color: var(--mv-asset-core) !important; opacity: 0.6; }
@@ -647,7 +660,7 @@ button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; c
    dropping to the system default Cyan. Re-tag those notes to
    .mv-threat directly when convenient; the alias is a safety net,
    not a replacement for updating them. */
-.mv-threat, .mv-monster, .mv-monsters, .mv-minion, .mv-minions, .mv-villain, .mv-phenomena { --mv-note-accent: var(--mv-threat-core); --mv-note-accent-dark: var(--mv-threat-dark); }
+.mv-threat, .mv-monster, .mv-monsters, .mv-minion, .mv-minions, .mv-villain, .mv-phenomena { --mv-note-accent: var(--mv-threat-core); --mv-note-accent-dark: var(--mv-threat-dark); --mv-text-primary: var(--mv-threat-text); }
 .mv-threat h1, .mv-threat h2, .mv-threat h3, .mv-threat h4, .mv-threat h5, .mv-threat h6, .mv-threat .HyperMD-header-1, .mv-threat .inline-title,
 .mv-monster h1, .mv-monster h2, .mv-monster h3, .mv-monster h4, .mv-monster h5, .mv-monster h6, .mv-monster .HyperMD-header-1, .mv-monster .inline-title,
 .mv-monsters h1, .mv-monsters h2, .mv-monsters h3, .mv-monsters h4, .mv-monsters h5, .mv-monsters h6, .mv-monsters .HyperMD-header-1, .mv-monsters .inline-title,
@@ -681,7 +694,7 @@ button.mv-threat-btn:hover { background-color: var(--mv-threat-core) !important;
    notes still tagged with the old class names fall back to NPC's
    color instead of silently dropping to the system default Cyan.
    Re-tag those notes to .mv-npc directly when convenient. */
-.mv-npc, .mv-recurring, .mv-single-appearance, .mv-one-time { --mv-note-accent: var(--mv-npc-core); --mv-note-accent-dark: var(--mv-npc-dark); }
+.mv-npc, .mv-recurring, .mv-single-appearance, .mv-one-time { --mv-note-accent: var(--mv-npc-core); --mv-note-accent-dark: var(--mv-npc-dark); --mv-text-primary: var(--mv-npc-text); }
 .mv-npc h1, .mv-npc h2, .mv-npc h3, .mv-npc h4, .mv-npc h5, .mv-npc h6, .mv-npc .HyperMD-header-1, .mv-npc .inline-title,
 .mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6, .mv-recurring .HyperMD-header-1, .mv-recurring .inline-title,
 .mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6, .mv-single-appearance .HyperMD-header-1, .mv-single-appearance .inline-title,
