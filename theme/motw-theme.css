@@ -152,13 +152,13 @@
 
 	/* Mystery */
 	--mv-mystery-core: #524964;
-	--mv-mystery-dark: #1B191E;
+	--mv-mystery-dark: var(--mv-mystery-folder);
 	--mv-mystery-light: #5E5276;
 	--mv-mystery-core-rgb: 82, 73, 100;
 
 	/* Hunter */
 	--mv-hunter-core: #455C7A;
-	--mv-hunter-dark: #191E23;
+	--mv-hunter-dark: var(--mv-hunter-folder);
 	--mv-hunter-light: #4C6A92;
 	--mv-hunter-core-rgb: 69, 92, 122;
 
@@ -166,47 +166,48 @@
 	   hex to NPC below (both #4A7B8D) — given as-is; the two read as
 	   the same color everywhere (sidebar and document headings). */
 	--mv-threat-core: #4A7B8D;
-	--mv-threat-dark: #1C2528;
+	--mv-threat-dark: var(--mv-threat-folder);
 	--mv-threat-light: #5091A9;
 	--mv-threat-core-rgb: 74, 123, 141;
 
 	/* NPC — generic, top-level "04 - NPCs" folder. Identical hex to
 	   Threat above. */
 	--mv-npc-core: #4A7B8D;
-	--mv-npc-dark: #1C2528;
+	--mv-npc-dark: var(--mv-npc-folder);
 	--mv-npc-light: #5091A9;
 	--mv-npc-core-rgb: 74, 123, 141;
 
 	/* Location. Identical hex to Reference below (both #BA5F48). */
 	--mv-location-core: #BA5F48;
-	--mv-location-dark: #34221E;
+	--mv-location-dark: var(--mv-location-folder);
 	--mv-location-light: #CC755F;
 	--mv-location-core-rgb: 186, 95, 72;
 
 	/* Reference ("Resources"). Identical hex to Location above. */
 	--mv-reference-core: #BA5F48;
-	--mv-reference-dark: #34221E;
+	--mv-reference-dark: var(--mv-reference-folder);
 	--mv-reference-light: #CC755F;
 	--mv-reference-core-rgb: 186, 95, 72;
 
 	/* Asset */
 	--mv-asset-core: #664218;
-	--mv-asset-dark: #1B150D;
+	--mv-asset-dark: var(--mv-asset-folder);
 	--mv-asset-light: #7D4D16;
 	--mv-asset-core-rgb: 102, 66, 24;
 
-	/* -- Folder sidebar colors — same hue/saturation as each category's
-	   Core, lightness halved (~50% darker). Used ONLY by the folder
-	   system (section 6); document headings/.inline-title still use
-	   -core directly (Full Power), unchanged — this reintroduces a
-	   folder-vs-document distinction specifically for the sidebar. -- */
-	--mv-mystery-folder: #292432;
-	--mv-hunter-folder: #222E3D;
-	--mv-threat-folder: #253D46;
-	--mv-npc-folder: #253D46;
-	--mv-location-folder: #5E2F23;
-	--mv-reference-folder: #5E2F23;
-	--mv-asset-folder: #33210C;
+	/* -- Folder sidebar colors. Also used directly for table headers/
+	   callout backgrounds/buttons via -dark (aliased to these, see each
+	   category's -dark token above) — top folder and table header are
+	   the SAME shade and saturation, per user's explicit call. Document
+	   headings/.inline-title still use -core directly (Full Power),
+	   unchanged — untouched by this. -- */
+	--mv-mystery-folder: #682637;
+	--mv-hunter-folder: #664867;
+	--mv-threat-folder: #243C60;
+	--mv-npc-folder: #245E70;
+	--mv-location-folder: #42532D;
+	--mv-reference-folder: #BA511F;
+	--mv-asset-folder: #943323;
 
 	/* -- Typography --
 	   Named commercial fonts, not web fonts — this snippet has no font
