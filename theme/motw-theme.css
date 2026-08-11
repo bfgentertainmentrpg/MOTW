@@ -297,14 +297,20 @@ body {
 }
 
 /* Headings default to Core Cyan (system-level); a category class
-   (see section 4/5) overrides this to the category's Core color. */
+   (see section 4/5) overrides this to the category's Core color.
+   .inline-title (the note's own title, above the properties panel)
+   is included here — it never had a color of its own before, so it
+   fell back to Obsidian's own default, which was tuned for a dark
+   background and reads as barely-visible pale-on-pale now that the
+   page is light. */
 .markdown-rendered h1,
 .markdown-rendered h2,
 .markdown-rendered h3,
 .HyperMD-header-1,
 .HyperMD-header-2,
-.HyperMD-header-3 {
-	color: var(--mv-cyan);
+.HyperMD-header-3,
+.inline-title {
+	color: var(--mv-cyan) !important;
 	margin-top: 1.8em !important;
 	margin-bottom: 0.5em !important;
 }
@@ -469,7 +475,10 @@ button.mod-cta {
 	border-color: var(--mv-cyan) !important;
 }
 
-/* -- Metadata (properties) panel -- */
+/* -- Metadata (properties) panel. Property VALUES (the actual text/
+   list/number content, not just the key labels) never had a color of
+   their own before — same bug as .inline-title, falling back to
+   Obsidian's own pale default, unreadable on the now-light panel. -- */
 .metadata-container {
 	background-color: var(--mv-panel) !important;
 	border-radius: var(--mv-radius-outer) !important;
@@ -477,6 +486,20 @@ button.mod-cta {
 
 .metadata-property-key {
 	color: var(--mv-text-secondary) !important;
+}
+
+.metadata-property-value,
+.metadata-input-longtext,
+.metadata-properties input,
+.metadata-properties textarea {
+	color: var(--mv-text-primary) !important;
+}
+
+/* List-type property values (cssclasses, tags) render as pill/chip
+   tags, not plain text — needs its own background + text pairing. */
+.multi-select-pill {
+	background-color: var(--mv-navy) !important;
+	color: var(--mv-text-primary) !important;
 }
 
 /* -- Progress bars / meters default to Cyan (system-level; see category
@@ -513,7 +536,8 @@ progress {
 .mv-location h4,
 .mv-location h5,
 .mv-location h6,
-.mv-location .HyperMD-header-1 {
+.mv-location .HyperMD-header-1,
+.mv-location .inline-title {
 	color: var(--mv-location-core) !important;
 }
 
@@ -555,7 +579,7 @@ button.mv-location-btn:hover {
    Apply with `cssclasses: mv-mystery`. Same pattern as Monster/Location. */
 .mv-mystery { --mv-note-accent: var(--mv-mystery-core); --mv-note-accent-dark: var(--mv-mystery-dark); }
 .mv-mystery h1, .mv-mystery h2, .mv-mystery h3, .mv-mystery h4, .mv-mystery h5, .mv-mystery h6,
-.mv-mystery .HyperMD-header-1 { color: var(--mv-mystery-core) !important; }
+.mv-mystery .HyperMD-header-1, .mv-mystery .inline-title { color: var(--mv-mystery-core) !important; }
 .mv-mystery hr, .mv-mystery .cm-hr { border-top-color: var(--mv-mystery-core) !important; opacity: 0.6; }
 .mv-mystery table:not(.move-table):not(.gear-table) th, .mv-mystery table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-mystery table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -566,7 +590,7 @@ button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !importan
 /* ================= 5C. CATEGORY: HUNTER =============================== */
 .mv-hunter { --mv-note-accent: var(--mv-hunter-core); --mv-note-accent-dark: var(--mv-hunter-dark); }
 .mv-hunter h1, .mv-hunter h2, .mv-hunter h3, .mv-hunter h4, .mv-hunter h5, .mv-hunter h6,
-.mv-hunter .HyperMD-header-1 { color: var(--mv-hunter-core) !important; }
+.mv-hunter .HyperMD-header-1, .mv-hunter .inline-title { color: var(--mv-hunter-core) !important; }
 .mv-hunter hr, .mv-hunter .cm-hr { border-top-color: var(--mv-hunter-core) !important; opacity: 0.6; }
 .mv-hunter table:not(.move-table):not(.gear-table) th, .mv-hunter table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-hunter table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -577,7 +601,7 @@ button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important;
 /* ================= 5D. CATEGORY: REFERENCE ============================= */
 .mv-reference { --mv-note-accent: var(--mv-reference-core); --mv-note-accent-dark: var(--mv-reference-dark); }
 .mv-reference h1, .mv-reference h2, .mv-reference h3, .mv-reference h4, .mv-reference h5, .mv-reference h6,
-.mv-reference .HyperMD-header-1 { color: var(--mv-reference-core) !important; }
+.mv-reference .HyperMD-header-1, .mv-reference .inline-title { color: var(--mv-reference-core) !important; }
 .mv-reference hr, .mv-reference .cm-hr { border-top-color: var(--mv-reference-core) !important; opacity: 0.6; }
 .mv-reference table:not(.move-table):not(.gear-table) th, .mv-reference table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-reference table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -592,7 +616,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
    real, selectable cssclasses value. */
 .mv-asset { --mv-note-accent: var(--mv-asset-core); --mv-note-accent-dark: var(--mv-asset-dark); }
 .mv-asset h1, .mv-asset h2, .mv-asset h3, .mv-asset h4, .mv-asset h5, .mv-asset h6,
-.mv-asset .HyperMD-header-1 { color: var(--mv-asset-core) !important; }
+.mv-asset .HyperMD-header-1, .mv-asset .inline-title { color: var(--mv-asset-core) !important; }
 .mv-asset hr, .mv-asset .cm-hr { border-top-color: var(--mv-asset-core) !important; opacity: 0.6; }
 .mv-asset table:not(.move-table):not(.gear-table) th, .mv-asset table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-asset-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-asset table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -601,31 +625,63 @@ button.mv-asset-btn { background-color: var(--mv-asset-dark) !important; color: 
 button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5D3. CATEGORY: THREAT ==================================
-   Deep Burgundy — generic, top-level "03 - Threats" folder. Flat,
-   standalone — for a note filed directly in Threats rather than one
-   of its four specific sub-types (Monster/Minion/Villain/Phenomena,
-   see 5E/5E2/5E3 below). */
-.mv-threat { --mv-note-accent: var(--mv-threat-core); --mv-note-accent-dark: var(--mv-threat-dark); }
-.mv-threat h1, .mv-threat h2, .mv-threat h3, .mv-threat h4, .mv-threat h5, .mv-threat h6,
-.mv-threat .HyperMD-header-1 { color: var(--mv-threat-core) !important; }
-.mv-threat hr, .mv-threat .cm-hr { border-top-color: var(--mv-threat-core) !important; opacity: 0.6; }
-.mv-threat table:not(.move-table):not(.gear-table) th, .mv-threat table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-threat-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-threat table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="threat"] { --callout-color: var(--mv-threat-core-rgb); --callout-bg: var(--mv-threat-dark); }
+   Deep Burgundy — generic, top-level "03 - Threats" folder.
+   .mv-monster, .mv-monsters, .mv-minion, .mv-minions, .mv-villain,
+   and .mv-phenomena are included as backward-compat aliases — those
+   categories were eliminated, but notes still tagged with the old
+   class names fall back to Threat's color instead of silently
+   dropping to the system default Cyan. Re-tag those notes to
+   .mv-threat directly when convenient; the alias is a safety net,
+   not a replacement for updating them. */
+.mv-threat, .mv-monster, .mv-monsters, .mv-minion, .mv-minions, .mv-villain, .mv-phenomena { --mv-note-accent: var(--mv-threat-core); --mv-note-accent-dark: var(--mv-threat-dark); }
+.mv-threat h1, .mv-threat h2, .mv-threat h3, .mv-threat h4, .mv-threat h5, .mv-threat h6, .mv-threat .HyperMD-header-1, .mv-threat .inline-title,
+.mv-monster h1, .mv-monster h2, .mv-monster h3, .mv-monster h4, .mv-monster h5, .mv-monster h6, .mv-monster .HyperMD-header-1, .mv-monster .inline-title,
+.mv-monsters h1, .mv-monsters h2, .mv-monsters h3, .mv-monsters h4, .mv-monsters h5, .mv-monsters h6, .mv-monsters .HyperMD-header-1, .mv-monsters .inline-title,
+.mv-minion h1, .mv-minion h2, .mv-minion h3, .mv-minion h4, .mv-minion h5, .mv-minion h6, .mv-minion .HyperMD-header-1, .mv-minion .inline-title,
+.mv-minions h1, .mv-minions h2, .mv-minions h3, .mv-minions h4, .mv-minions h5, .mv-minions h6, .mv-minions .HyperMD-header-1, .mv-minions .inline-title,
+.mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6, .mv-villain .HyperMD-header-1, .mv-villain .inline-title,
+.mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6, .mv-phenomena .HyperMD-header-1, .mv-phenomena .inline-title { color: var(--mv-threat-core) !important; }
+.mv-threat hr, .mv-threat .cm-hr, .mv-monster hr, .mv-monster .cm-hr, .mv-monsters hr, .mv-monsters .cm-hr, .mv-minion hr, .mv-minion .cm-hr, .mv-minions hr, .mv-minions .cm-hr, .mv-villain hr, .mv-villain .cm-hr, .mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: var(--mv-threat-core) !important; opacity: 0.6; }
+.mv-threat table:not(.move-table):not(.gear-table) th, .mv-threat table:not(.move-table):not(.gear-table) td:first-child,
+.mv-monster table:not(.move-table):not(.gear-table) th, .mv-monster table:not(.move-table):not(.gear-table) td:first-child,
+.mv-monsters table:not(.move-table):not(.gear-table) th, .mv-monsters table:not(.move-table):not(.gear-table) td:first-child,
+.mv-minion table:not(.move-table):not(.gear-table) th, .mv-minion table:not(.move-table):not(.gear-table) td:first-child,
+.mv-minions table:not(.move-table):not(.gear-table) th, .mv-minions table:not(.move-table):not(.gear-table) td:first-child,
+.mv-villain table:not(.move-table):not(.gear-table) th, .mv-villain table:not(.move-table):not(.gear-table) td:first-child,
+.mv-phenomena table:not(.move-table):not(.gear-table) th, .mv-phenomena table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-threat-dark) !important; color: var(--mv-text-on-fill) !important; }
+.mv-threat table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-monster table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-monsters table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-minion table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-minions table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-villain table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-phenomena table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.callout[data-callout="threat"], .callout[data-callout="monster"], .callout[data-callout="minion"], .callout[data-callout="villain"], .callout[data-callout="phenomena"] { --callout-color: var(--mv-threat-core-rgb); --callout-bg: var(--mv-threat-dark); }
 button.mv-threat-btn { background-color: var(--mv-threat-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-threat-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-threat-btn:hover { background-color: var(--mv-threat-core) !important; color: var(--mv-void) !important; }
 
 /* ================= 5F. CATEGORY: NPC ======================================
-   Sage Gray — generic, top-level "04 - NPCs" folder. Flat, standalone —
-   no fading, no blending. Recurring/One Time (5F2/5F3) are its two
-   specific sub-types, each with their own flat color too. */
-.mv-npc { --mv-note-accent: var(--mv-npc-core); --mv-note-accent-dark: var(--mv-npc-dark); }
-.mv-npc h1, .mv-npc h2, .mv-npc h3, .mv-npc h4, .mv-npc h5, .mv-npc h6,
-.mv-npc .HyperMD-header-1 { color: var(--mv-npc-core) !important; }
-.mv-npc hr, .mv-npc .cm-hr { border-top-color: var(--mv-npc-core) !important; opacity: 0.6; }
-.mv-npc table:not(.move-table):not(.gear-table) th, .mv-npc table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-npc-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-npc table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="npc"] { --callout-color: var(--mv-npc-core-rgb); --callout-bg: var(--mv-npc-dark); }
+   Sage Gray — generic, top-level "04 - NPCs" folder.
+   .mv-recurring, .mv-single-appearance, and .mv-one-time are included
+   as backward-compat aliases — those categories were eliminated, but
+   notes still tagged with the old class names fall back to NPC's
+   color instead of silently dropping to the system default Cyan.
+   Re-tag those notes to .mv-npc directly when convenient. */
+.mv-npc, .mv-recurring, .mv-single-appearance, .mv-one-time { --mv-note-accent: var(--mv-npc-core); --mv-note-accent-dark: var(--mv-npc-dark); }
+.mv-npc h1, .mv-npc h2, .mv-npc h3, .mv-npc h4, .mv-npc h5, .mv-npc h6, .mv-npc .HyperMD-header-1, .mv-npc .inline-title,
+.mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6, .mv-recurring .HyperMD-header-1, .mv-recurring .inline-title,
+.mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6, .mv-single-appearance .HyperMD-header-1, .mv-single-appearance .inline-title,
+.mv-one-time h1, .mv-one-time h2, .mv-one-time h3, .mv-one-time h4, .mv-one-time h5, .mv-one-time h6, .mv-one-time .HyperMD-header-1, .mv-one-time .inline-title { color: var(--mv-npc-core) !important; }
+.mv-npc hr, .mv-npc .cm-hr, .mv-recurring hr, .mv-recurring .cm-hr, .mv-single-appearance hr, .mv-single-appearance .cm-hr, .mv-one-time hr, .mv-one-time .cm-hr { border-top-color: var(--mv-npc-core) !important; opacity: 0.6; }
+.mv-npc table:not(.move-table):not(.gear-table) th, .mv-npc table:not(.move-table):not(.gear-table) td:first-child,
+.mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child,
+.mv-single-appearance table:not(.move-table):not(.gear-table) th, .mv-single-appearance table:not(.move-table):not(.gear-table) td:first-child,
+.mv-one-time table:not(.move-table):not(.gear-table) th, .mv-one-time table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-npc-dark) !important; color: var(--mv-text-on-fill) !important; }
+.mv-npc table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-recurring table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-single-appearance table:not(.move-table):not(.gear-table) td:not(:first-child),
+.mv-one-time table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
+.callout[data-callout="npc"], .callout[data-callout="recurring"], .callout[data-callout="single-appearance"], .callout[data-callout="one-time"] { --callout-color: var(--mv-npc-core-rgb); --callout-bg: var(--mv-npc-dark); }
 button.mv-npc-btn { background-color: var(--mv-npc-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-npc-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-npc-btn:hover { background-color: var(--mv-npc-core) !important; color: var(--mv-void) !important; }
 
@@ -669,14 +725,26 @@ button.mv-npc-btn:hover { background-color: var(--mv-npc-core) !important; color
 .nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-reference-core); }
 .nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-asset-core); }
 
-/* Known 2nd-level subfolders (Threats' four) -> 80%, straight off the
-   inherited --mv-item-accent from their top-level parent above. Add a
-   line here, same pattern, for any other 2nd-level subfolder. */
+/* Known 2nd-level subfolders -> 90% fill + a Full Power (100%) frame,
+   straight off the inherited --mv-item-accent from their top-level
+   parent above. Add a line here, same pattern, for any other
+   2nd-level subfolder added later. */
 .nav-folder-title[data-path="03 - Threats/01 - Monsters"],
 .nav-folder-title[data-path="03 - Threats/02 - Minions"],
 .nav-folder-title[data-path="03 - Threats/03 - Villain"],
-.nav-folder-title[data-path="03 - Threats/04 - Phenomena"] {
-	background-color: color-mix(in srgb, var(--mv-item-accent) 80%, var(--mv-void)) !important;
+.nav-folder-title[data-path="03 - Threats/04 - Phenomena"],
+.nav-folder-title[data-path="04 - NPCs/Recurring"],
+.nav-folder-title[data-path="04 - NPCs/Single Appearance"],
+.nav-folder-title[data-path="05 - Locations/Location 1"],
+.nav-folder-title[data-path="05 - Locations/Location 2"],
+.nav-folder-title[data-path="06 - References/Handouts"],
+.nav-folder-title[data-path="06 - References/Keeper Documents"],
+.nav-folder-title[data-path="06 - References/Player Documents"],
+.nav-folder-title[data-path="07 - Assets/Images"],
+.nav-folder-title[data-path="07 - Assets/Page Template"],
+.nav-folder-title[data-path="07 - Assets/Section Templates"] {
+	background-color: color-mix(in srgb, var(--mv-item-accent) 90%, var(--mv-void)) !important;
+	border: 1px solid var(--mv-item-accent) !important;
 }
 
 /* -- 6b. Top-level folders: solid Full Power fill (no color-mix — a
