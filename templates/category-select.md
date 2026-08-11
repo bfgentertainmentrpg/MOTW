@@ -7,20 +7,15 @@
    as a permanent live widget. Re-run this template any time to change
    a note's category later.
 
-   Threat and NPC are generic, top-level-folder options — use them for
-   a note filed directly in "03 - Threats" / "04 - NPCs" rather than
-   Monster/Minion/Villain/Phenomena or Recurring/One Time specifically. */
+   Simplified to just the 7 top-level-folder categories — Monster,
+   Minion, Villain, Phenomena, Recurring NPC, and One Time NPC were
+   eliminated; use Threat / NPC for any note that used to be one of
+   those sub-types. */
 const labels = [
     "Mystery",
     "Hunter",
     "Threat",
-    "Monster",
-    "Minion",
-    "Villain",
-    "Phenomena",
     "NPC",
-    "Recurring NPC",
-    "One Time NPC",
     "Location",
     "Reference",
     "Asset"
@@ -30,13 +25,7 @@ const values = [
     "mv-mystery",
     "mv-hunter",
     "mv-threat",
-    "mv-monster",
-    "mv-minion",
-    "mv-villain",
-    "mv-phenomena",
     "mv-npc",
-    "mv-recurring",
-    "mv-one-time",
     "mv-location",
     "mv-reference",
     "mv-asset"

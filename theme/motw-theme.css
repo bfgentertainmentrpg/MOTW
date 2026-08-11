@@ -124,124 +124,76 @@
 	/* -- Text -- */
 	--mv-text-secondary: #5C6B63;  /* Muted Slate Green — metadata, subtitles, secondary headings */
 	--mv-text-primary: #1F3038;    /* Deep Charcoal — default reading text on the light void/panel/navy layers */
-	--mv-text-on-fill: #F3F1EA;    /* Light text used specifically on a dark colored fill (table headers, category Dark tiers, buttons, callouts, top-level folder titles) — NOT the default reading color */
+	--mv-text-on-fill: #F3E7C9;    /* Cream, pulled from the Route 66 poster's sky/title tones. Used specifically on a dark colored fill (table headers, category Dark tiers, buttons, callouts, folder titles) — NOT the default reading color */
 
 	/* -- Borders, derived from the structure layer -- */
 	--mv-border: #C9C2AC;
 	--mv-border-strong: #A9A08A;
 
 	/* ===================== 2. CATEGORY TOKENS =========================
-	   Each category gets Core / Dark / Light. Core = the vault's
-	   authoritative hex (the full 13-color palette below). Dark/Light
-	   are derived by holding hue fixed and scaling saturation/lightness
-	   by the same ratios the doc's own Monster Core -> Dark/Light pair
-	   originally implied (Dark: S *0.58, L *0.317; Light: S *1.14,
-	   L *1.16) — this is lightness/saturation scaling of the SAME hue,
-	   not blending toward a different color, so it's consistent with
-	   "no fading, no blending" between categories. Core is always used
-	   as-given, verbatim; Dark exists purely as a fill dark enough to
-	   hold --mv-text-on-fill (light) text on top of it — unrelated to
-	   the page's own (now light) background.
+	   Simplified to just the 7 top-level-folder categories — Monster,
+	   Minion, Villain, Phenomena, Recurring, and One Time (the
+	   Threat/NPC sub-types) were eliminated per user's call to just
+	   stick with the top folder colors. Core = the vault's
+	   authoritative hex, pulled from the Route 66 poster reference
+	   (darker tones only). Dark/Light are derived by holding hue fixed
+	   and scaling saturation/lightness by the same ratios the doc's
+	   own original Monster Core -> Dark/Light pair implied (Dark:
+	   S *0.58, L *0.317; Light: S *1.14, L *1.16) — lightness/
+	   saturation scaling of the SAME hue, not blending toward a
+	   different color. Core is always used as-given, verbatim.
 
-	   Threat and NPC are generic, top-level-folder categories — used
-	   for a note filed directly in "03 - Threats" / "04 - NPCs" rather
-	   than one of their specific sub-types (Monster/Minion/Villain/
-	   Phenomena under Threats; Recurring/One Time under NPCs). */
+	   These are now the ONLY color source for both the sidebar folder
+	   system (section 6) and in-document category colors — the two
+	   were previously independent (folder color vs. cssclasses color
+	   could differ on purpose) but are unified again here: a category's
+	   folder color and its document heading color are the same Core
+	   value, "Full Power," always. */
 
-	/* Mystery — Deep Slate */
-	--mv-mystery-core: #1F3038;
-	--mv-mystery-dark: #0B0F10;
-	--mv-mystery-light: #223843;
-	--mv-mystery-core-rgb: 31, 48, 56;
+	/* Mystery — near-black cactus silhouette */
+	--mv-mystery-core: #1F1712;
+	--mv-mystery-dark: #090707;
+	--mv-mystery-light: #251A14;
+	--mv-mystery-core-rgb: 31, 23, 18;
 
-	/* Hunter — Slate Blue */
-	--mv-hunter-core: #30434B;
-	--mv-hunter-dark: #111516;
-	--mv-hunter-light: #354F59;
-	--mv-hunter-core-rgb: 48, 67, 75;
+	/* Hunter — deep slate blue (distant mountains) */
+	--mv-hunter-core: #2E4A57;
+	--mv-hunter-dark: #111619;
+	--mv-hunter-light: #325768;
+	--mv-hunter-core-rgb: 46, 74, 87;
 
-	/* Threat — Deep Burgundy (generic, top-level "03 - Threats" folder) */
-	--mv-threat-core: #4C181B;
-	--mv-threat-dark: #150B0C;
-	--mv-threat-light: #5C181C;
-	--mv-threat-core-rgb: 76, 24, 27;
+	/* Threat — deep maroon (desert ground). Generic, top-level
+	   "03 - Threats" folder — no more Monster/Minion/Villain/
+	   Phenomena sub-types. */
+	--mv-threat-core: #6B2331;
+	--mv-threat-dark: #1D1012;
+	--mv-threat-light: #822335;
+	--mv-threat-core-rgb: 107, 35, 49;
 
-	/* Monster — Dusty Teal (Threats sub-type) */
-	--mv-monster-core: #535E5D;
-	--mv-monster-dark: #1B1D1D;
-	--mv-monster-light: #5F6E6D;
-	--mv-monster-core-rgb: 83, 94, 93;
+	/* NPC — dark terracotta (mesa rock). Generic, top-level
+	   "04 - NPCs" folder — no more Recurring/One Time sub-types. */
+	--mv-npc-core: #8B4A3D;
+	--mv-npc-dark: #271B19;
+	--mv-npc-light: #A85240;
+	--mv-npc-core-rgb: 139, 74, 61;
 
-	/* Minion — Faded Crimson (Threats sub-type) */
-	--mv-minion-core: #7B1620;
-	--mv-minion-dark: #200E10;
-	--mv-minion-light: #97111F;
-	--mv-minion-core-rgb: 123, 22, 32;
+	/* Location — darker maroon shadow tone */
+	--mv-location-core: #4A1B26;
+	--mv-location-dark: #140C0E;
+	--mv-location-light: #5A1C2A;
+	--mv-location-core-rgb: 74, 27, 38;
 
-	/* Phenomena — Blue Gray (Threats sub-type) */
-	--mv-phenomena-core: #7F9293;
-	--mv-phenomena-dark: #292D2E;
-	--mv-phenomena-light: #96A7A8;
-	--mv-phenomena-core-rgb: 127, 146, 147;
+	/* Reference — deep teal (car body, darkened) */
+	--mv-reference-core: #1F4D4E;
+	--mv-reference-dark: #0D1516;
+	--mv-reference-light: #205D5E;
+	--mv-reference-core-rgb: 31, 77, 78;
 
-	/* Villain — Dusty Rose (Threats sub-type) */
-	--mv-villain-core: #DB9593;
-	--mv-villain-dark: #4B2A29;
-	--mv-villain-light: #EDBDBC;
-	--mv-villain-core-rgb: 219, 149, 147;
-
-	/* NPC — Sage Gray (generic, top-level "04 - NPCs" folder) */
-	--mv-npc-core: #6E7774;
-	--mv-npc-dark: #232525;
-	--mv-npc-light: #7F8A87;
-	--mv-npc-core-rgb: 110, 119, 116;
-
-	/* Recurring — Muted Green (NPC sub-type) */
-	--mv-recurring-core: #7F8F7D;
-	--mv-recurring-dark: #292C29;
-	--mv-recurring-light: #95A493;
-	--mv-recurring-core-rgb: 127, 143, 125;
-
-	/* One Time — Warm Tan (NPC sub-type) */
-	--mv-one-time-core: #A9A293;
-	--mv-one-time-dark: #35332F;
-	--mv-one-time-light: #C1BBAE;
-	--mv-one-time-core-rgb: 169, 162, 147;
-
-	/* Location — Weathered Brown */
-	--mv-location-core: #82644F;
-	--mv-location-dark: #26201C;
-	--mv-location-light: #9B7357;
-	--mv-location-core-rgb: 130, 100, 79;
-
-	/* Reference — Warm Stone */
-	--mv-reference-core: #C2BEAC;
-	--mv-reference-dark: #3F3D35;
-	--mv-reference-light: #DCD9CD;
-	--mv-reference-core-rgb: 194, 190, 172;
-
-	/* Asset — Aged Cream */
-	--mv-asset-core: #E1DFCF;
-	--mv-asset-dark: #4E4C3B;
-	--mv-asset-light: #FCFBF9;
-	--mv-asset-core-rgb: 225, 223, 207;
-
-	/* Threats — Teal. Moved off the Monster-crimson family entirely (and,
-	   as of this pass, off purple too — purple now belongs to Mystery)
-	   onto its own identity. Two tiers, since one faded value can't
-	   satisfy both jobs at once:
-	     --mv-threat-header: the fill color (Dark tier) — muted, matching
-	       the weight of every other top-level folder's fill.
-	     --mv-threat-vivid: the Core tier, kept bright for anything that
-	       needs to stay legible as text on the dark sidebar (file names,
-	       the top-level accent stripe) rather than fill a background —
-	       faded backgrounds work because Alabaster/bold text sits on top
-	       of them, but plain colored file text has no such help.
-	   Section 6a fades both, in the same order (Monsters 90%, Minions
-	   80%, Villain 70%, Phenomena 60%, each 10 points below the last),
-	   just toward their own respective 100% reference. */
-	--mv-threat-header: #1A2D2D;
-	--mv-threat-vivid: #3AA6A6;
+	/* Asset — dark amber/gold (sunset sky, darkened) */
+	--mv-asset-core: #7A5220;
+	--mv-asset-dark: #211910;
+	--mv-asset-light: #95601E;
+	--mv-asset-core-rgb: 122, 82, 32;
 
 	/* -- Typography --
 	   Named commercial fonts, not web fonts — this snippet has no font
@@ -552,82 +504,6 @@ progress {
 	margin-right: auto !important;
 }
 
-/* ================= 4. CATEGORY: MONSTER (worked example) =============
-   Apply by adding `cssclasses: mv-monster` to a note's frontmatter. That
-   class lands on the note's view container in both Live Preview and
-   Reading mode, which is what the selectors below target. */
-
-.mv-monster { --mv-note-accent: var(--mv-monster-core); --mv-note-accent-dark: var(--mv-monster-dark); }
-.mv-monster h1,
-.mv-monster h2,
-.mv-monster h3,
-.mv-monster h4,
-.mv-monster h5,
-.mv-monster h6,
-.mv-monster .HyperMD-header-1 {
-	color: var(--mv-monster-core) !important;
-}
-
-.mv-monster hr,
-.mv-monster .cm-hr {
-	border-top-color: var(--mv-monster-core) !important;
-	opacity: 0.6;
-}
-
-
-/* Header-table label column: dark Monster fill, Alabaster value text
-   (see doc section 22 — the "NAME / TYPE / MOTIVATION" example table) */
-.mv-monster table:not(.move-table):not(.gear-table) th,
-.mv-monster table:not(.move-table):not(.gear-table) td:first-child {
-	background-color: var(--mv-monster-dark) !important;
-	color: var(--mv-text-on-fill) !important;
-}
-
-.mv-monster table:not(.move-table):not(.gear-table) td:not(:first-child) {
-	background-color: var(--mv-panel) !important;
-}
-
-/* Monster callout: dark Monster background, Monster border/title */
-.callout[data-callout="monster"] {
-	--callout-color: var(--mv-monster-core-rgb);
-	--callout-bg: var(--mv-monster-dark);
-}
-
-/* Monster-specific action button, e.g. inside a Monster template.
-   Selector includes the `button` element to match the specificity of the
-   global button rule in section 3, so this override actually wins. */
-button.mv-monster-btn {
-	background-color: var(--mv-monster-dark) !important;
-	color: var(--mv-text-on-fill) !important;
-	border: 1px solid var(--mv-monster-core) !important;
-	border-radius: var(--mv-radius-inner);
-}
-
-button.mv-monster-btn:hover {
-	background-color: var(--mv-monster-core) !important;
-	color: var(--mv-void) !important;
-}
-
-/* Monster threat meter (category-specific, per doc section 26) */
-.mv-monster .progress-bar-line {
-	accent-color: var(--mv-monster-core);
-}
-
-/* ================= 4B. CATEGORY: MINION ==================================
-   Curry/Mustard (Pantone 124 C). Originally shared its core/dark
-   tokens with the NPC sub-categories (Recurring/Single Appearance) —
-   now decoupled (see --mv-npc-core/-dark, section 1) so changing
-   Minion's color doesn't silently drag NPC's color along with it. */
-.mv-minion { --mv-note-accent: var(--mv-minion-core); --mv-note-accent-dark: var(--mv-minion-dark); }
-.mv-minion h1, .mv-minion h2, .mv-minion h3, .mv-minion h4, .mv-minion h5, .mv-minion h6,
-.mv-minion .HyperMD-header-1 { color: var(--mv-minion-core) !important; }
-.mv-minion hr, .mv-minion .cm-hr { border-top-color: var(--mv-minion-core) !important; opacity: 0.6; }
-.mv-minion table:not(.move-table):not(.gear-table) th, .mv-minion table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-minion-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-minion table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="minion"] { --callout-color: var(--mv-minion-core-rgb); --callout-bg: var(--mv-minion-dark); }
-button.mv-minion-btn { background-color: var(--mv-minion-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-minion-core) !important; border-radius: var(--mv-radius-inner); }
-button.mv-minion-btn:hover { background-color: var(--mv-minion-core) !important; color: var(--mv-void) !important; }
-
 /* ================= 5. CATEGORY: LOCATION (worked example) ============ */
 
 .mv-location { --mv-note-accent: var(--mv-location-core); --mv-note-accent-dark: var(--mv-location-dark); }
@@ -739,57 +615,6 @@ button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; c
 button.mv-threat-btn { background-color: var(--mv-threat-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-threat-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-threat-btn:hover { background-color: var(--mv-threat-core) !important; color: var(--mv-void) !important; }
 
-/* ================= 5E. THREATS SUB-CATEGORIES ==========================
-   Monsters/Minions (plural — the Threats folder sub-types), still
-   fading from --mv-threat-vivid/-header as before. Villain and
-   Phenomena used to live here too but are now standalone flat-color
-   categories below (5E2/5E3) — no fading, no blending, per user's
-   explicit call: each gets its own fixed Pantone hex, not a
-   percentage of the shared Threat teal.
-   Note: these are deliberately NOT named .mv-monster — that class
-   already exists above as a standalone crimson identity from before
-   Threats had its own teal palette. .mv-monsters (plural) is the
-   Threats/01 - Monsters folder's actual color; .mv-monster (singular)
-   is a separate, older "monster stat block" style. Don't confuse the
-   two when tagging a note. */
-.mv-monsters { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)); }
-.mv-monsters h1, .mv-monsters h2, .mv-monsters h3, .mv-monsters h4, .mv-monsters h5, .mv-monsters h6,
-.mv-monsters .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; }
-.mv-monsters hr, .mv-monsters .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 90%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-monsters table:not(.move-table):not(.gear-table) th, .mv-monsters table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 90%, var(--mv-void)) !important; color: var(--mv-text-on-fill) !important; }
-.mv-monsters table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.mv-minions { --mv-note-accent: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)); --mv-note-accent-dark: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)); }
-.mv-minions h1, .mv-minions h2, .mv-minions h3, .mv-minions h4, .mv-minions h5, .mv-minions h6,
-.mv-minions .HyperMD-header-1 { color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; }
-.mv-minions hr, .mv-minions .cm-hr { border-top-color: color-mix(in srgb, var(--mv-threat-vivid) 80%, var(--mv-void)) !important; opacity: 0.6; }
-.mv-minions table:not(.move-table):not(.gear-table) th, .mv-minions table:not(.move-table):not(.gear-table) td:first-child { background-color: color-mix(in srgb, var(--mv-threat-header) 80%, var(--mv-void)) !important; color: var(--mv-text-on-fill) !important; }
-.mv-minions table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-
-/* ================= 5E2. CATEGORY: VILLAIN ================================
-   Violet Intense (Pantone 2597) — flat, standalone. No color-mix, no
-   fade off --mv-threat-vivid; --mv-villain-core/-dark are fixed hex. */
-.mv-villain { --mv-note-accent: var(--mv-villain-core); --mv-note-accent-dark: var(--mv-villain-dark); }
-.mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6,
-.mv-villain .HyperMD-header-1 { color: var(--mv-villain-core) !important; }
-.mv-villain hr, .mv-villain .cm-hr { border-top-color: var(--mv-villain-core) !important; opacity: 0.6; }
-.mv-villain table:not(.move-table):not(.gear-table) th, .mv-villain table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-villain-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-villain table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="villain"] { --callout-color: var(--mv-villain-core-rgb); --callout-bg: var(--mv-villain-dark); }
-button.mv-villain-btn { background-color: var(--mv-villain-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-villain-core) !important; border-radius: var(--mv-radius-inner); }
-button.mv-villain-btn:hover { background-color: var(--mv-villain-core) !important; color: var(--mv-void) !important; }
-
-/* ================= 5E3. CATEGORY: PHENOMENA ===============================
-   Magenta (Pantone 235) — flat, standalone. No color-mix, no fade off
-   --mv-threat-vivid; --mv-phenomena-core/-dark are fixed hex. */
-.mv-phenomena { --mv-note-accent: var(--mv-phenomena-core); --mv-note-accent-dark: var(--mv-phenomena-dark); }
-.mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6,
-.mv-phenomena .HyperMD-header-1 { color: var(--mv-phenomena-core) !important; }
-.mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: var(--mv-phenomena-core) !important; opacity: 0.6; }
-.mv-phenomena table:not(.move-table):not(.gear-table) th, .mv-phenomena table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-phenomena-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-phenomena table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="phenomena"] { --callout-color: var(--mv-phenomena-core-rgb); --callout-bg: var(--mv-phenomena-dark); }
-button.mv-phenomena-btn { background-color: var(--mv-phenomena-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-phenomena-core) !important; border-radius: var(--mv-radius-inner); }
-button.mv-phenomena-btn:hover { background-color: var(--mv-phenomena-core) !important; color: var(--mv-void) !important; }
 /* ================= 5F. CATEGORY: NPC ======================================
    Sage Gray — generic, top-level "04 - NPCs" folder. Flat, standalone —
    no fading, no blending. Recurring/One Time (5F2/5F3) are its two
@@ -804,113 +629,62 @@ button.mv-phenomena-btn:hover { background-color: var(--mv-phenomena-core) !impo
 button.mv-npc-btn { background-color: var(--mv-npc-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-npc-core) !important; border-radius: var(--mv-radius-inner); }
 button.mv-npc-btn:hover { background-color: var(--mv-npc-core) !important; color: var(--mv-void) !important; }
 
-/* ================= 5F2. CATEGORY: RECURRING NPC ===========================
-   Muted Green — NPC sub-type. Flat, standalone. */
-.mv-recurring { --mv-note-accent: var(--mv-recurring-core); --mv-note-accent-dark: var(--mv-recurring-dark); }
-.mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6,
-.mv-recurring .HyperMD-header-1 { color: var(--mv-recurring-core) !important; }
-.mv-recurring hr, .mv-recurring .cm-hr { border-top-color: var(--mv-recurring-core) !important; opacity: 0.6; }
-.mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-recurring-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-recurring table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="recurring"] { --callout-color: var(--mv-recurring-core-rgb); --callout-bg: var(--mv-recurring-dark); }
-button.mv-recurring-btn { background-color: var(--mv-recurring-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-recurring-core) !important; border-radius: var(--mv-radius-inner); }
-button.mv-recurring-btn:hover { background-color: var(--mv-recurring-core) !important; color: var(--mv-void) !important; }
-
-/* ================= 5F3. CATEGORY: ONE TIME NPC ============================
-   Warm Tan — NPC sub-type. Flat, standalone. Renamed from
-   .mv-single-appearance — update any notes/templates still tagged
-   with the old class name. */
-.mv-one-time { --mv-note-accent: var(--mv-one-time-core); --mv-note-accent-dark: var(--mv-one-time-dark); }
-.mv-one-time h1, .mv-one-time h2, .mv-one-time h3, .mv-one-time h4, .mv-one-time h5, .mv-one-time h6,
-.mv-one-time .HyperMD-header-1 { color: var(--mv-one-time-core) !important; }
-.mv-one-time hr, .mv-one-time .cm-hr { border-top-color: var(--mv-one-time-core) !important; opacity: 0.6; }
-.mv-one-time table:not(.move-table):not(.gear-table) th, .mv-one-time table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-one-time-dark) !important; color: var(--mv-text-on-fill) !important; }
-.mv-one-time table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
-.callout[data-callout="one-time"] { --callout-color: var(--mv-one-time-core-rgb); --callout-bg: var(--mv-one-time-dark); }
-button.mv-one-time-btn { background-color: var(--mv-one-time-dark) !important; color: var(--mv-text-on-fill) !important; border: 1px solid var(--mv-one-time-core) !important; border-radius: var(--mv-radius-inner); }
-button.mv-one-time-btn:hover { background-color: var(--mv-one-time-core) !important; color: var(--mv-void) !important; }
 /* ================= 6. FOLDER & FILE COLORS (sidebar index) ============
-   Category is assigned once per branch, then cascades to every subfolder
-   and file inside it automatically via a CSS custom property — no need
-   to list every nested path individually. Depth then decides how the
-   color is *expressed*:
+   Simplified to a uniform depth-based system, all 7 colors pulled
+   straight from section 2's category tokens (no more separate
+   --mv-folder-* palette — folder color and document heading color are
+   unified now):
 
-     Top-level folder  -> solid category background, bold Alabaster text
-     Subfolder         -> bold category-colored text, no frame
-     File (leaf item)  -> full category-colored text, not bold
+     Top-level folder (e.g. "03 - Threats")            -> Full Power
+                                                           (100%, the
+                                                           Core hex,
+                                                           solid)
+     2nd-level subfolder (e.g. ".../01 - Monsters")      -> 80%
+                                                           (color-mix
+                                                           toward void)
+     3rd-level and deeper (generic default, any path
+     not explicitly listed above)                        -> 65%
+     Document (a note's own heading text, via cssclasses) -> Full Power,
+                                                            always,
+                                                            regardless
+                                                            of the
+                                                            note's
+                                                            actual
+                                                            folder depth
 
    Update the data-path values below to match your actual vault folder
    names — Obsidian stamps the vault-relative path onto .nav-folder-title
    / .nav-file-title as data-path, exact and case-sensitive. */
 
-/* -- Folder palette — intentionally SEPARATE from the mv- category
-   tokens used above for in-document heading/table colors, so a
-   folder's sidebar color and a note's heading color can differ on
-   purpose (folder color = where the note lives; mv- category = what
-   cssclasses tag the note itself carries). 10 colors were supplied
-   for a 7-folder vault; the 7 are assigned below in sidebar order,
-   the remaining 3 (#3B82F6, #2563EB, #1D4ED8) are reserved, unused,
-   for folders added later. -- */
-:root {
-	--mv-folder-mysteries: #6B21A8;
-	--mv-folder-hunters: #8B5CF6;
-	--mv-folder-threats: #A78BFA;
-	--mv-folder-npcs: #D946EF;
-	--mv-folder-locations: #EC4899;
-	--mv-folder-references: #F472B6;
-	--mv-folder-assets: #60A5FA;
+/* -- 6a. Assign a folder's Full Power color per top-level branch,
+   straight from its category Core token. `:has()` reads it off the
+   folder's own title, then --mv-item-accent cascades down into every
+   child folder/file — that's what makes 2nd/3rd-level depth-fading
+   below possible without re-declaring the base color each time. -- */
+.nav-folder:has(> .nav-folder-title[data-path="01 - Mysteries"]) { --mv-item-accent: var(--mv-mystery-core); }
+.nav-folder:has(> .nav-folder-title[data-path="02 - Hunters"]) { --mv-item-accent: var(--mv-hunter-core); }
+.nav-folder:has(> .nav-folder-title[data-path="03 - Threats"]) { --mv-item-accent: var(--mv-threat-core); }
+.nav-folder:has(> .nav-folder-title[data-path="04 - NPCs"]) { --mv-item-accent: var(--mv-npc-core); }
+.nav-folder:has(> .nav-folder-title[data-path="05 - Locations"]) { --mv-item-accent: var(--mv-location-core); }
+.nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-reference-core); }
+.nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-asset-core); }
 
-	/* Threats' subfolders fade from this Dark tier (see below), the
-	   same two-tier structure the old --mv-threat-vivid/-header pair
-	   used — a stable token rather than repeating the color-mix at
-	   every fade step. */
-	--mv-folder-threats-dark: color-mix(in srgb, var(--mv-folder-threats) 30%, var(--mv-void));
+/* Known 2nd-level subfolders (Threats' four) -> 80%, straight off the
+   inherited --mv-item-accent from their top-level parent above. Add a
+   line here, same pattern, for any other 2nd-level subfolder. */
+.nav-folder-title[data-path="03 - Threats/01 - Monsters"],
+.nav-folder-title[data-path="03 - Threats/02 - Minions"],
+.nav-folder-title[data-path="03 - Threats/03 - Villain"],
+.nav-folder-title[data-path="03 - Threats/04 - Phenomena"] {
+	background-color: color-mix(in srgb, var(--mv-item-accent) 80%, var(--mv-void)) !important;
 }
 
-/* -- 6a. Assign a folder color per branch. `:has()` reads the color
-   off the folder's own title, then the resulting custom properties
-   inherit down into every child folder/file — that's what makes the
-   cascade automatic. Two properties per folder: --mv-item-accent
-   (Core — used for text/borders/stripes) and --mv-item-accent-dark
-   (Dark — used anywhere a folder color fills a background). -- */
-.nav-folder:has(> .nav-folder-title[data-path="01 - Mysteries"]) { --mv-item-accent: var(--mv-folder-mysteries); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-mysteries) 30%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="02 - Hunters"]) { --mv-item-accent: var(--mv-folder-hunters); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-hunters) 30%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats"]) { --mv-item-accent: var(--mv-folder-threats); --mv-item-accent-dark: var(--mv-folder-threats-dark); }
-.nav-folder:has(> .nav-folder-title[data-path="04 - NPCs"]) { --mv-item-accent: var(--mv-folder-npcs); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-npcs) 30%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="05 - Locations"]) { --mv-item-accent: var(--mv-folder-locations); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-locations) 30%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="06 - References"]) { --mv-item-accent: var(--mv-folder-references); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-references) 30%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="07 - Assets"]) { --mv-item-accent: var(--mv-folder-assets); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-assets) 30%, var(--mv-void)); }
-
-/* Subtree overrides: a folder can claim its own color even though its
-   parent branch is colored differently — everything beneath *this*
-   folder then inherits the override instead of the parent's color.
-
-   Threats' four subfolders step down 10 points at a time, in this
-   specific order, each one 10% less than the one before it, blended
-   toward Void — but text (--mv-item-accent) fades from the bright
-   --mv-folder-threats while the background (--mv-item-accent-dark)
-   fades from the muted --mv-folder-threats-dark, so file names stay
-   legible while the fills stay in balance with Mysteries/Hunters:
-     01 - Monsters   -> 90%
-     02 - Minions    -> 80%
-     03 - Villain     -> 70%
-     04 - Phenomena  -> 60%
-   Paths match the numbered folder names actually in the vault. */
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/01 - Monsters"]) { --mv-item-accent: color-mix(in srgb, var(--mv-folder-threats) 90%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-threats-dark) 90%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/02 - Minions"]) { --mv-item-accent: color-mix(in srgb, var(--mv-folder-threats) 80%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-threats-dark) 80%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/03 - Villain"]) { --mv-item-accent: color-mix(in srgb, var(--mv-folder-threats) 70%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-threats-dark) 70%, var(--mv-void)); }
-.nav-folder:has(> .nav-folder-title[data-path="03 - Threats/04 - Phenomena"]) { --mv-item-accent: color-mix(in srgb, var(--mv-folder-threats) 60%, var(--mv-void)); --mv-item-accent-dark: color-mix(in srgb, var(--mv-folder-threats-dark) 60%, var(--mv-void)); }
-
-/* -- 6b. Subfolder styling (the default for any folder title): the
-   category's Dark tier, muted FURTHER — 65% of it blended toward Void —
-   so depth actually reads as depth: top-level is "brightest but muted"
-   (the Dark tier, full strength), every subfolder below it is more
-   muted still. This is what was missing for every category except
-   Threats, which had its own hand-tuned fade but nothing generic drove
-   the other six. Bold Alabaster text, no frame. -- */
-.nav-folder-title {
+/* -- 6b. Top-level folders: solid Full Power fill (no color-mix — a
+   top-level background always uses the category's Core straight) +
+   cream text. -- */
+.nav-folder-title:not([data-path*="/"]) {
+	background-color: var(--mv-item-accent, var(--mv-navy));
 	border: none;
-	background-color: color-mix(in srgb, var(--mv-item-accent-dark, var(--mv-navy)) 65%, var(--mv-void));
 	color: var(--mv-text-on-fill) !important;
 	font-family: var(--mv-font-header) !important;
 	font-weight: 700;
@@ -918,32 +692,18 @@ button.mv-one-time-btn:hover { background-color: var(--mv-one-time-core) !import
 	padding: 0.1em 0.5em;
 }
 
-/* Threats' four subfolders already carry their own hand-tuned fade step
-   in --mv-item-accent-dark (set above) — apply it directly rather than
-   letting 6b's generic 65%-further-muting apply on top of it, which
-   would double-mute them. The attribute selector outranks 6b's bare
-   .nav-folder-title on specificity. */
-.nav-folder-title[data-path="03 - Threats/01 - Monsters"],
-.nav-folder-title[data-path="03 - Threats/02 - Minions"],
-.nav-folder-title[data-path="03 - Threats/03 - Villain"],
-.nav-folder-title[data-path="03 - Threats/04 - Phenomena"] {
-	background-color: var(--mv-item-accent-dark);
-}
-
-/* -- 6c. Top-level folders override 6b: solid, full-opacity category Dark
-   fill (no color-mix blend — a background always uses the category's Dark
-   tier straight) + a slim, blended left accent stripe (unchanged — this
-   is a border, not a background) + bold Alabaster text. "Top-level" is
-   read straight off data-path rather than assumed DOM nesting (Obsidian's
-   file-explorer markup doesn't reliably expose a `.mod-root >
-   .nav-folder-children` chain to select against) — a top-level folder's
-   path has no "/" in it, any subfolder's does. -- */
-.nav-folder-title:not([data-path*="/"]) {
-	background-color: var(--mv-item-accent-dark, var(--mv-navy));
-	border: 1px solid transparent;
-	border-left: 3px solid color-mix(in srgb, var(--mv-item-accent, var(--mv-cyan)) 65%, var(--mv-void));
+/* -- 6c. Generic default for every other folder title (3rd-level and
+   deeper, or any 2nd-level folder not explicitly listed in 6a) -> 65%.
+   The 2nd-level override above (specific data-path, higher specificity)
+   wins over this bare-class default wherever both could apply. -- */
+.nav-folder-title {
+	border: none;
+	background-color: color-mix(in srgb, var(--mv-item-accent, var(--mv-navy)) 65%, var(--mv-void));
 	color: var(--mv-text-on-fill) !important;
+	font-family: var(--mv-font-header) !important;
 	font-weight: 700;
+	font-size: 16px !important;
+	padding: 0.1em 0.5em;
 }
 
 /* -- 6d. Documents (files): Alabaster, same as every other row in the
@@ -964,23 +724,3 @@ button.mv-one-time-btn:hover { background-color: var(--mv-one-time-core) !import
 	--indentation-guide-color: transparent;
 }
 
-/* =============== 7. REMAINING CATEGORIES — TOKENS + NEXT STEPS ========
-   Minion, Hunter, Mystery, Reference, and Asset have their Core/Dark/
-   Light tokens defined in section 2 and their folder color wired in
-   section 6, but no worked-out heading/table/callout/button block yet.
-
-   To add one, copy the MONSTER block in section 4 and do a find/replace:
-     .mv-monster        -> .mv-<category>
-     --mv-monster-core   -> --mv-<category>-core
-     --mv-monster-dark   -> --mv-<category>-dark
-     --mv-monster-core-rgb -> --mv-<category>-core-rgb (add the RGB triplet
-                              to section 2 first, same as Monster/Location)
-     data-callout="monster" -> data-callout="<category>"
-
-   RGB triplets for the remaining categories, if/when a callout needs one:
-     Minion    (160, 124, 197)
-     Hunter    (91, 143, 209)
-     Mystery   (140, 76, 31)
-     Reference (120, 144, 156)
-     Asset     (107, 170, 122)
-== */
