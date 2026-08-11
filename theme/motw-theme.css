@@ -552,7 +552,7 @@ progress {
 .mv-location h6,
 .mv-location .HyperMD-header-1,
 .mv-location .inline-title {
-	color: var(--mv-location-core) !important;
+	color: var(--mv-location-folder) !important;
 }
 
 .mv-location hr,
@@ -593,7 +593,7 @@ button.mv-location-btn:hover {
    Apply with `cssclasses: mv-mystery`. Same pattern as Monster/Location. */
 .mv-mystery { --mv-note-accent: var(--mv-mystery-core); --mv-note-accent-dark: var(--mv-mystery-dark); }
 .mv-mystery h1, .mv-mystery h2, .mv-mystery h3, .mv-mystery h4, .mv-mystery h5, .mv-mystery h6,
-.mv-mystery .HyperMD-header-1, .mv-mystery .inline-title { color: var(--mv-mystery-core) !important; }
+.mv-mystery .HyperMD-header-1, .mv-mystery .inline-title { color: var(--mv-mystery-folder) !important; }
 .mv-mystery hr, .mv-mystery .cm-hr { border-top-color: var(--mv-mystery-core) !important; opacity: 0.6; }
 .mv-mystery table:not(.move-table):not(.gear-table) th, .mv-mystery table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-mystery-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-mystery table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -604,7 +604,7 @@ button.mv-mystery-btn:hover { background-color: var(--mv-mystery-core) !importan
 /* ================= 5C. CATEGORY: HUNTER =============================== */
 .mv-hunter { --mv-note-accent: var(--mv-hunter-core); --mv-note-accent-dark: var(--mv-hunter-dark); }
 .mv-hunter h1, .mv-hunter h2, .mv-hunter h3, .mv-hunter h4, .mv-hunter h5, .mv-hunter h6,
-.mv-hunter .HyperMD-header-1, .mv-hunter .inline-title { color: var(--mv-hunter-core) !important; }
+.mv-hunter .HyperMD-header-1, .mv-hunter .inline-title { color: var(--mv-hunter-folder) !important; }
 .mv-hunter hr, .mv-hunter .cm-hr { border-top-color: var(--mv-hunter-core) !important; opacity: 0.6; }
 .mv-hunter table:not(.move-table):not(.gear-table) th, .mv-hunter table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-hunter-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-hunter table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -615,7 +615,7 @@ button.mv-hunter-btn:hover { background-color: var(--mv-hunter-core) !important;
 /* ================= 5D. CATEGORY: REFERENCE ============================= */
 .mv-reference { --mv-note-accent: var(--mv-reference-core); --mv-note-accent-dark: var(--mv-reference-dark); }
 .mv-reference h1, .mv-reference h2, .mv-reference h3, .mv-reference h4, .mv-reference h5, .mv-reference h6,
-.mv-reference .HyperMD-header-1, .mv-reference .inline-title { color: var(--mv-reference-core) !important; }
+.mv-reference .HyperMD-header-1, .mv-reference .inline-title { color: var(--mv-reference-folder) !important; }
 .mv-reference hr, .mv-reference .cm-hr { border-top-color: var(--mv-reference-core) !important; opacity: 0.6; }
 .mv-reference table:not(.move-table):not(.gear-table) th, .mv-reference table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-reference-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-reference table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -630,7 +630,7 @@ button.mv-reference-btn:hover { background-color: var(--mv-reference-core) !impo
    real, selectable cssclasses value. */
 .mv-asset { --mv-note-accent: var(--mv-asset-core); --mv-note-accent-dark: var(--mv-asset-dark); }
 .mv-asset h1, .mv-asset h2, .mv-asset h3, .mv-asset h4, .mv-asset h5, .mv-asset h6,
-.mv-asset .HyperMD-header-1, .mv-asset .inline-title { color: var(--mv-asset-core) !important; }
+.mv-asset .HyperMD-header-1, .mv-asset .inline-title { color: var(--mv-asset-folder) !important; }
 .mv-asset hr, .mv-asset .cm-hr { border-top-color: var(--mv-asset-core) !important; opacity: 0.6; }
 .mv-asset table:not(.move-table):not(.gear-table) th, .mv-asset table:not(.move-table):not(.gear-table) td:first-child { background-color: var(--mv-asset-dark) !important; color: var(--mv-text-on-fill) !important; }
 .mv-asset table:not(.move-table):not(.gear-table) td:not(:first-child) { background-color: var(--mv-panel) !important; }
@@ -654,7 +654,7 @@ button.mv-asset-btn:hover { background-color: var(--mv-asset-core) !important; c
 .mv-minion h1, .mv-minion h2, .mv-minion h3, .mv-minion h4, .mv-minion h5, .mv-minion h6, .mv-minion .HyperMD-header-1, .mv-minion .inline-title,
 .mv-minions h1, .mv-minions h2, .mv-minions h3, .mv-minions h4, .mv-minions h5, .mv-minions h6, .mv-minions .HyperMD-header-1, .mv-minions .inline-title,
 .mv-villain h1, .mv-villain h2, .mv-villain h3, .mv-villain h4, .mv-villain h5, .mv-villain h6, .mv-villain .HyperMD-header-1, .mv-villain .inline-title,
-.mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6, .mv-phenomena .HyperMD-header-1, .mv-phenomena .inline-title { color: var(--mv-threat-core) !important; }
+.mv-phenomena h1, .mv-phenomena h2, .mv-phenomena h3, .mv-phenomena h4, .mv-phenomena h5, .mv-phenomena h6, .mv-phenomena .HyperMD-header-1, .mv-phenomena .inline-title { color: var(--mv-threat-folder) !important; }
 .mv-threat hr, .mv-threat .cm-hr, .mv-monster hr, .mv-monster .cm-hr, .mv-monsters hr, .mv-monsters .cm-hr, .mv-minion hr, .mv-minion .cm-hr, .mv-minions hr, .mv-minions .cm-hr, .mv-villain hr, .mv-villain .cm-hr, .mv-phenomena hr, .mv-phenomena .cm-hr { border-top-color: var(--mv-threat-core) !important; opacity: 0.6; }
 .mv-threat table:not(.move-table):not(.gear-table) th, .mv-threat table:not(.move-table):not(.gear-table) td:first-child,
 .mv-monster table:not(.move-table):not(.gear-table) th, .mv-monster table:not(.move-table):not(.gear-table) td:first-child,
@@ -685,7 +685,7 @@ button.mv-threat-btn:hover { background-color: var(--mv-threat-core) !important;
 .mv-npc h1, .mv-npc h2, .mv-npc h3, .mv-npc h4, .mv-npc h5, .mv-npc h6, .mv-npc .HyperMD-header-1, .mv-npc .inline-title,
 .mv-recurring h1, .mv-recurring h2, .mv-recurring h3, .mv-recurring h4, .mv-recurring h5, .mv-recurring h6, .mv-recurring .HyperMD-header-1, .mv-recurring .inline-title,
 .mv-single-appearance h1, .mv-single-appearance h2, .mv-single-appearance h3, .mv-single-appearance h4, .mv-single-appearance h5, .mv-single-appearance h6, .mv-single-appearance .HyperMD-header-1, .mv-single-appearance .inline-title,
-.mv-one-time h1, .mv-one-time h2, .mv-one-time h3, .mv-one-time h4, .mv-one-time h5, .mv-one-time h6, .mv-one-time .HyperMD-header-1, .mv-one-time .inline-title { color: var(--mv-npc-core) !important; }
+.mv-one-time h1, .mv-one-time h2, .mv-one-time h3, .mv-one-time h4, .mv-one-time h5, .mv-one-time h6, .mv-one-time .HyperMD-header-1, .mv-one-time .inline-title { color: var(--mv-npc-folder) !important; }
 .mv-npc hr, .mv-npc .cm-hr, .mv-recurring hr, .mv-recurring .cm-hr, .mv-single-appearance hr, .mv-single-appearance .cm-hr, .mv-one-time hr, .mv-one-time .cm-hr { border-top-color: var(--mv-npc-core) !important; opacity: 0.6; }
 .mv-npc table:not(.move-table):not(.gear-table) th, .mv-npc table:not(.move-table):not(.gear-table) td:first-child,
 .mv-recurring table:not(.move-table):not(.gear-table) th, .mv-recurring table:not(.move-table):not(.gear-table) td:first-child,
