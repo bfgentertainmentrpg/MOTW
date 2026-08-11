@@ -68,7 +68,7 @@
 .mb-button.harm-harm-button > button {
     min-height: 36px !important;
 
-    color: var(--mv-text-primary) !important;
+    color: var(--mv-text-on-fill) !important;
 
     font-family: var(--font-interface) !important;
     font-size: 0.78em !important;
@@ -94,13 +94,13 @@
 .mb-button.harm-heal-button > button {
     background-color: #4E6750 !important;
     border: 1px solid #4E6750 !important;
-    color: var(--mv-text-primary) !important;
+    color: var(--mv-text-on-fill) !important;
 }
 
 .mb-button.harm-heal-button > button:hover {
     background-color: #5B765D !important;
     border-color: #5B765D !important;
-    color: var(--mv-text-primary) !important;
+    color: var(--mv-text-on-fill) !important;
 }
 
 /* =========================================
@@ -110,13 +110,13 @@
 .mb-button.harm-harm-button > button {
     background-color: #773F3F !important;
     border: 1px solid #773F3F !important;
-    color: var(--mv-text-primary) !important;
+    color: var(--mv-text-on-fill) !important;
 }
 
 .mb-button.harm-harm-button > button:hover {
     background-color: #894A4A !important;
     border-color: #894A4A !important;
-    color: var(--mv-text-primary) !important;
+    color: var(--mv-text-on-fill) !important;
 }
 
 /* =========================================
@@ -230,7 +230,7 @@
 
     transform: translateY(-50%);
 
-    color: var(--mv-text-primary) !important;
+    color: var(--mv-text-on-fill) !important;
 
     pointer-events: none;
     z-index: 3;

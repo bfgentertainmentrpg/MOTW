@@ -166,7 +166,7 @@ table.move-table td * {
 
 table.move-table thead th {
     background-color: var(--mv-note-accent-dark) !important;
-    color: var(--move-text) !important;
+    color: var(--mv-text-on-fill) !important;
 
     border: none !important;
 
@@ -190,7 +190,7 @@ table.move-table td:first-child {
     white-space: nowrap;
 
     background-color: var(--mv-note-accent-dark) !important;
-    color: var(--move-text) !important;
+    color: var(--mv-text-on-fill) !important;
 
     font-weight: 600;
 

@@ -102,7 +102,7 @@
         var(--mv-note-accent-dark) !important;
 
     color:
-        var(--mv-text-primary) !important;
+        var(--mv-text-on-fill) !important;
 
     font-weight: 700 !important;
 
