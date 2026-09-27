@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MotW Campaign Keeper</title>
+  <link rel="stylesheet" href="app/styles.css">
+</head>
+<body>
+  <aside id="sidebar">
+    <div class="brand">🔦 Campaign Keeper</div>
+    <select id="campaign-select" aria-label="Campaign"></select>
+    <input id="search" type="search" placeholder="Search… (Enter)" aria-label="Search">
+    <nav id="nav"></nav>
+    <div class="io">
+      <button id="export" title="Download this campaign as a JSON file">⬇ Export</button>
+      <button id="import" title="Load a campaign JSON file">⬆ Import</button>
+      <input id="import-file" type="file" accept="application/json,.json" hidden>
+    </div>
+    <p class="muted small">Saved in this browser only. Export regularly to back up or share with your table.</p>
+  </aside>
+  <button id="menu-toggle" aria-label="Menu">☰</button>
+  <main id="main"></main>
+
+  <script src="app/templates.js"></script>
+  <script src="app/app.js"></script>
+</body>
+</html>
