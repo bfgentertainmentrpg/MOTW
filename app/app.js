@@ -22,7 +22,7 @@ function loadDb() {
   } catch (e) {
     console.warn("Could not read saved data", e);
   }
-  const c = newCampaign("My Campaign");
+  const c = typeof sampleCampaign === "function" ? sampleCampaign() : newCampaign("My Campaign");
   return { campaigns: [c], currentId: c.id };
 }
 
@@ -32,7 +32,7 @@ function save() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
   } catch (e) {
-    alert("Could not save — your browser storage may be full or blocked. Export a backup now.");
+    notice("Could not save — your browser storage may be full or blocked. Export a backup now.");
   }
 }
 
@@ -108,6 +108,41 @@ function entryChip(e) {
   return `<a class="chip" href="#/entry/${e.id}">${t.icon} ${esc(e.name)}</a>`;
 }
 
+// ---------- in-page dialogs (browser pop-ups are blocked in some viewers) ----------
+
+function modal(title, bodyHtml, buttons) {
+  return new Promise((resolve) => {
+    const wrap = document.createElement("div");
+    wrap.className = "modal-backdrop";
+    wrap.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+      <h2>${esc(title)}</h2><div class="modal-body">${bodyHtml}</div>
+      <div class="actions">${buttons.map((b, i) => `<button type="button" data-i="${i}" class="${b.cls || ""}">${esc(b.label)}</button>`).join("")}</div></div>`;
+    document.body.appendChild(wrap);
+    const close = (val) => { wrap.remove(); resolve(val); };
+    wrap.addEventListener("click", (ev) => {
+      if (ev.target === wrap) return close(null);
+      const b = ev.target.closest("button[data-i]");
+      if (b) close(buttons[Number(b.dataset.i)].value(wrap));
+    });
+    wrap.addEventListener("keydown", (ev) => ev.key === "Escape" && close(null));
+    (wrap.querySelector("input, textarea") || wrap.querySelector("button")).focus();
+  });
+}
+
+const ask = (message, okLabel = "Delete") =>
+  modal("Are you sure?", `<p>${esc(message)}</p>`, [
+    { label: "Cancel", value: () => false },
+    { label: okLabel, cls: "danger", value: () => true },
+  ]);
+
+const askText = (title, placeholder = "") =>
+  modal(title, `<input id="modal-input" placeholder="${esc(placeholder)}">`, [
+    { label: "Cancel", value: () => null },
+    { label: "Create", cls: "primary", value: (w) => $("#modal-input", w).value.trim() || null },
+  ]);
+
+const notice = (message) => modal("Heads up", `<p>${esc(message)}</p>`, [{ label: "OK", cls: "primary", value: () => true }]);
+
 function download(filename, data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
@@ -179,8 +214,8 @@ function viewDashboard() {
     save();
     renderSidebar();
   });
-  $("#delete-campaign").addEventListener("click", () => {
-    if (!confirm(`Delete "${c.name}" and all its entries? Export a backup first if unsure.`)) return;
+  $("#delete-campaign").addEventListener("click", async () => {
+    if (!(await ask(`Delete "${c.name}" and all its entries? Export a backup first if unsure.`))) return;
     db.campaigns = db.campaigns.filter((x) => x.id !== c.id);
     if (!db.campaigns.length) db.campaigns.push(newCampaign("My Campaign"));
     db.currentId = db.campaigns[0].id;
@@ -267,8 +302,8 @@ function viewEntry(id) {
     ${back.length ? `<section class="card"><h2>Referenced by</h2>${back.map(entryChip).join(" ")}</section>` : ""}
     <p class="muted small">Tip: click harm boxes or countdown steps to track them live during play.</p>`;
 
-  $("#del").addEventListener("click", () => {
-    if (!confirm(`Delete "${e.name}"?`)) return;
+  $("#del").addEventListener("click", async () => {
+    if (!(await ask(`Delete "${e.name}"?`))) return;
     campaign().entries = entries().filter((x) => x.id !== e.id);
     save();
     location.hash = `#/list/${e.type}`;
@@ -431,7 +466,7 @@ function viewEdit(id, isNew = false) {
   $("#cancel").addEventListener("click", () => {
     if (isNew) campaign().entries = entries().filter((x) => x.id !== id);
     save();
-    history.back();
+    location.hash = isNew ? `#/list/${draft.type}` : `#/entry/${id}`;
   });
 
   $("#edit").addEventListener("submit", (ev) => {
@@ -525,7 +560,11 @@ function createAndEdit(type, name) {
   const e = newEntry(type, name);
   entries().push(e);
   save();
-  history.replaceState(null, "", `#/edit/${e.id}`);
+  try {
+    history.replaceState(null, "", `#/edit/${e.id}`);
+  } catch (err) {
+    /* some embedded viewers block history changes; the edit view still works */
+  }
   renderSidebar();
   viewEdit(e.id, true);
 }
@@ -543,11 +582,11 @@ function pickTypeFor(name) {
 
 // ---------- global controls ----------
 
-$("#campaign-select").addEventListener("change", (ev) => {
+$("#campaign-select").addEventListener("change", async (ev) => {
   if (ev.target.value === "__new") {
-    const name = prompt("Name for the new campaign:");
+    const name = await askText("New campaign", "e.g. Hollow Creek Hunters");
     if (name) {
-      const c = newCampaign(name.trim());
+      const c = newCampaign(name);
       db.campaigns.push(c);
       db.currentId = c.id;
     }
@@ -565,21 +604,37 @@ $("#search").addEventListener("keydown", (ev) => {
 
 $("#export").addEventListener("click", () => {
   const c = campaign();
-  download(`motw-${slug(c.name)}-${new Date().toISOString().slice(0, 10)}.json`, { app: "motw-keeper", version: 1, campaign: c });
+  const data = { app: "motw-keeper", version: 1, campaign: c };
+  const json = JSON.stringify(data, null, 2);
+  modal(
+    `Export “${c.name}”`,
+    `<p class="muted small">Copy this text and keep it somewhere safe (a note, an email to yourself, a Google Doc). Paste it into Import to restore or share.</p>
+     <textarea id="export-text" rows="10" readonly>${esc(json)}</textarea>`,
+    [
+      // Embedded viewers block downloads, so only offer the file when running standalone.
+      ...(window.self === window.top
+        ? [{ label: "Download file", value: () => download(`motw-${slug(c.name)}-${new Date().toISOString().slice(0, 10)}.json`, data) }]
+        : []),
+      {
+        label: "Copy",
+        cls: "primary",
+        value: (w) => {
+          const ta = $("#export-text", w);
+          navigator.clipboard?.writeText(json).catch(() => ta.select());
+          return true;
+        },
+      },
+    ]
+  );
 });
 
-$("#import").addEventListener("click", () => $("#import-file").click());
-$("#import-file").addEventListener("change", async (ev) => {
-  const file = ev.target.files[0];
-  ev.target.value = "";
-  if (!file) return;
+async function importJson(text) {
   try {
-    const data = JSON.parse(await file.text());
-    const c = data.campaign;
-    if (!c || !Array.isArray(c.entries)) throw new Error("Not a campaign export");
+    const c = JSON.parse(text).campaign;
+    if (!c || !Array.isArray(c.entries)) throw new Error("it isn't a Campaign Keeper export.");
     const existing = db.campaigns.find((x) => x.id === c.id);
     if (existing) {
-      if (!confirm(`"${existing.name}" already exists here. Replace it with the imported copy?`)) return;
+      if (!(await ask(`"${existing.name}" already exists here. Replace it with the imported copy?`, "Replace"))) return;
       db.campaigns = db.campaigns.map((x) => (x.id === c.id ? c : x));
     } else {
       db.campaigns.push(c);
@@ -589,8 +644,27 @@ $("#import-file").addEventListener("change", async (ev) => {
     location.hash = "#/";
     route();
   } catch (e) {
-    alert("That file couldn't be imported: " + e.message);
+    notice("That couldn't be imported: " + e.message);
   }
+}
+
+$("#import").addEventListener("click", async () => {
+  const text = await modal(
+    "Import a campaign",
+    `<p class="muted small">Paste exported text below, or choose a .json file.</p>
+     <textarea id="import-text" rows="8" placeholder='{"app": "motw-keeper", ...}'></textarea>`,
+    [
+      { label: "Choose file…", value: () => ($("#import-file").click(), null) },
+      { label: "Import", cls: "primary", value: (w) => $("#import-text", w).value.trim() || null },
+    ]
+  );
+  if (text) importJson(text);
+});
+
+$("#import-file").addEventListener("change", async (ev) => {
+  const file = ev.target.files[0];
+  ev.target.value = "";
+  if (file) importJson(await file.text());
 });
 
 $("#menu-toggle").addEventListener("click", () => document.body.classList.toggle("nav-open"));

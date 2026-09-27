@@ -21,3 +21,6 @@ In your browser (localStorage). Use **Export** to save a `.json` backup and **Im
 3. Open `https://<your-username>.github.io/<repo-name>/`.
 
 To run locally, just open `index.html` in a browser.
+
+## Hosting as a private claude.ai Artifact
+`sh build-artifact.sh` bundles everything into `dist/campaign-keeper.html`, a single file that can be published as a private Artifact.

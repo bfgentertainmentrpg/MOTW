@@ -10,6 +10,9 @@
   --link: #e8c170;
   --danger: #c0504d;
   --radius: 8px;
+  --display: "Special Elite", "Courier New", monospace;
+  --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
   color-scheme: dark;
 }
 
@@ -21,12 +24,12 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
-  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 16px/1.55 var(--body);
 }
 
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
-h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; margin: 0; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
 h1 { font-size: 1.9rem; }
 h2 { font-size: 1.15rem; margin-bottom: .6rem; color: var(--accent); }
 h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .3rem; font-family: inherit; }
@@ -44,16 +47,17 @@ h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: 
   flex-direction: column;
   gap: 10px;
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
 }
-.brand { font-family: Georgia, serif; font-size: 1.25rem; color: var(--accent); }
+.brand { font-family: var(--display); font-size: 1.1rem; color: var(--accent); }
 #nav { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
 #nav a { color: var(--text); padding: 7px 10px; border-radius: var(--radius); display: flex; justify-content: space-between; }
 #nav a:hover { background: var(--panel-2); text-decoration: none; }
 #nav a.active { background: var(--accent-2); }
-.count { color: var(--muted); font-size: .8rem; }
+.count { color: var(--muted); font-size: .8rem; font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .io { display: flex; gap: 6px; margin-top: auto; }
 .io button { flex: 1; }
 #menu-toggle { display: none; }
@@ -69,6 +73,7 @@ input, textarea, select, button, .btn {
 }
 input, textarea, select { width: 100%; }
 textarea { resize: vertical; }
+button:focus-visible, a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 button, .btn { cursor: pointer; display: inline-block; }
 button:hover, .btn:hover { border-color: var(--accent); text-decoration: none; }
@@ -80,7 +85,7 @@ input.short { width: 90px; }
 #main { flex: 1; min-width: 0; padding: 28px 32px 60px; max-width: 1000px; }
 .page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.title-input { font: 1.7rem Georgia, serif; background: transparent; border: none; border-bottom: 1px solid var(--border); border-radius: 0; padding: 4px 0; }
+.title-input { font: 1.7rem var(--display); background: transparent; border: none; border-bottom: 1px solid var(--border); border-radius: 0; padding: 4px 0; }
 #campaign-name { outline: none; border-bottom: 1px dashed transparent; }
 #campaign-name:hover, #campaign-name:focus { border-bottom-color: var(--muted); }
 
@@ -142,3 +147,11 @@ ol.countdown li.reached strong { color: #f0a09e; }
   .grid2 { grid-template-columns: 1fr; }
   .portrait { float: none; margin: 0 0 12px; max-width: 100%; }
 }
+
+/* ---------- dialogs ---------- */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(8, 6, 10, .7); display: grid; place-items: center; padding: 16px; z-index: 50; }
+.modal { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; width: min(560px, 100%); display: flex; flex-direction: column; gap: 12px; box-shadow: 0 20px 60px #000; }
+.modal textarea { font: .8rem/1.4 var(--mono); }
+.modal .actions { justify-content: flex-end; }
+.track .muted, table.attacks td:nth-child(2), ol.countdown li strong { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { #sidebar { transition: none; } }
